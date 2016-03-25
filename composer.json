@@ -1,0 +1,11 @@
+{
+  "name": "thinkshout/mailchimp-api-php",
+  "type": "library",
+  "description": "PHP library for v3 of the MailChimp API",
+  "keywords": ["mailchimp", "mail"],
+  "homepage": "https://github.com/thinkshout/mailchimp-api-php",
+  "require": {
+    "php": ">=5.5.0",
+    "guzzlehttp/guzzle": "~6.1"
+  }
+}
