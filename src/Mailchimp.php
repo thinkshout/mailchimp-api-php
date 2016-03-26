@@ -81,6 +81,12 @@ class Mailchimp {
    * @return object
    */
   protected function request($method, $path, $tokens = NULL) {
+    if (!empty($tokens)) {
+      foreach ($tokens as $key => $value) {
+        $path = str_replace('{' . $key . '}', $value, $path);
+      }
+    }
+
     try {
       $response = $this->client->request($method, $this->endpoint . $path);
 
