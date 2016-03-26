@@ -80,7 +80,7 @@ class Mailchimp {
    *
    * @return object
    */
-  private function request($method, $path, $tokens = NULL) {
+  protected function request($method, $path, $tokens = NULL) {
     try {
       $response = $this->client->request($method, $this->endpoint . $path);
 
