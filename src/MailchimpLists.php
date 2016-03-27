@@ -41,6 +41,24 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Gets information about all members of a MailChimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#read-get_lists_list_id_members
+   */
+  public function getMembers($list_id) {
+    $tokens = array(
+      'list_id' => $list_id,
+    );
+
+    return $this->request('GET', '/lists/{list_id}/members', $tokens);
+  }
+
+  /**
    * Gets information about a member of a MailChimp list.
    *
    * @param string $list_id
@@ -82,6 +100,32 @@ class MailchimpLists extends Mailchimp {
     );
 
     return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/activity', $tokens);
+  }
+
+  /**
+   * Adds a new member to a MailChimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   *
+   * @param string $email
+   *   The email address to add.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#create-post_lists_list_id_members
+   */
+  public function addMember($list_id, $email) {
+    $tokens = array(
+      'list_id' => $list_id,
+    );
+
+    $parameters = array(
+      'status' => 'pending',
+      'email_address' => $email,
+    );
+
+    return $this->request('POST', '/lists/{list_id}/members', $tokens, $parameters);
   }
 
 }

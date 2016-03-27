@@ -81,10 +81,12 @@ class Mailchimp {
    *   The API path to request.
    * @param array $tokens
    *   Associative array of tokens and values to replace in the path.
+   * @param array $parameters
+   *   Associative array of parameters to sent in the request body.
    *
    * @return object
    */
-  protected function request($method, $path, $tokens = NULL) {
+  protected function request($method, $path, $tokens = NULL, $parameters = NULL) {
     if (!empty($tokens)) {
       foreach ($tokens as $key => $value) {
         $path = str_replace('{' . $key . '}', $value, $path);
@@ -92,7 +94,19 @@ class Mailchimp {
     }
 
     try {
-      $response = $this->client->request($method, $this->endpoint . $path);
+      $options = array();
+      if (!empty($parameters)) {
+        if ($method == 'GET') {
+          // Send parameters as query string parameters.
+          $options['query'] = $parameters;
+        }
+        else {
+          // Send parameters as JSON in request body.
+          $options['json'] = $parameters;
+        }
+      }
+
+      $response = $this->client->request($method, $this->endpoint . $path, $options);
 
       $data = json_decode($response->getBody());
 
