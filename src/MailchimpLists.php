@@ -171,6 +171,25 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Removes a member from a MailChimp list.
+   *
+   * @param $list_id
+   *   The ID of the list.
+   * @param $email
+   *   The member's email address.
+   *
+   * @return object
+   */
+  public function removeMember($list_id, $email) {
+    $tokens = array(
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    );
+
+    return $this->request('DELETE', '/lists/{list_id}/members/{subscriber_hash}', $tokens);
+  }
+
+  /**
    * Updates a member of a MailChimp list.
    *
    * @param string $list_id
