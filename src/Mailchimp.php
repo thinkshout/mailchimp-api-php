@@ -111,6 +111,7 @@ class Mailchimp {
       $data = json_decode($response->getBody());
 
     } catch (RequestException $e) {
+      // TODO: Throw Mailchimp exception.
       $data = $e->getMessage();
     }
 
