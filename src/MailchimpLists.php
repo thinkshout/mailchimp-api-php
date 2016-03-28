@@ -164,7 +164,6 @@ class MailchimpLists extends Mailchimp {
     );
 
     $parameters += array(
-      'status' => 'pending',
       'email_address' => $email,
     );
 
