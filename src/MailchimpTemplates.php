@@ -38,4 +38,24 @@ class MailchimpTemplates extends Mailchimp {
     return $this->request('GET', '/templates/{template_id}', $tokens, $parameters);
   }
 
+  /**
+   * Gets the default content of a specific template.
+   *
+   * @param $template_id
+   *   The ID of the template.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/templates/default-content/#read-get_templates_template_id_default_content
+   */
+  public function getTemplateContent($template_id, $parameters = array()) {
+    $tokens = array(
+      'template_id' => $template_id,
+    );
+
+    return $this->request('GET', '/templates/{template_id}/default-content', $tokens, $parameters);
+  }
+
 }
