@@ -82,7 +82,7 @@ class Mailchimp {
    * @param array $tokens
    *   Associative array of tokens and values to replace in the path.
    * @param array $parameters
-   *   Associative array of parameters to sent in the request body.
+   *   Associative array of parameters to send in the request body.
    *
    * @return object
    */
