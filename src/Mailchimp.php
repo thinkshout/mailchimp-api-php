@@ -128,9 +128,9 @@ class Mailchimp {
    *   The data center ID.
    */
   private function getDataCenter($api_key) {
-    $dc = substr($api_key, -3);
+    $api_key_parts = explode('-', $api_key);
 
-    return (!empty($dc)) ? $dc : Mailchimp::DEFAULT_DATA_CENTER;
+    return (isset($api_key_parts[1])) ? $api_key_parts[1] : Mailchimp::DEFAULT_DATA_CENTER;
   }
 
 }
