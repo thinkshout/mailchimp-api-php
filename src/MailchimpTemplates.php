@@ -1,0 +1,41 @@
+<?php
+
+namespace Mailchimp;
+
+class MailchimpTemplates extends Mailchimp {
+
+  /**
+   * Gets information about all templates owned by the authenticated account.
+   *
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/templates/#read-get_templates
+   */
+  public function getTemplates($parameters = array()) {
+    return $this->request('GET', '/templates', NULL, $parameters);
+  }
+
+  /**
+   * Gets information a specific template.
+   *
+   * @param string $template_id
+   *   The ID of the template.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/templates/#read-get_templates_template_id
+   */
+  public function getTemplate($template_id, $parameters = array()) {
+    $tokens = array(
+      'template_id' => $template_id,
+    );
+
+    return $this->request('GET', '/templates/{template_id}', $tokens, $parameters);
+  }
+
+}
