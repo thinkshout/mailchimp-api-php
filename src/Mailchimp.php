@@ -102,7 +102,7 @@ class Mailchimp {
         }
         else {
           // Send parameters as JSON in request body.
-          $options['json'] = $parameters;
+          $options['json'] = (object) $parameters;
         }
       }
 
