@@ -4,6 +4,9 @@ namespace Mailchimp;
 
 class MailchimpCampaigns extends Mailchimp {
 
+  const EMAIL_TYPE_HTML = 'html';
+  const EMAIL_TYPE_PLAIN_TEXT = 'plain_text';
+
   const CAMPAIGN_TYPE_REGULAR = 'regular';
   const CAMPAIGN_TYPE_PLAINTEXT = 'plaintext';
   const CAMPAIGN_TYPE_ABSPLIT = 'absplit';
@@ -120,6 +123,53 @@ class MailchimpCampaigns extends Mailchimp {
     );
 
     return $this->request('PATCH', '/campaigns/{campaign_id}', $tokens, $parameters);
+  }
+
+  /**
+   * Sends a test email.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   * @param array $test_emails
+   *   Email addresses to send the test email to.
+   * @param string $send_type
+   *   The type of test email to send.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#action-post_campaigns_campaign_id_actions_test
+   */
+  public function sendTest($campaign_id, $test_emails, $send_type, $parameters = array()) {
+    $tokens = array(
+      'campaign_id' => $campaign_id,
+    );
+
+    $parameters += array(
+      'test_emails' => $test_emails,
+      'send_type' => $send_type,
+    );
+
+    return $this->request('POST', '/campaigns/{campaign_id}/actions/test', $tokens, $parameters);
+  }
+
+  /**
+   * Send a MailChimp campaign.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#action-post_campaigns_campaign_id_actions_send
+   */
+  public function send($campaign_id) {
+    $tokens = array(
+      'campaign_id' => $campaign_id,
+    );
+
+    return $this->request('POST', '/campaigns/{campaign_id}/actions/send', $tokens);
   }
 
 }
