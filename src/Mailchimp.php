@@ -9,6 +9,24 @@ class Mailchimp {
 
   const DEFAULT_DATA_CENTER = 'us1';
 
+  const ERROR_CODE_BAD_REQUEST = 'BadRequest';
+  const ERROR_CODE_INVALID_ACTION = 'InvalidAction';
+  const ERROR_CODE_INVALID_RESOURCE = 'InvalidResource';
+  const ERROR_CODE_JSON_PARSE_ERROR = 'JSONParseError';
+  const ERROR_CODE_API_KEY_MISSING = 'APIKeyMissing';
+  const ERROR_CODE_API_KEY_INVALID = 'APIKeyInvalid';
+  const ERROR_CODE_FORBIDDEN = 'Forbidden';
+  const ERROR_CODE_USER_DISABLED = 'UserDisabled';
+  const ERROR_CODE_WRONG_DATACENTER = 'WrongDatacenter';
+  const ERROR_CODE_RESOURCE_NOT_FOUND = 'ResourceNotFound';
+  const ERROR_CODE_METHOD_NOT_ALLOWED = 'MethodNotAllowed';
+  const ERROR_CODE_RESOURCE_NESTING_TOO_DEEP = 'ResourceNestingTooDeep';
+  const ERROR_CODE_INVALID_METHOD_OVERRIDE = 'InvalidMethodOverride';
+  const ERROR_CODE_REQUESTED_FIELDS_INVALID = 'RequestedFieldsInvalid';
+  const ERROR_CODE_TOO_MANY_REQUESTS = 'TooManyRequests';
+  const ERROR_CODE_INTERNAL_SERVER_ERROR = 'InternalServerError';
+  const ERROR_CODE_COMPLIANCE_RELATED = 'ComplianceRelated';
+
   /**
    * @var string $endpoint
    *   The REST API endpoint.
@@ -34,6 +52,14 @@ class Mailchimp {
   private $client;
 
   /**
+   * @var string $debug_error_code
+   *   A MailChimp API error code to return with every API response.
+   *   Used for testing / debugging error handling.
+   *   See ERROR_CODE_* constants.
+   */
+  private $debug_error_code;
+
+  /**
    * Mailchimp constructor.
    *
    * @param string $api_key
@@ -54,11 +80,19 @@ class Mailchimp {
     $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, $dc, $this->endpoint);
 
     $this->client = new Client(array(
-      'headers' => array(
-        'Authorization' => $this->api_user . ' ' . $this->api_key,
-      ),
       'timeout' => $timeout,
     ));
+  }
+
+  /**
+   * Sets a MailChimp error code to be returned by all requests.
+   * Used to test and debug error handling.
+   *
+   * @param string $error_code
+   *   The MailChimp error code.
+   */
+  public function setDebugErrorCode($error_code) {
+    $this->debug_error_code = $error_code;
   }
 
   /**
@@ -94,7 +128,18 @@ class Mailchimp {
     }
 
     try {
-      $options = array();
+      // Set default request options with auth header.
+      $options = array(
+        'headers' => array(
+          'Authorization' => $this->api_user . ' ' . $this->api_key,
+        ),
+      );
+
+      // Add trigger error header if a debug error code has been set.
+      if (!empty($this->debug_error_code)) {
+        $options['headers']['X-Trigger-Error'] = $this->debug_error_code;
+      }
+
       if (!empty($parameters)) {
         if ($method == 'GET') {
           // Send parameters as query string parameters.
