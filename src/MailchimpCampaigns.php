@@ -172,4 +172,20 @@ class MailchimpCampaigns extends Mailchimp {
     return $this->request('POST', '/campaigns/{campaign_id}/actions/send', $tokens);
   }
 
+  /**
+   * Deletes a Mailchimp campaign.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   *
+   * @return object
+   */
+  public function delete($campaign_id) {
+    $tokens = array(
+      'campaign_id' => $campaign_id,
+    );
+
+    return $this->request('DELETE', '/campaigns/{campaign_id}', $tokens);
+  }
+
 }
