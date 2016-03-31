@@ -119,6 +119,8 @@ class Mailchimp {
    *   Associative array of parameters to send in the request body.
    *
    * @return object
+   *
+   * @throws MailchimpAPIException
    */
   protected function request($method, $path, $tokens = NULL, $parameters = NULL) {
     if (!empty($tokens)) {
@@ -155,9 +157,9 @@ class Mailchimp {
 
       $data = json_decode($response->getBody());
 
+      // TODO: Detect error in repsonse and throw MailchimpAPIException.
     } catch (RequestException $e) {
-      // TODO: Throw Mailchimp exception.
-      $data = $e->getMessage();
+      throw new MailchimpAPIException($e->getResponse()->getBody(), $e->getCode(), $e);
     }
 
     return $data;
