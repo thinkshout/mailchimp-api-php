@@ -259,26 +259,32 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Adds a new segment to a MailChimp list.
+   * Updates a segment associated with a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
    * @param int $segment_id
    *   The ID of the segment.
+   * @param string $name
+   *   The name of the segment.
    * @param array $parameters
    *   Associative array of optional request parameters.
    *
    * @return object
    *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#create-post_lists_list_id_segments
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#edit-patch_lists_list_id_segments_segment_id
    */
-  public function updateSegment($list_id, $segment_id, $parameters) {
+  public function updateSegment($list_id, $segment_id, $name, $parameters) {
     $tokens = array(
       'list_id' => $list_id,
       'segment_id' => $segment_id,
     );
 
-    return $this->request('POST', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters);
+    $parameters += array(
+      'name' => $name,
+    );
+
+    return $this->request('PATCH', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters);
   }
 
 }
