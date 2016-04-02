@@ -173,9 +173,9 @@ class MailchimpLists extends Mailchimp {
   /**
    * Removes a member from a MailChimp list.
    *
-   * @param $list_id
+   * @param string $list_id
    *   The ID of the list.
-   * @param $email
+   * @param string $email
    *   The member's email address.
    *
    * @return object

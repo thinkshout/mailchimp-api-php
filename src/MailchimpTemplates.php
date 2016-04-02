@@ -41,7 +41,7 @@ class MailchimpTemplates extends Mailchimp {
   /**
    * Gets the default content of a specific template.
    *
-   * @param $template_id
+   * @param string $template_id
    *   The ID of the template.
    * @param array $parameters
    *   Associative array of optional request parameters.

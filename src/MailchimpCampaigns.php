@@ -56,7 +56,7 @@ class MailchimpCampaigns extends Mailchimp {
    *   List settings for the campaign.
    * @param object $settings
    *   The subject, from name, reply-to, etc settings for the campaign.
-   * @param $parameters
+   * @param array $parameters
    *   Associative array of optional request parameters.
    *
    * @return object
@@ -104,7 +104,7 @@ class MailchimpCampaigns extends Mailchimp {
    *   List settings for the campaign.
    * @param object $settings
    *   The subject, from name, reply-to, etc settings for the campaign.
-   * @param $parameters
+   * @param array $parameters
    *   Associative array of optional request parameters.
    *
    * @return object
