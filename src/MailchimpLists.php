@@ -158,7 +158,7 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/activity/#read-get_lists_list_id_members_subscriber_hash_activity
    */
-  public function getMemberActivity($list_id, $email, $parameters = NULL) {
+  public function getMemberActivity($list_id, $email, $parameters = array()) {
     $tokens = array(
       'list_id' => $list_id,
       'subscriber_hash' => md5(strtolower($email)),
@@ -226,7 +226,7 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#edit-patch_lists_list_id_members_subscriber_hash
    */
-  public function updateMember($list_id, $email, $parameters = NULL) {
+  public function updateMember($list_id, $email, $parameters = array()) {
     $tokens = array(
       'list_id' => $list_id,
       'subscriber_hash' => md5(strtolower($email)),
@@ -247,7 +247,7 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#read-get_lists_list_id_segments
    */
-  public function getSegments($list_id, $parameters) {
+  public function getSegments($list_id, $parameters = array()) {
     $tokens = array(
       'list_id' => $list_id,
     );
@@ -269,7 +269,7 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#create-post_lists_list_id_segments
    */
-  public function addSegment($list_id, $name, $parameters) {
+  public function addSegment($list_id, $name, $parameters = array()) {
     $tokens = array(
       'list_id' => $list_id,
     );
@@ -297,7 +297,7 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#edit-patch_lists_list_id_segments_segment_id
    */
-  public function updateSegment($list_id, $segment_id, $name, $parameters) {
+  public function updateSegment($list_id, $segment_id, $name, $parameters = array()) {
     $tokens = array(
       'list_id' => $list_id,
       'segment_id' => $segment_id,
