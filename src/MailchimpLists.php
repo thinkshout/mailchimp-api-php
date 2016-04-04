@@ -59,6 +59,29 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Gets information about all interests associated with an interest category.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $interest_category_id
+   *   The ID of the interest category.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/interests/#read-get_lists_list_id_interest_categories_interest_category_id_interests
+   */
+  public function getInterests($list_id, $interest_category_id, $parameters = array()) {
+    $tokens = array(
+      'list_id' => $list_id,
+      'interest_category_id' => $interest_category_id,
+    );
+
+    return $this->request('GET', '/lists/{list_id}/interest-categories/{interest_category_id}/interests', $tokens, $parameters);
+  }
+
+  /**
    * Gets merge fields associated with a MailChimp list.
    *
    * @param string $list_id
