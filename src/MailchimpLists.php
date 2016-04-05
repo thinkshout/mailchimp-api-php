@@ -310,4 +310,27 @@ class MailchimpLists extends Mailchimp {
     return $this->request('PATCH', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters);
   }
 
+  /**
+   * Gets information about members of a list segment.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $segment_id
+   *   The ID of the segment.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/members/#read-get_lists_list_id_segments_segment_id_members
+   */
+  public function getSegmentMembers($list_id, $segment_id, $parameters = array()) {
+    $tokens = array(
+      'list_id' => $list_id,
+      'segment_id' => $segment_id,
+    );
+
+    return $this->request('GET', '/lists/{list_id}/segments/{segment_id}/members', $tokens, $parameters);
+  }
+
 }
