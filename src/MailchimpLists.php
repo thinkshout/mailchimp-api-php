@@ -333,4 +333,42 @@ class MailchimpLists extends Mailchimp {
     return $this->request('GET', '/lists/{list_id}/segments/{segment_id}/members', $tokens, $parameters);
   }
 
+  /**
+   * Gets all lists an email address is subscribed to.
+   *
+   * @param string $email
+   *   The email address to get lists for.
+   *
+   * @return array
+   *   Array of subscribed list objects.
+   *
+   * @throws MailchimpAPIException
+   */
+  public function getListsForEmail($email) {
+    $list_data = $this->getLists();
+
+    $subscribed_lists = array();
+
+    // Check each list for a subscriber matching the email address.
+    if ($list_data->total_items > 0) {
+      foreach ($list_data->lists as $list) {
+        try {
+          $member_data = $this->getMemberInfo($list->id, $email);
+
+          if (isset($member_data->id)) {
+            $subscribed_lists[] = $list;
+          }
+        } catch (MailchimpAPIException $e) {
+          if ($e->getCode() !== 404) {
+            // 404 indicates the email address is not subscribed to this list
+            // and can be safely ignored. Surface all other exceptions.
+            throw new MailchimpAPIException($e->getResponse()->getBody(), $e->getCode(), $e);
+          }
+        }
+      }
+    }
+
+    return $subscribed_lists;
+  }
+
 }
