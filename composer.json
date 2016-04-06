@@ -9,9 +9,13 @@
     "php": ">=5.5.0",
     "guzzlehttp/guzzle": "~6.1"
   },
+  "require-dev": {
+    "phpunit/phpunit": "4.8.21"
+  },
   "autoload": {
     "psr-4": {
-      "Mailchimp\\": "src/"
+      "Mailchimp\\": "src/",
+      "Mailchimp\\Tests\\": "tests/src/"
     }
   }
 }

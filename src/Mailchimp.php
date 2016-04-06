@@ -28,10 +28,16 @@ class Mailchimp {
   const ERROR_CODE_COMPLIANCE_RELATED = 'ComplianceRelated';
 
   /**
+   * @var Client $client
+   *   The GuzzleHttp Client.
+   */
+  protected $client;
+
+  /**
    * @var string $endpoint
    *   The REST API endpoint.
    */
-  private $endpoint = 'https://us1.api.mailchimp.com/3.0';
+  protected $endpoint = 'https://us1.api.mailchimp.com/3.0';
 
   /**
    * @var string $api_key
@@ -44,12 +50,6 @@ class Mailchimp {
    *   The MailChimp API username to authenticate with.
    */
   private $api_user;
-
-  /**
-   * @var Client $client
-   *   The GuzzleHttp Client.
-   */
-  private $client;
 
   /**
    * @var string $debug_error_code
