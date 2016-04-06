@@ -357,6 +357,51 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Adds a new webhook to a list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $url
+   *   The callback URL the webhook should notify of events.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   */
+  public function addWebhook($list_id, $url, $parameters = array()) {
+    $tokens = array(
+      'list_id' => $list_id,
+    );
+
+    $parameters += array(
+      'url' => $url,
+    );
+
+    return $this->request('POST', '/lists/{list_id}/webhooks', $tokens, $parameters);
+  }
+
+  /**
+   * Deletes a webhook.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $webhook_id
+   *   The ID of the webhook.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   */
+  public function deleteWebhook($list_id, $webhook_id, $parameters = array()) {
+    $tokens = array(
+      'list_id' => $list_id,
+      'webhook_id' => $webhook_id,
+    );
+
+    return $this->request('DELETE', '/lists/{list_id}/webhooks/{webhook_id}', $tokens, $parameters);
+  }
+
+  /**
    * Gets all lists an email address is subscribed to.
    *
    * @param string $email
