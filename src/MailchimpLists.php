@@ -4,6 +4,11 @@ namespace Mailchimp;
 
 class MailchimpLists extends Mailchimp {
 
+  const MEMBER_STATUS_SUBSCRIBED = 'subscribed';
+  const MEMBER_STATUS_UNSUBSCRIBED = 'unsubscribed';
+  const MEMBER_STATUS_CLEANED = 'cleaned';
+  const MEMBER_STATUS_PENDING = 'pending';
+
   /**
    * Gets information about all lists owned by the authenticated account.
    *
