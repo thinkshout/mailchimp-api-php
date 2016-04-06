@@ -339,6 +339,24 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Gets information about webhooks associated with a list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   */
+  public function getWebhooks($list_id, $parameters = array()) {
+    $tokens = array(
+      'list_id' => $list_id,
+    );
+
+    return $this->request('GET', '/lists/{list_id}/webhooks', $tokens, $parameters);
+  }
+
+  /**
    * Gets all lists an email address is subscribed to.
    *
    * @param string $email
