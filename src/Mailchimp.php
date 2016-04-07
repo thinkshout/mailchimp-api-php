@@ -60,6 +60,13 @@ class Mailchimp {
   private $debug_error_code;
 
   /**
+   * @var array $batch_operations
+   *   Array of pending batch operations.
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
+   */
+  private $batch_operations;
+
+  /**
    * Mailchimp constructor.
    *
    * @param string $api_key
@@ -107,6 +114,77 @@ class Mailchimp {
   }
 
   /**
+   * Processes all pending batch operations.
+   *
+   * @throws MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
+   */
+  public function processBatchOperations() {
+    $parameters = array(
+      'operations' => $this->batch_operations,
+    );
+
+    try {
+      $response = $this->request('POST', '/batches', NULL, $parameters);
+
+      // Reset batch operations.
+      $this->batch_operations = array();
+
+      return $response;
+
+    } catch (MailchimpAPIException $e) {
+      $message = 'Failed to process batch operations: ' . $e->getMessage();
+      throw new MailchimpAPIException($message, $e->getCode(), $e);
+    }
+  }
+
+  /**
+   * Adds a pending batch operation.
+   *
+   * @param $method
+   *   The HTTP method.
+   * @param $path
+   *   The request path, relative to the API endpoint.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *   The new batch operation object.
+   *
+   * @throws MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
+   */
+  protected function addBatchOperation($method, $path, $parameters = array()) {
+    if (empty($method) || empty($path)) {
+      throw new MailchimpAPIException('Cannot add batch operation without a method and path.');
+    }
+
+    $op = (object) array(
+      'method' => $method,
+      'path' => $path,
+    );
+
+    if (!empty($parameters)) {
+      if ($method == 'GET') {
+        $op->params = (object) $parameters;
+      }
+      else {
+        $op->body = json_encode($parameters);
+      }
+    }
+
+    if (empty($this->batch_operations)) {
+      $this->batch_operations = array();
+    }
+
+    $this->batch_operations[] = $op;
+
+    return $op;
+  }
+
+  /**
    * Makes a request to the MailChimp API.
    *
    * @param string $method
@@ -117,44 +195,49 @@ class Mailchimp {
    *   Associative array of tokens and values to replace in the path.
    * @param array $parameters
    *   Associative array of parameters to send in the request body.
+   * @param bool $batch
+   *   TRUE if this request should be added to pending batch operations.
    *
    * @return object
    *
    * @throws MailchimpAPIException
    */
-  protected function request($method, $path, $tokens = NULL, $parameters = NULL) {
+  protected function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE) {
     if (!empty($tokens)) {
       foreach ($tokens as $key => $value) {
         $path = str_replace('{' . $key . '}', $value, $path);
       }
     }
 
+    if ($batch) {
+      return $this->addBatchOperation($method, $path, $parameters);
+    }
+
+    // Set default request options with auth header.
+    $options = array(
+      'headers' => array(
+        'Authorization' => $this->api_user . ' ' . $this->api_key,
+      ),
+    );
+
+    // Add trigger error header if a debug error code has been set.
+    if (!empty($this->debug_error_code)) {
+      $options['headers']['X-Trigger-Error'] = $this->debug_error_code;
+    }
+
+    if (!empty($parameters)) {
+      if ($method == 'GET') {
+        // Send parameters as query string parameters.
+        $options['query'] = $parameters;
+      }
+      else {
+        // Send parameters as JSON in request body.
+        $options['json'] = (object) $parameters;
+      }
+    }
+
     try {
-      // Set default request options with auth header.
-      $options = array(
-        'headers' => array(
-          'Authorization' => $this->api_user . ' ' . $this->api_key,
-        ),
-      );
-
-      // Add trigger error header if a debug error code has been set.
-      if (!empty($this->debug_error_code)) {
-        $options['headers']['X-Trigger-Error'] = $this->debug_error_code;
-      }
-
-      if (!empty($parameters)) {
-        if ($method == 'GET') {
-          // Send parameters as query string parameters.
-          $options['query'] = $parameters;
-        }
-        else {
-          // Send parameters as JSON in request body.
-          $options['json'] = (object) $parameters;
-        }
-      }
-
       $response = $this->client->request($method, $this->endpoint . $path, $options);
-
       $data = json_decode($response->getBody());
 
       return $data;

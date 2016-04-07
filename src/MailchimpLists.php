@@ -181,12 +181,14 @@ class MailchimpLists extends Mailchimp {
    *   The email address to add.
    * @param array $parameters
    *   Associative array of optional request parameters.
+   * @param bool $batch
+   *   TRUE to create a new pending batch operation.
    *
    * @return object
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#create-post_lists_list_id_members
    */
-  public function addMember($list_id, $email, $parameters = array()) {
+  public function addMember($list_id, $email, $parameters = array(), $batch = FALSE) {
     $tokens = array(
       'list_id' => $list_id,
     );
@@ -195,7 +197,7 @@ class MailchimpLists extends Mailchimp {
       'email_address' => $email,
     );
 
-    return $this->request('POST', '/lists/{list_id}/members', $tokens, $parameters);
+    return $this->request('POST', '/lists/{list_id}/members', $tokens, $parameters, $batch);
   }
 
   /**
@@ -226,18 +228,49 @@ class MailchimpLists extends Mailchimp {
    *   The member's email address.
    * @param array $parameters
    *   Associative array of optional request parameters.
+   * @param bool $batch
+   *   TRUE to create a new pending batch operation.
    *
    * @return object
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#edit-patch_lists_list_id_members_subscriber_hash
    */
-  public function updateMember($list_id, $email, $parameters = array()) {
+  public function updateMember($list_id, $email, $parameters = array(), $batch = FALSE) {
     $tokens = array(
       'list_id' => $list_id,
       'subscriber_hash' => md5(strtolower($email)),
     );
 
-    return $this->request('PATCH', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters);
+    return $this->request('PATCH', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters, $batch);
+  }
+
+  /**
+   * Adds a new or update an existing member of a MailChimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $email
+   *   The member's email address.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   * @param bool $batch
+   *   TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#edit-put_lists_list_id_members_subscriber_hash
+   */
+  public function addOrUpdateMember($list_id, $email, $parameters = array(), $batch = FALSE) {
+    $tokens = array(
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    );
+
+    $parameters += array(
+      'email_address' => $email,
+    );
+
+    return $this->request('PUT', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters, $batch);
   }
 
   /**
@@ -269,12 +302,14 @@ class MailchimpLists extends Mailchimp {
    *   The name of the segment.
    * @param array $parameters
    *   Associative array of optional request parameters.
+   * @param bool $batch
+   *   TRUE to create a new pending batch operation.
    *
    * @return object
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#create-post_lists_list_id_segments
    */
-  public function addSegment($list_id, $name, $parameters = array()) {
+  public function addSegment($list_id, $name, $parameters = array(), $batch = FALSE) {
     $tokens = array(
       'list_id' => $list_id,
     );
@@ -283,7 +318,7 @@ class MailchimpLists extends Mailchimp {
       'name' => $name,
     );
 
-    return $this->request('POST', '/lists/{list_id}/segments', $tokens, $parameters);
+    return $this->request('POST', '/lists/{list_id}/segments', $tokens, $parameters, $batch);
   }
 
   /**
@@ -297,12 +332,14 @@ class MailchimpLists extends Mailchimp {
    *   The name of the segment.
    * @param array $parameters
    *   Associative array of optional request parameters.
+   * @param bool $batch
+   *   TRUE to create a new pending batch operation.
    *
    * @return object
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#edit-patch_lists_list_id_segments_segment_id
    */
-  public function updateSegment($list_id, $segment_id, $name, $parameters = array()) {
+  public function updateSegment($list_id, $segment_id, $name, $parameters = array(), $batch = FALSE) {
     $tokens = array(
       'list_id' => $list_id,
       'segment_id' => $segment_id,
@@ -312,7 +349,7 @@ class MailchimpLists extends Mailchimp {
       'name' => $name,
     );
 
-    return $this->request('PATCH', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters);
+    return $this->request('PATCH', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters, $batch);
   }
 
   /**
@@ -365,10 +402,12 @@ class MailchimpLists extends Mailchimp {
    *   The callback URL the webhook should notify of events.
    * @param array $parameters
    *   Associative array of optional request parameters.
+   * @param bool $batch
+   *   TRUE to create a new pending batch operation.
    *
    * @return object
    */
-  public function addWebhook($list_id, $url, $parameters = array()) {
+  public function addWebhook($list_id, $url, $parameters = array(), $batch = FALSE) {
     $tokens = array(
       'list_id' => $list_id,
     );
@@ -377,7 +416,7 @@ class MailchimpLists extends Mailchimp {
       'url' => $url,
     );
 
-    return $this->request('POST', '/lists/{list_id}/webhooks', $tokens, $parameters);
+    return $this->request('POST', '/lists/{list_id}/webhooks', $tokens, $parameters, $batch);
   }
 
   /**
