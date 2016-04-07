@@ -157,12 +157,11 @@ class Mailchimp {
 
       $data = json_decode($response->getBody());
 
-      // TODO: Detect error in response and throw MailchimpAPIException.
+      return $data;
+
     } catch (RequestException $e) {
       throw new MailchimpAPIException($e->getResponse()->getBody(), $e->getCode(), $e);
     }
-
-    return $data;
   }
 
   /**
