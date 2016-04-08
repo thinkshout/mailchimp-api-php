@@ -140,6 +140,22 @@ class Mailchimp {
   }
 
   /**
+   * Gets the status of a batch request.
+   *
+   * @param $batch_id
+   *   The ID of the batch operation.
+   *
+   * @return object
+   */
+  public function getBatchOperation($batch_id) {
+    $tokens = array(
+      'batch_id' => $batch_id,
+    );
+
+    return $this->request('GET', '/batches/{batch_id}', $tokens);
+  }
+
+  /**
    * Adds a pending batch operation.
    *
    * @param $method
