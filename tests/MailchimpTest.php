@@ -4,6 +4,9 @@ namespace Mailchimp\Tests;
 
 class MailchimpTest extends \PHPUnit_Framework_TestCase {
 
+  /**
+   * Tests library functionality for account information.
+   */
   public function testGetAccount() {
     $mc = new Mailchimp();
     $mc->getAccount();
