@@ -187,6 +187,8 @@ class MailchimpCampaigns extends Mailchimp {
    *   The ID of the campaign.
    *
    * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#delete-delete_campaigns_campaign_id
    */
   public function delete($campaign_id) {
     $tokens = array(
