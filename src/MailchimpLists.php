@@ -209,6 +209,8 @@ class MailchimpLists extends Mailchimp {
    *   The member's email address.
    *
    * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#delete-delete_lists_list_id_members_subscriber_hash
    */
   public function removeMember($list_id, $email) {
     $tokens = array(
