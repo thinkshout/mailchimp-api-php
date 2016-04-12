@@ -386,6 +386,8 @@ class MailchimpLists extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/webhooks/#read-get_lists_list_id_webhooks
    */
   public function getWebhooks($list_id, $parameters = array()) {
     $tokens = array(
@@ -393,6 +395,29 @@ class MailchimpLists extends Mailchimp {
     );
 
     return $this->request('GET', '/lists/{list_id}/webhooks', $tokens, $parameters);
+  }
+
+  /**
+   * Gets information about a specific webhook associated with a list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $webhook_id
+   *   The ID of the webhook.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/webhooks/#read-get_lists_list_id_webhooks_webhook_id
+   */
+  public function getWebhook($list_id, $webhook_id, $parameters = array()) {
+    $tokens = array(
+      'list_id' => $list_id,
+      'webhook_id' => $webhook_id,
+    );
+
+    return $this->request('GET', '/lists/{list_id}/webhooks/{webhook_id}', $tokens, $parameters);
   }
 
   /**
