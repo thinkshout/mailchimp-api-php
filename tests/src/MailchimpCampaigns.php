@@ -2,8 +2,6 @@
 
 namespace Mailchimp\Tests;
 
-use Mailchimp\MailchimpAPIException;
-
 class MailchimpCampaigns extends \Mailchimp\MailchimpCampaigns {
 
   /**

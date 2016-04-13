@@ -2,8 +2,6 @@
 
 namespace Mailchimp\Tests;
 
-use Mailchimp\MailchimpAPIException;
-
 class MailchimpLists extends \Mailchimp\MailchimpLists {
 
   /**
