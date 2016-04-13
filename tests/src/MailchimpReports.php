@@ -2,6 +2,8 @@
 
 namespace Mailchimp\Tests;
 
+use Mailchimp\MailchimpAPIException;
+
 class MailchimpReports extends \Mailchimp\MailchimpReports {
 
   /**
@@ -17,6 +19,20 @@ class MailchimpReports extends \Mailchimp\MailchimpReports {
 
   public function getEndpoint() {
     return $this->endpoint;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function getSummary($parameters = array()) {
+    throw new MailchimpAPIException('Method not implemented in test library.');
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function getCampaignSummary($campaign_id, $parameters = array()) {
+    throw new MailchimpAPIException('Method not implemented in test library.');
   }
 
 }

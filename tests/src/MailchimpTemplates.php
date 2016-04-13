@@ -2,6 +2,8 @@
 
 namespace Mailchimp\Tests;
 
+use Mailchimp\MailchimpAPIException;
+
 class MailchimpTemplates extends \Mailchimp\MailchimpTemplates {
 
   /**
@@ -17,6 +19,27 @@ class MailchimpTemplates extends \Mailchimp\MailchimpTemplates {
 
   public function getEndpoint() {
     return $this->endpoint;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function getTemplates($parameters = array()) {
+    throw new MailchimpAPIException('Method not implemented in test library.');
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function getTemplate($template_id, $parameters = array()) {
+    throw new MailchimpAPIException('Method not implemented in test library.');
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function getTemplateContent($template_id, $parameters = array()) {
+    throw new MailchimpAPIException('Method not implemented in test library.');
   }
 
 }
