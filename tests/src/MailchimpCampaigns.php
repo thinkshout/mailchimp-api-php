@@ -24,13 +24,6 @@ class MailchimpCampaigns extends \Mailchimp\MailchimpCampaigns {
   /**
    * @inheritdoc
    */
-  public function getCampaigns($parameters = array()) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
-  }
-
-  /**
-   * @inheritdoc
-   */
   public function getCampaign($campaign_id, $parameters = array()) {
     parent::getCampaign($campaign_id, $parameters);
 
@@ -50,48 +43,6 @@ class MailchimpCampaigns extends \Mailchimp\MailchimpCampaigns {
     );
 
     return $response;
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function addCampaign($type, $recipients, $settings, $parameters = array(), $batch = FALSE) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function setCampaignContent($campaign_id, $parameters = array()) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function updateCampaign($campaign_id, $type, $recipients, $settings, $parameters = array(), $batch = FALSE) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function sendTest($campaign_id, $test_emails, $send_type, $parameters = array(), $batch = FALSE) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function send($campaign_id, $batch = FALSE) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function delete($campaign_id) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
   }
 
 }

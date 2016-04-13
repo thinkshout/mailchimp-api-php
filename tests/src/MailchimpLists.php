@@ -132,13 +132,6 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
   /**
    * @inheritdoc
    */
-  public function getMembers($list_id, $parameters = array()) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
-  }
-
-  /**
-   * @inheritdoc
-   */
   public function getMemberInfo($list_id, $email, $parameters = array()) {
     parent::getMemberInfo($list_id, $email, $parameters);
 
@@ -149,13 +142,6 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
     );
 
     return $response;
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function getMemberActivity($list_id, $email, $parameters = array()) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
   }
 
   /**
@@ -283,13 +269,6 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
   /**
    * @inheritdoc
    */
-  public function getSegmentMembers($list_id, $segment_id, $parameters = array()) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
-  }
-
-  /**
-   * @inheritdoc
-   */
   public function getWebhooks($list_id, $parameters = array()) {
     parent::getWebhooks($list_id, $parameters);
 
@@ -318,13 +297,6 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
   /**
    * @inheritdoc
    */
-  public function getWebhook($list_id, $webhook_id, $parameters = array()) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
-  }
-
-  /**
-   * @inheritdoc
-   */
   public function addWebhook($list_id, $url, $parameters = array(), $batch = FALSE) {
     parent::addWebhook($list_id, $url, $parameters, $batch);
 
@@ -348,13 +320,6 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
     parent::deleteWebhook($list_id, $webhook_id, $parameters);
 
     return (!empty($list_id) && !empty($webhook_id));
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function getListsForEmail($email) {
-    throw new MailchimpAPIException('Method not implemented in test library.');
   }
 
 }
