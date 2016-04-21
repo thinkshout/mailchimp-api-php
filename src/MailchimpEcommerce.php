@@ -161,11 +161,13 @@ class MailchimpEcommerce extends Mailchimp {
   /**
    * Adds a new cart to a store.
    *
+   * @param string $store_id
+   * The ID for the store.
    * @param string $id
    *  The unique identifier for the cart.
-   * @param object $customer
+   * @param object $customer.
    *  Information about a specific customer.
-   * @param string $currency_code
+   * @param string $currency_code.
    *  The three-letter ISO 4217 code for the currency that the cart uses.
    * @param float $order_total
    *  The order total for the cart.
