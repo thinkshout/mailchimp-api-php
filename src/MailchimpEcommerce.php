@@ -54,7 +54,7 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#create-post_ecommerce_stores
    */
   public function addStore($id, $list_id, $name, $currency_code, $parameters = array(), $batch = FALSE) {
     $parameters += array(
