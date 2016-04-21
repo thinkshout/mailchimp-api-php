@@ -5,7 +5,7 @@ namespace Mailchimp\Tests;
 class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
   /**
-   * Tests library functionality for report information.
+   * Tests library functionality for stores information.
    */
   public function testGetStores() {
     $mc = new MailchimpEcommerce();
@@ -16,7 +16,7 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
-   * Tests library functionality for list information.
+   * Tests library functionality for store information.
    */
   public function testGetStore() {
     $store_id = 'MC002';
