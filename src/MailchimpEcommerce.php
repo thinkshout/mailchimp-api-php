@@ -157,4 +157,37 @@ class MailchimpEcommerce extends Mailchimp {
 
       return $this->request('GET', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens, $parameters);
     }
+
+    /**
+     * Adds a new cart to a store.
+     *
+     * @param string $id
+     *  The unique identifier for the cart.
+     * @param object $customer
+     *  Information about a specific customer.
+     * @param string $currency_code
+     *  The three-letter ISO 4217 code for the currency that the cart uses.
+     * @param float $order_total
+     *  The order total for the cart.
+     * @param bool $batch
+     * TRUE to create a new pending batch operation.
+     *
+     * @return object
+     *
+     * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#create-post_ecommerce_stores_store_id_carts
+     */
+     public function addCart($store_id, $id, $customer, $currency_code, $order_total, $parameters = array(), $batch = FALSE) {
+       $tokens = array(
+         'store_id' => $store_id,
+       );
+
+       $parameters += array(
+         'id' => $id,
+         'customer' => $customer,
+         'currency_code' => $currency_code,
+         'order_total' => $order_total,
+       );
+
+       return $this->request('POST', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters, $batch);
+     }
 }
