@@ -148,4 +148,18 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($currency_code, $request_body->currency_code);
     $this->assertEquals($order_total, $request_body->order_total);
   }
+
+  /**
+   * Tests library function for deleting a cart.
+   */
+  public function testDeleteCart() {
+    $store_id = 'MC001';
+    $cart_id = 'cart0001';
+
+    $mc = new MailchimpEcommerce();
+    $mc->deleteCart($store_id, $cart_id);
+
+    $this->assertEquals('DELETE', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndPoint() . '/ecommerce/stores/' . $store_id . '/carts/' . $cart_id, $mc->getClient()->uri);
+  }
 }

@@ -193,4 +193,24 @@ class MailchimpEcommerce extends Mailchimp {
     return $this->request('POST', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters, $batch);
   }
 
+  /**
+   * Deletes a cart.
+   *
+   * @param string $store_id
+   *   The ID of the store.
+   * @param string $cart_id
+   *   The ID of the cart.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#delete-delete_ecommerce_stores_store_id_carts_cart_id
+   */
+  public function deleteCart($store_id, $cart_id) {
+    $tokens = array(
+      'store_id' => $store_id,
+      'cart_id' => $cart_id,
+    );
+
+    return $this->request('DELETE', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens);
+  }
 }
