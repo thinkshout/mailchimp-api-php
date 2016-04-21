@@ -122,7 +122,6 @@ class MailchimpEcommerce extends Mailchimp {
     *
     * @param array $store_id
     *   The ID of the store where the carts exist.
-    *
     * @param array $parameters
     *   Associative array of optional request parameters.
     *
@@ -143,7 +142,6 @@ class MailchimpEcommerce extends Mailchimp {
     *
     * @param string $store_id
     *   The ID of the store.
-    *
     * @param string $cart_id
     *   The ID of the cart.
     *
