@@ -77,4 +77,17 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
      $this->assertEquals($currency_code, $request_body->currency_code);
    }
 
+   /**
+    * Tests library functionality for deleting stores.
+    */
+    public function testDelete() {
+      $store_id = 'MC002';
+
+      $mc = new MailchimpEcommerce();
+      $mc->delete($store_id);
+
+      $this->assertEquals('DELETE', $mc->getClient()->method);
+      $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id, $mc->getClient()->uri);
+    }
+
 }

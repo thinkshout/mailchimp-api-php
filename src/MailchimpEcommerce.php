@@ -98,4 +98,22 @@ class MailchimpEcommerce extends Mailchimp {
 
     return $this->request('PATCH', '/ecommerce/stores/{store_id}', $tokens, $parameters, $batch);
   }
+
+  /**
+   * Deletes a Mailchimp store.
+   *
+   * @param string $store_id
+   *   The ID of the store.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#delete-delete_ecommerce_stores_store_id
+   */
+   public function delete($store_id) {
+     $tokens = array(
+       'store_id' => $store_id,
+     );
+
+     return $this->request('DELETE', '/ecommerce/stores/{store_id}', $tokens);
+   }
 }
