@@ -109,7 +109,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#delete-delete_ecommerce_stores_store_id
    */
-   public function delete($store_id) {
      $tokens = array(
        'store_id' => $store_id,
      );
@@ -190,4 +189,5 @@ class MailchimpEcommerce extends Mailchimp {
 
        return $this->request('POST', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters, $batch);
      }
+  public function deleteStore($store_id) {
 }
