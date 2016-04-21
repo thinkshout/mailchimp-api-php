@@ -28,7 +28,7 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/reports/#read-get_reports_campaign_id
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#read-get_ecommerce_stores_store_id
    */
   public function getStore($store_id, $parameters = array()) {
     $tokens = array(
