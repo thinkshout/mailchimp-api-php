@@ -38,4 +38,33 @@ class MailchimpEcommerce extends Mailchimp {
     return $this->request('GET', '/ecommerce/store/{store_id}', $tokens, $parameters);
   }
 
+  /**
+   * Adds a new store to the authenticated account.
+   *
+   * @param string $id
+   *  The unique identifier for the store.
+   * @param string $list_id
+   *  The id for the list associated with the store.
+   * @param string $name
+   *  The name of the store.
+   * @param string $currency_code
+   *  The three-letter ISO 4217 code for the currency that the store accepts
+   * @param bool $batch
+   *  TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#
+   */
+  public function addStore($id, $list_id, $name, $currency_code, $parameters = array(), $batch = FALSE) {
+    $parameters += array(
+      'id' => $id,
+      'list_id' => $list_id,
+      'name' => $name,
+      'currency_code' => $currency_code,
+    );
+
+    return $this->request('POST', '/ecommerce/stores', NULL, $parameters, $batch);
+  }
+
 }
