@@ -398,4 +398,46 @@ class MailchimpEcommerce extends Mailchimp {
 
     return $this->request('GET', '/ecommerce/stores/' . $store_id . '/orders/' . $order_id, $tokens, $parameters);
   }
+
+  /**
+   * Add a new order to a store.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $id
+   *  A unique identifier for the order.
+   * @param object $customer
+   *  Information about a specific customer. This information will update any
+   *  existing customer. If the customer doesn't exist in the store, a new
+   *  customer will be created.
+   * @param string $currency_code
+   *  The three-letter ISO 4217 code for the currency that the store accepts.
+   * @param float $order_total
+   *  The total for the order.
+   * @param array $lines
+   *  An array of the order's line items.
+   * @param array $parameters
+   *  Associative array of optional request parameters.
+   * @param bool $batch
+   *  TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#create-post_ecommerce_stores_store_id_orders
+   */
+  public function addOrder($store_id, $id, $customer, $currency_code, $order_total, $lines, $parameters = array(), $batch = FALSE) {
+    $tokens = array(
+      'store_id' => $store_id,
+    );
+
+    $parameters += array(
+      'id' => $id,
+      'customer' => $customer,
+      'currency_code' => $currency_code,
+      'order_total' => $order_total,
+      'lines' => $lines,
+    );
+
+    return $this->request('POST', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters, $batch);
+  }
 }
