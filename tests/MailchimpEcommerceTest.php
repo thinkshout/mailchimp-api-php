@@ -162,4 +162,17 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('DELETE', $mc->getClient()->method);
     $this->assertEquals($mc->getEndPoint() . '/ecommerce/stores/' . $store_id . '/carts/' . $cart_id, $mc->getClient()->uri);
   }
+
+  /**
+   * Tests library function for getting customers.
+   */
+  public function testGetCustomers() {
+    $store_id = 'MC001';
+
+    $mc = new MailchimpEcommerce();
+    $mc->getCustomers($store_id);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndPoint() . '/ecommerce/stores/' . $store_id . '/customers', $mc->getClient()->uri);
+  }
 }
