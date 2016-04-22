@@ -232,8 +232,22 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertNotEmpty($mc->getClient()->options['json']);
 
     $request_body = $mc->getClient()->options['json'];
-    
+
     $this->assertEquals($email_address, $request_body->email_address);
     $this->assertEquals($opt_in_status, $request_body->opt_in_status);
+  }
+
+  /**
+   * Tests library function for deleting a customer.
+   */
+  public function testDeleteCustomer() {
+    $store_id = 'MC001';
+    $customer_id = 'cust0003';
+
+    $mc = new MailchimpEcommerce();
+    $mc->deleteCustomer($store_id, $customer_id);
+
+    $this->assertEquals('DELETE', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndPoint() . '/ecommerce/stores/' . $store_id . '/customers/' . $customer_id, $mc->getClient()->uri);
   }
 }
