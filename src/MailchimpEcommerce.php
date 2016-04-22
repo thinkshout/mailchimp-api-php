@@ -241,4 +241,27 @@ class MailchimpEcommerce extends Mailchimp {
 
     return $this->request('GET', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters);
   }
+
+  /**
+   * Get information about a specific customer.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $customer_id
+   *  The ID of the customer.
+   * @param array $parameters
+   *  Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#read-get_ecommerce_stores_store_id_customers_customer_id
+   */
+  public function getCustomer($store_id, $customer_id, $parameters = array()) {
+    $tokens = array(
+      'store_id' => $store_id,
+      'customer_id' => $customer_id,
+    );
+
+    return $this->request('GET', '/ecommerce/stores/' . $store_id . '/customers/' . $customer_id, $tokens, $parameters);
+  }
 }
