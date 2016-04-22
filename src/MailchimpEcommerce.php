@@ -300,4 +300,38 @@ class MailchimpEcommerce extends Mailchimp {
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters, $batch);
   }
+
+  /**
+   * Update a customer.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $customer_id
+   *  The ID of the customer.
+   * @param string $email_address
+   *  The email address of the customer.
+   * @param bool $opt_in_status
+   *  The customer's opt-in status.
+   * @param array $parameters
+   *  Associative array of optional request parameters.
+   * @param bool $batch
+   *  TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#edit-patch_ecommerce_stores_store_id_customers_customer_id
+   */
+  public function updateCustomer($store_id, $customer_id, $email_address, $opt_in_status, $parameters = array(), $batch = FALSE) {
+    $tokens = array(
+      'store_id' => $store_id,
+      'customer_id' => $customer_id,
+    );
+
+    $parameters += array(
+      'email_address' => $email_address,
+      'opt_in_status' => $opt_in_status,
+    );
+
+    return $this->request('PATCH', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens, $parameters, $batch);
+  }
 }

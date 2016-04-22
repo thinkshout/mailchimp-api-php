@@ -213,4 +213,27 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($email_address, $request_body->email_address);
     $this->assertEquals($opt_in_status, $request_body->opt_in_status);
   }
+
+  /**
+   * Tests library function for updating a customer.
+   */
+  public function testUpdateCustomer() {
+    $store_id = 'MC001';
+    $customer_id = 'cust0001';
+    $email_address = 'freddie@freddiesjokes.com';
+    $opt_in_status = TRUE;
+
+    $mc = new MailchimpEcommerce();
+    $mc->updateCustomer($store_id, $customer_id, $email_address, $opt_in_status);
+
+    $this->assertEquals('PATCH', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/customers/' . $customer_id, $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+    
+    $this->assertEquals($email_address, $request_body->email_address);
+    $this->assertEquals($opt_in_status, $request_body->opt_in_status);
+  }
 }
