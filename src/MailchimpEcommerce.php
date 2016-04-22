@@ -375,4 +375,27 @@ class MailchimpEcommerce extends Mailchimp {
 
     return $this->request('GET', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters);
   }
+
+  /**
+   * Get information about a specific order.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID of the order.
+   * @param array $parameters
+   *  Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#read-get_ecommerce_stores_store_id_orders_order_id
+   */
+  public function getOrder($store_id, $order_id, $parameters = array()) {
+    $tokens = array(
+      'store_id' => $store_id,
+      'order_id' => $order_id,
+    );
+
+    return $this->request('GET', '/ecommerce/stores/' . $store_id . '/orders/' . $order_id, $tokens, $parameters);
+  }
 }
