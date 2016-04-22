@@ -189,4 +189,28 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('GET', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/customers/' . $customer_id, $mc->getClient()->uri);
   }
+
+  /**
+   * Tests library function for adding a customer.
+   */
+  public function testAddCustomer() {
+    $store_id = 'MC001';
+    $id = 'cust0001';
+    $email_address = 'freddie@freddiesjokes.com';
+    $opt_in_status = TRUE;
+
+    $mc = new MailchimpEcommerce();
+    $mc->addCustomer($store_id, $id, $email_address, $opt_in_status);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/customers', $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($id, $request_body->id);
+    $this->assertEquals($email_address, $request_body->email_address);
+    $this->assertEquals($opt_in_status, $request_body->opt_in_status);
+  }
 }

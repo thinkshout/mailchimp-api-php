@@ -264,4 +264,40 @@ class MailchimpEcommerce extends Mailchimp {
 
     return $this->request('GET', '/ecommerce/stores/' . $store_id . '/customers/' . $customer_id, $tokens, $parameters);
   }
+
+  /**
+   * Adds a new customer to a store.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $id
+   *  A unique identifier for the customer.
+   * @param string $email_address
+   *  The customer's email address.
+   * @param bool $opt_in_status
+   *  The customer's opt-in status. This value will never overwrite the opt-in
+   *  status of a pre-existing MailChimp list member, but will apply to list
+   *  members that are added through the e-commerce API endpoints.
+   * @param array $parameters
+   *  Associative array of optional request parameters.
+   * @param bool $batch
+   *  TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#create-post_ecommerce_stores_store_id_customers
+   */
+  public function addCustomer($store_id, $id, $email_address, $opt_in_status, $parameters = array(), $batch = FALSE) {
+    $tokens = array(
+      'store_id' => $store_id,
+    );
+
+    $parameters += array(
+      'id' => $id,
+      'email_address' => $email_address,
+      'opt_in_status' => $opt_in_status,
+    );
+
+    return $this->request('POST', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters, $batch);
+  }
 }
