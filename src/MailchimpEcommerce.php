@@ -110,11 +110,11 @@ class MailchimpEcommerce extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#delete-delete_ecommerce_stores_store_id
    */
   public function deleteStore($store_id) {
-   $tokens = array(
-     'store_id' => $store_id,
-   );
+    $tokens = array(
+      'store_id' => $store_id,
+    );
 
-   return $this->request('DELETE', '/ecommerce/stores/{store_id}', $tokens);
+    return $this->request('DELETE', '/ecommerce/stores/{store_id}', $tokens);
   }
 
   /**
@@ -130,11 +130,11 @@ class MailchimpEcommerce extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#read-get_ecommerce_stores_store_id_carts
    */
   public function getCarts($store_id, $parameters = array()) {
-   $tokens = array(
-     'store_id' => $store_id,
-   );
+    $tokens = array(
+      'store_id' => $store_id,
+    );
 
-   return $this->request('GET', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters);
+    return $this->request('GET', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters);
   }
 
   /**
@@ -165,9 +165,9 @@ class MailchimpEcommerce extends Mailchimp {
    * The ID for the store.
    * @param string $id
    *  The unique identifier for the cart.
-   * @param object $customer.
+   * @param object $customer .
    *  Information about a specific customer.
-   * @param string $currency_code.
+   * @param string $currency_code .
    *  The three-letter ISO 4217 code for the currency that the cart uses.
    * @param float $order_total
    *  The order total for the cart.
@@ -180,14 +180,14 @@ class MailchimpEcommerce extends Mailchimp {
    */
   public function addCart($store_id, $id, $customer, $currency_code, $order_total, $parameters = array(), $batch = FALSE) {
     $tokens = array(
-     'store_id' => $store_id,
+      'store_id' => $store_id,
     );
 
     $parameters += array(
-     'id' => $id,
-     'customer' => $customer,
-     'currency_code' => $currency_code,
-     'order_total' => $order_total,
+      'id' => $id,
+      'customer' => $customer,
+      'currency_code' => $currency_code,
+      'order_total' => $order_total,
     );
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters, $batch);
