@@ -49,6 +49,8 @@ class MailchimpEcommerce extends Mailchimp {
    *  The name of the store.
    * @param string $currency_code
    *  The three-letter ISO 4217 code for the currency that the store accepts
+   * @param array $parameters
+   *  Associative array of optional request parameters.
    * @param bool $batch
    *  TRUE to create a new pending batch operation.
    *
@@ -78,6 +80,8 @@ class MailchimpEcommerce extends Mailchimp {
    *  The name of the store.
    * @param string $currency_code
    *  The three-letter ISO 4217 code for the currency that the store accepts
+   * @param array $parameters
+   *  Associative array of optional request parameters.
    * @param bool $batch
    *  TRUE to create a new pending batch operation.
    *
@@ -144,6 +148,8 @@ class MailchimpEcommerce extends Mailchimp {
    *   The ID of the store.
    * @param string $cart_id
    *   The ID of the cart.
+   * @param array $parameters
+   *  Associative array of optional request parameters.
    *
    * @return object
    *
@@ -171,6 +177,8 @@ class MailchimpEcommerce extends Mailchimp {
    *  The three-letter ISO 4217 code for the currency that the cart uses.
    * @param float $order_total
    *  The order total for the cart.
+   * @param array $parameters
+   *  Associative array of optional request parameters.
    * @param bool $batch
    * TRUE to create a new pending batch operation.
    *
@@ -219,6 +227,8 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @param string $store_id
    *  The ID of the store.
+   * @param array $parameters
+   *  Associative array of optional request parameters.
    *
    * @return object
    *
@@ -229,6 +239,6 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
     );
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/customers', $tokens);
+    return $this->request('GET', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters = array());
   }
 }
