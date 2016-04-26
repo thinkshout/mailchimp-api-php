@@ -35,7 +35,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
     );
 
-    return $this->request('GET', '/ecommerce/store/{store_id}', $tokens, $parameters);
+    return $this->request('GET', '/ecommerce/stores/{store_id}', $tokens, $parameters);
   }
 
   /**
