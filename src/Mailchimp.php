@@ -78,7 +78,7 @@ class Mailchimp {
    * @param int $timeout
    *   Maximum request time in seconds.
    */
-  public function __construct($api_key, $api_user = 'apikey', $timeout) {
+  public function __construct($api_key, $api_user = 'apikey', $timeout = 10) {
     $this->api_key = $api_key;
     $this->api_user = $api_user;
 
