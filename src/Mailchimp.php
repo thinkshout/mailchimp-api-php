@@ -259,7 +259,15 @@ class Mailchimp {
       return $data;
 
     } catch (RequestException $e) {
-      throw new MailchimpAPIException($e->getResponse()->getBody(), $e->getCode(), $e);
+      $response = $e->getResponse();
+      if (!empty($response)) {
+        $message = $e->getResponse()->getBody();
+      }
+      else {
+        $message = $e->getMessage();
+      }
+
+      throw new MailchimpAPIException($message, $e->getCode(), $e);
     }
   }
 
