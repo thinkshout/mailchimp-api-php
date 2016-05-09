@@ -1,6 +1,6 @@
 {
   "name": "thinkshout/mailchimp-api-php",
-  "version": "1.0",
+  "version": "1.0.1",
   "type": "library",
   "description": "PHP library for v3 of the MailChimp API",
   "keywords": ["mailchimp", "mail"],
