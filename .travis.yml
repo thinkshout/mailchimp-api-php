@@ -1,0 +1,19 @@
+language: php
+before_script:
+- composer self-update
+- composer install --dev --no-interaction
+#- phpenv local --unset
+script:
+- vendor/bin/phpunit --coverage-clover clover.xml
+after_script:
+#- cd ..
+#- phpenv local 5.5
+#- phpenv local --unset
+php:
+- 5.5
+- 5.6
+- 7.0
+notifications:
+  email: false
+  slack:
+    secure: IZHSaVKTODGfl4nsL6ZQbqOefBV+vz7/AKfceu9B7wVrVKBe7gApp47RAVwSXCJGueUpV62T4BWAx/bsUeI2Q06Mtc3pBxpU9ABeTSvkXjp73ZK2WPtso7cpyiFpfGt8KdalXVQwnF/ukFKKdoX94MG8XhmPiNy4X+ncjpnnXXNzYiJs59jv2EA06qvkTEe90j7yyE2TFBUS2bKtkDTJw2uOxcdCE9YKX1jZpeTP0EDEQDQLMW7BVX8Xet2qCNnwz+PEqfoe+FtSikOWdpwbga4aHIpl/5rAHpwCI/6ZxrZRQUqFlMxEOlFp0VkPVbC7XFqNXWcKNRtMLSBQy6DqHAgghB+6/q/VpuskBq5QVdQv5gzbPBAZCp6HLE8/G343WUdFRgVyeP3IDvA3ElJr4flbw2zhI4GjMlz4nJQmw1yucRsKZ9+5cSK9ZlxQEKbo1YddEv8TdOu1P4uyRg63b4JnUS7U2LCang8/+BQi/a5bjTtnhYgz2JBtrAX0Xo/yX5ziCqKQEUl3lQCW6jf+0JwYPe0zHX7IGrw/RlJDbCi4MkzbIfQqzaM6iHSZRPC5+17qXM/rFsVQ2eFUJD/12ajpFVc783m9wBxwzKd7XT7sjtg86ud0JQcA2hW7mlpHuDY8YQ2p1Ezjn12JuXgqVb89JwCZRTjG5UGB6Oho8Nk=
