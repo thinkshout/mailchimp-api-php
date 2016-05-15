@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 
 class Mailchimp {
 
+  const VERSION = '1.0.1';
   const DEFAULT_DATA_CENTER = 'us1';
 
   const ERROR_CODE_BAD_REQUEST = 'BadRequest';
@@ -26,6 +27,12 @@ class Mailchimp {
   const ERROR_CODE_TOO_MANY_REQUESTS = 'TooManyRequests';
   const ERROR_CODE_INTERNAL_SERVER_ERROR = 'InternalServerError';
   const ERROR_CODE_COMPLIANCE_RELATED = 'ComplianceRelated';
+
+  /**
+   * API version.
+   * @var string
+   */
+  public $version = self::VERSION;
 
   /**
    * @var Client $client
