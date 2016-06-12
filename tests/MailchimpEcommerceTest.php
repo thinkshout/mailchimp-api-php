@@ -321,4 +321,22 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($lines['quantity'], $request_body->lines['quantity']);
     $this->assertEquals($lines['price'], $request_body->lines['price']);
   }
+
+  /**
+   * Test adding a product.
+   */
+  public function testAddProduct(){
+    $store_id = 'MC001';
+    $product_id = 'sku0001';
+    $title = 'Test Product 001';
+    $mc = new MailchimpEcommerce();
+    $mc->addProduct($store_id, $product_id, $title);
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products', $mc->getClient()->uri);
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+    $request_body = $mc->getClient()->options['json'];
+    $this->assertEquals($product_id, $request_body->id);
+    $this->assertEquals($title, $request_body->title);
+    $this->assertEquals($store_id, $request_body->store_id);
+  }
 }
