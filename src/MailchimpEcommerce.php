@@ -74,8 +74,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @param string $store_id
    *  The unique identifier for the store.
-   * @param string $list_id
-   *  The id for the list associated with the store.
    * @param string $name
    *  The name of the store.
    * @param string $currency_code
@@ -89,13 +87,12 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#edit-patch_ecommerce_stores_store_id
    */
-  public function updateStore($store_id, $list_id, $name, $currency_code, $parameters = array(), $batch = FALSE) {
+  public function updateStore($store_id, $name, $currency_code, $parameters = array(), $batch = FALSE) {
     $tokens = array(
       'store_id' => $store_id,
     );
 
     $parameters += array(
-      'list_id' => $list_id,
       'name' => $name,
       'currency_code' => $currency_code,
     );
