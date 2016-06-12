@@ -58,12 +58,11 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
    */
   public function testUpdateStore() {
     $store_id = 'MC001';
-    $list_id = '205d96e6b4';
     $name = "Freddie'\''s Merchandise";
     $currency_code = 'USD';
 
     $mc = new MailchimpEcommerce();
-    $mc->updateStore($store_id, $list_id, $name, $currency_code);
+    $mc->updateStore($store_id, $name, $currency_code);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id, $mc->getClient()->uri);
@@ -72,7 +71,6 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
     $request_body = $mc->getClient()->options['json'];
 
-    $this->assertEquals($list_id, $request_body->list_id);
     $this->assertEquals($name, $request_body->name);
     $this->assertEquals($currency_code, $request_body->currency_code);
   }
