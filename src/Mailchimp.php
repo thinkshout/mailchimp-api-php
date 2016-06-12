@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 
 class Mailchimp {
 
+  const VERSION = '1.0.2';
   const DEFAULT_DATA_CENTER = 'us1';
 
   const ERROR_CODE_BAD_REQUEST = 'BadRequest';
@@ -26,6 +27,12 @@ class Mailchimp {
   const ERROR_CODE_TOO_MANY_REQUESTS = 'TooManyRequests';
   const ERROR_CODE_INTERNAL_SERVER_ERROR = 'InternalServerError';
   const ERROR_CODE_COMPLIANCE_RELATED = 'ComplianceRelated';
+
+  /**
+   * API version.
+   * @var string
+   */
+  public $version = self::VERSION;
 
   /**
    * @var Client $client
@@ -78,7 +85,7 @@ class Mailchimp {
    * @param int $timeout
    *   Maximum request time in seconds.
    */
-  public function __construct($api_key, $api_user = 'apikey', $timeout) {
+  public function __construct($api_key, $api_user = 'apikey', $timeout = 10) {
     $this->api_key = $api_key;
     $this->api_user = $api_user;
 
@@ -259,7 +266,15 @@ class Mailchimp {
       return $data;
 
     } catch (RequestException $e) {
-      throw new MailchimpAPIException($e->getResponse()->getBody(), $e->getCode(), $e);
+      $response = $e->getResponse();
+      if (!empty($response)) {
+        $message = $e->getResponse()->getBody();
+      }
+      else {
+        $message = $e->getMessage();
+      }
+
+      throw new MailchimpAPIException($message, $e->getCode(), $e);
     }
   }
 
