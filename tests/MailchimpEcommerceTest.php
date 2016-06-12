@@ -25,7 +25,7 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $mc->getStore($store_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/ecommerce/store/' . $store_id, $mc->getClient()->uri);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id, $mc->getClient()->uri);
   }
 
   /**
