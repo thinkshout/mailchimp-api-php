@@ -480,17 +480,21 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @param string $store_id
    *  Store ID
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
    *
    * @return object
    *
-   *  @throws \Mailchimp\MailchimpAPIException
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#read-get_ecommerce_stores_store_id_products
    */
-  public function getProducts($store_id){
+  public function getProducts($store_id, $parameters = array()){
     $tokens = array(
       'store_id' => $store_id,
     );
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/products', $tokens);
+    return $this->request('GET', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
   }
 
   /**
@@ -500,18 +504,22 @@ class MailchimpEcommerce extends Mailchimp {
    *  Store ID.
    * @param string $product_id
    *  Product ID.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
    *
    * @return object
    *
    * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#read-get_ecommerce_stores_store_id_products_product_id
    */
-  public function getProduct($store_id, $product_id){
+  public function getProduct($store_id, $product_id, $parameters = array()){
     $tokens = array(
       'store_id' => $store_id,
       'product_id' => $product_id,
     );
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens);
+    return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens, $parameters);
   }
 
   /**
@@ -525,6 +533,8 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *
    * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/
    */
   public function deleteProduct($store_id, $product_id){
     $tokens = array(
