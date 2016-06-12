@@ -335,6 +335,5 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $request_body = $mc->getClient()->options['json'];
     $this->assertEquals($product_id, $request_body->id);
     $this->assertEquals($title, $request_body->title);
-    $this->assertEquals($store_id, $request_body->store_id);
   }
 }
