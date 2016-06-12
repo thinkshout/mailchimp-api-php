@@ -437,4 +437,108 @@ class MailchimpEcommerce extends Mailchimp {
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters, $batch);
   }
+
+  /**
+   * Add a product to a store.
+   *
+   * @param string $store_id
+   *  Store ID to add the product too. Required.
+   * @param string $id
+   *  Unique ID for the product. Required.
+   * @param string $title
+   *  Product title. Required.
+   * @param array $variants
+   *  An array of the product's variants
+   * @param array $parameters
+   *  An array of additional parameters. See API docs.
+   *
+   * @return object
+   *
+   *  @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#
+   */
+  public function addProduct($store_id, $id, $title, $variants = array(), $parameters = array()){
+    $tokens = array(
+      'store_id' => $store_id,
+    );
+
+    $parameters += array(
+      'id' => $id,
+      'title' => $title,
+      'variants' => $variants,
+    );
+
+    return $this->request('POST', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
+  }
+
+  /**
+   * Get information about all products for a store.
+   *
+   * @param string $store_id
+   *  Store ID
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#read-get_ecommerce_stores_store_id_products
+   */
+  public function getProducts($store_id, $parameters = array()){
+    $tokens = array(
+      'store_id' => $store_id,
+    );
+
+    return $this->request('GET', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
+  }
+
+  /**
+   * Get information about a specific product.
+   *
+   * @param string $store_id
+   *  Store ID.
+   * @param string $product_id
+   *  Product ID.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#read-get_ecommerce_stores_store_id_products_product_id
+   */
+  public function getProduct($store_id, $product_id, $parameters = array()){
+    $tokens = array(
+      'store_id' => $store_id,
+      'product_id' => $product_id,
+    );
+
+    return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens, $parameters);
+  }
+
+  /**
+   * Delete a product.
+   *
+   * @param string $store_id
+   *  Store ID.
+   * @param string $product_id
+   *  Product ID.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/
+   */
+  public function deleteProduct($store_id, $product_id){
+    $tokens = array(
+      'store_id' => $store_id,
+      'product_id' => $product_id,
+    );
+
+    return $this->request('DELETE', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens);
+  }
 }
