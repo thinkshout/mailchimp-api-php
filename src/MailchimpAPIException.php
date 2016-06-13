@@ -9,7 +9,7 @@ class MailchimpAPIException extends Exception {
   /**
    * @inheritdoc
    */
-  public function __construct($message = "", $code = 0, Exception $previous = null) {
+  public function __construct($message = "", $code = 0, Exception $previous = NULL) {
     // Construct message from JSON if required.
     if (substr($message, 0, 1) == '{') {
       $message_obj = json_decode($message);

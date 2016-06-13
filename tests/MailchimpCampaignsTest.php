@@ -33,13 +33,13 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
    */
   public function testAddCampaign() {
     $type = 'regular';
-    $recipients = (object) array(
+    $recipients = (object) [
       'list_id' => '3c307a9f3f',
-    );
-    $settings = (object) array(
+    ];
+    $settings = (object) [
       'subject_line' => 'Your Purchase Receipt',
       'from_name' => 'Customer Service',
-    );
+    ];
 
     $mc = new MailchimpCampaigns();
     $mc->addCampaign($type, $recipients, $settings);
@@ -63,9 +63,9 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
    */
   public function testSetCampaignContent() {
     $campaign_id = '42694e9e57';
-    $parameters = array(
+    $parameters = [
       'html' => '<p>The HTML to use for the saved campaign.</p>',
-    );
+    ];
 
     $mc = new MailchimpCampaigns();
     $mc->setCampaignContent($campaign_id, $parameters);
@@ -86,13 +86,13 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
   public function testUpdateCampaign() {
     $campaign_id = '3e06f4ec92';
     $type = 'regular';
-    $recipients = (object) array(
+    $recipients = (object) [
       'list_id' => '3c307a9f3f',
-    );
-    $settings = (object) array(
+    ];
+    $settings = (object) [
       'subject_line' => 'This is an updated subject line',
       'from_name' => 'Customer Service',
-    );
+    ];
 
     $mc = new MailchimpCampaigns();
     $mc->updateCampaign($campaign_id, $type, $recipients, $settings);
@@ -116,9 +116,9 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
    */
   public function testSendTest() {
     $campaign_id = 'b03bfc273a';
-    $emails = array(
+    $emails = [
       'test@example.com',
-    );
+    ];
     $send_type = 'html';
 
     $mc = new MailchimpCampaigns();

@@ -93,9 +93,9 @@ class Mailchimp {
 
     $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, $dc, $this->endpoint);
 
-    $this->client = new Client(array(
+    $this->client = new Client([
       'timeout' => $timeout,
-    ));
+    ]);
   }
 
   /**
@@ -128,19 +128,20 @@ class Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
    */
   public function processBatchOperations() {
-    $parameters = array(
+    $parameters = [
       'operations' => $this->batch_operations,
-    );
+    ];
 
     try {
       $response = $this->request('POST', '/batches', NULL, $parameters);
 
       // Reset batch operations.
-      $this->batch_operations = array();
+      $this->batch_operations = [];
 
       return $response;
 
-    } catch (MailchimpAPIException $e) {
+    }
+    catch (MailchimpAPIException $e) {
       $message = 'Failed to process batch operations: ' . $e->getMessage();
       throw new MailchimpAPIException($message, $e->getCode(), $e);
     }
@@ -155,9 +156,9 @@ class Mailchimp {
    * @return object
    */
   public function getBatchOperation($batch_id) {
-    $tokens = array(
+    $tokens = [
       'batch_id' => $batch_id,
-    );
+    ];
 
     return $this->request('GET', '/batches/{batch_id}', $tokens);
   }
@@ -179,15 +180,15 @@ class Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
    */
-  protected function addBatchOperation($method, $path, $parameters = array()) {
+  protected function addBatchOperation($method, $path, $parameters = []) {
     if (empty($method) || empty($path)) {
       throw new MailchimpAPIException('Cannot add batch operation without a method and path.');
     }
 
-    $op = (object) array(
+    $op = (object) [
       'method' => $method,
       'path' => $path,
-    );
+    ];
 
     if (!empty($parameters)) {
       if ($method == 'GET') {
@@ -199,7 +200,7 @@ class Mailchimp {
     }
 
     if (empty($this->batch_operations)) {
-      $this->batch_operations = array();
+      $this->batch_operations = [];
     }
 
     $this->batch_operations[] = $op;
@@ -237,11 +238,11 @@ class Mailchimp {
     }
 
     // Set default request options with auth header.
-    $options = array(
-      'headers' => array(
+    $options = [
+      'headers' => [
         'Authorization' => $this->api_user . ' ' . $this->api_key,
-      ),
-    );
+      ],
+    ];
 
     // Add trigger error header if a debug error code has been set.
     if (!empty($this->debug_error_code)) {
@@ -265,7 +266,8 @@ class Mailchimp {
 
       return $data;
 
-    } catch (RequestException $e) {
+    }
+    catch (RequestException $e) {
       $response = $e->getResponse();
       if (!empty($response)) {
         $message = $e->getResponse()->getBody();
