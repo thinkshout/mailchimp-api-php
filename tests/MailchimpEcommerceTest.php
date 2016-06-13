@@ -348,7 +348,7 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     // Method must be DELETE.
     $this->assertEquals('DELETE', $mc->getClient()->method);
     // Confirm URI being used.
-    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/2' . $store_id . '/products/' . $product_id, $mc->getClient()->uri);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id, $mc->getClient()->uri);
     $this->assertNotEmpty($mc->getClient()->options['json']);
     $request_body = $mc->getClient()->options['json'];
     // Check that the request body has the right parameters.
