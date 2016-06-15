@@ -120,7 +120,7 @@ class MailchimpListsTest extends \PHPUnit_Framework_TestCase {
     $mc->addMember($list_id, $email);
 
     $this->assertEquals('POST', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members' , $mc->getClient()->uri);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members', $mc->getClient()->uri);
 
     $this->assertNotEmpty($mc->getClient()->options['json']);
 
