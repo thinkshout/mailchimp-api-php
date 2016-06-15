@@ -362,6 +362,19 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('GET', $mc->getClient()->method);
     // Confirm the URI being used.
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products', $mc->getClient()->uri);
+  }
 
+  /**
+   * Test getting information on a single product.
+   */
+  public function testGetProduct() {
+    $store_id = 'MC001';
+    $product_id = 'sku0001';
+    $mc = new MailchimpEcommerce();
+    $mc->getProduct($store_id, $product_id);
+    // Method must be GET.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Confirm the URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id, $mc->getClient()->uri);
   }
 }
