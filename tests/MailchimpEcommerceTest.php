@@ -349,12 +349,6 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('DELETE', $mc->getClient()->method);
     // Confirm URI being used.
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id, $mc->getClient()->uri);
-    print_r($mc->getClient()->options);
-    $this->assertNotEmpty($mc->getClient()->options['json']);
-    $request_body = $mc->getClient()->options['json'];
-    // Check that the request body has the right parameters.
-    $this->assertEquals($product_id, $request_body->product_id);
-    $this->assertEquals($store_id, $request_body->store_id);
   }
 
   /**
@@ -368,10 +362,6 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('GET', $mc->getClient()->method);
     // Confirm the URI being used.
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products', $mc->getClient()->uri);
-    $this->assertNotEmpty($mc->getClient()->options['json']);
-    $request_body = $mc->getClient()->options['json'];
-    // Check that the request body has the right parameters.
-    $this->assertEquals($store_id, $request_body->store_id);
 
   }
 }
