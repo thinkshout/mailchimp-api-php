@@ -121,11 +121,11 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   public function testAddCart() {
     $store_id = 'MC001';
     $id = 'cart0001';
-    $customer = (object) array(
-     'id' => 'cust0005',
-     'email_address' => 'freddy@freddiesjokes.com',
-     'opt_in_status' => TRUE,
-    );
+    $customer = (object) [
+      'id' => 'cust0005',
+      'email_address' => 'freddy@freddiesjokes.com',
+      'opt_in_status' => TRUE,
+    ];
     $currency_code = 'USD';
     $order_total = 12.45;
 
@@ -282,20 +282,20 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   public function testAddOrder() {
     $store_id = 'MC001';
     $id = 'ord0001';
-    $customer = (object) array(
+    $customer = (object) [
       'id' => 'cust0005',
       'email_address' => 'freddy@freddiesjokes.com',
       'opt_in_status' => TRUE,
-    );
+    ];
     $currency_code = 'USD';
     $order_total = 12.45;
-    $lines = array(
+    $lines = [
       'id' => 'L001',
       'product_id' => 'PROD001',
       'product_variant_id' => 'PROD001A',
       'quantity' => 2,
       'price' => 10,
-    );
+    ];
 
     $mc = new MailchimpEcommerce();
     $mc->addOrder($store_id, $id, $customer, $currency_code, $order_total, $lines);
@@ -323,7 +323,7 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   /**
    * Test adding a product.
    */
-  public function testAddProduct(){
+  public function testAddProduct() {
     $store_id = 'MC001';
     $product_id = 'sku0001';
     $title = 'Test Product 001';
@@ -340,7 +340,7 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   /**
    * Test deleting a product.
    */
-  public function testDeleteProduct(){
+  public function testDeleteProduct() {
     $store_id = 'MC001';
     $product_id = 'sku0001';
     $mc = new MailchimpEcommerce();
@@ -354,5 +354,23 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     // Check that the request body has the right parameters.
     $this->assertEquals($product_id, $request_body->product_id);
     $this->assertEquals($store_id, $request_body->store_id);
+  }
+
+  /**
+   * Test getting all products.
+   */
+  public function testsGetProducts() {
+    $store_id = 'MC001';
+    $mc = new MailchimpEcommerce();
+    $mc->getProducts($store_id);
+    // Method must be GET.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Confirm the URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products', $mc->getClient()->uri);
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+    $request_body = $mc->getClient()->options['json'];
+    // Check that the request body has the right parameters.
+    $this->assertEquals($store_id, $request_body->store_id);
+
   }
 }
