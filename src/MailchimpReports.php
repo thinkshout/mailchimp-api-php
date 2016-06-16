@@ -14,7 +14,7 @@ class MailchimpReports extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/reports/#read-get_reports
    */
-  public function getSummary($parameters = array()) {
+  public function getSummary($parameters = []) {
     return $this->request('GET', '/reports', NULL, $parameters);
   }
 
@@ -30,10 +30,10 @@ class MailchimpReports extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/reports/#read-get_reports_campaign_id
    */
-  public function getCampaignSummary($campaign_id, $parameters = array()) {
-    $tokens = array(
+  public function getCampaignSummary($campaign_id, $parameters = []) {
+    $tokens = [
       'campaign_id' => $campaign_id,
-    );
+    ];
 
     return $this->request('GET', '/reports/{campaign_id}', $tokens, $parameters);
   }
