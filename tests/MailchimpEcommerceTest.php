@@ -321,6 +321,33 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Test getting all products.
+   */
+  public function testsGetProducts() {
+    $store_id = 'MC001';
+    $mc = new MailchimpEcommerce();
+    $mc->getProducts($store_id);
+    // Method must be GET.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Confirm the URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products', $mc->getClient()->uri);
+  }
+
+  /**
+   * Test getting information on a single product.
+   */
+  public function testGetProduct() {
+    $store_id = 'MC001';
+    $product_id = 'sku0001';
+    $mc = new MailchimpEcommerce();
+    $mc->getProduct($store_id, $product_id);
+    // Method must be GET.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Confirm the URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id, $mc->getClient()->uri);
+  }
+
+  /**
    * Test adding a product.
    */
   public function testAddProduct() {
@@ -348,33 +375,6 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     // Method must be DELETE.
     $this->assertEquals('DELETE', $mc->getClient()->method);
     // Confirm URI being used.
-    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id, $mc->getClient()->uri);
-  }
-
-  /**
-   * Test getting all products.
-   */
-  public function testsGetProducts() {
-    $store_id = 'MC001';
-    $mc = new MailchimpEcommerce();
-    $mc->getProducts($store_id);
-    // Method must be GET.
-    $this->assertEquals('GET', $mc->getClient()->method);
-    // Confirm the URI being used.
-    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products', $mc->getClient()->uri);
-  }
-
-  /**
-   * Test getting information on a single product.
-   */
-  public function testGetProduct() {
-    $store_id = 'MC001';
-    $product_id = 'sku0001';
-    $mc = new MailchimpEcommerce();
-    $mc->getProduct($store_id, $product_id);
-    // Method must be GET.
-    $this->assertEquals('GET', $mc->getClient()->method);
-    // Confirm the URI being used.
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id, $mc->getClient()->uri);
   }
 }

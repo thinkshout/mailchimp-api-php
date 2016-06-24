@@ -439,40 +439,6 @@ class MailchimpEcommerce extends Mailchimp {
   }
 
   /**
-   * Add a product to a store.
-   *
-   * @param string $store_id
-   *  Store ID to add the product too. Required.
-   * @param string $id
-   *  Unique ID for the product. Required.
-   * @param string $title
-   *  Product title. Required.
-   * @param array $variants
-   *  An array of the product's variants
-   * @param array $parameters
-   *  An array of additional parameters. See API docs.
-   *
-   * @return object
-   *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#
-   */
-  public function addProduct($store_id, $id, $title, $variants = [], $parameters = []) {
-    $tokens = [
-      'store_id' => $store_id,
-    ];
-
-    $parameters += [
-      'id' => $id,
-      'title' => $title,
-      'variants' => $variants,
-    ];
-
-    return $this->request('POST', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
-  }
-
-  /**
    * Get information about all products for a store.
    *
    * @param string $store_id
@@ -517,6 +483,40 @@ class MailchimpEcommerce extends Mailchimp {
     ];
 
     return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens, $parameters);
+  }
+
+  /**
+   * Add a product to a store.
+   *
+   * @param string $store_id
+   *  Store ID to add the product too. Required.
+   * @param string $id
+   *  Unique ID for the product. Required.
+   * @param string $title
+   *  Product title. Required.
+   * @param array $variants
+   *  An array of the product's variants
+   * @param array $parameters
+   *  An array of additional parameters. See API docs.
+   *
+   * @return object
+   *
+   *  @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#
+   */
+  public function addProduct($store_id, $id, $title, $variants = array(), $parameters = array()){
+    $tokens = array(
+      'store_id' => $store_id,
+    );
+
+    $parameters += array(
+      'id' => $id,
+      'title' => $title,
+      'variants' => $variants,
+    );
+
+    return $this->request('POST', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
   }
 
   /**
