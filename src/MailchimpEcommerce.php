@@ -439,6 +439,31 @@ class MailchimpEcommerce extends Mailchimp {
   }
 
   /**
+   * Update a specific order.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID for the order in the store.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#edit-patch_ecommerce_stores_store_id_orders_order_id
+   */
+  public function updateOrder($store_id, $order_id, $parameters = array(), $batch = FALSE) {
+    $tokens = array(
+      'store_id' => $store_id,
+      'order_id' => $order_id,
+    );
+
+    return $this->request('PATCH', '/ecommerce/stores/{store_id}/orders/{order_id}', $tokens, $parameters, $batch);
+  }
+
+  /**
    * Get information about all products for a store.
    *
    * @param string $store_id

@@ -321,6 +321,21 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library function for updating an order.
+   */
+  public function testsUpdateOrder() {
+    $store_id = 'MC001';
+    $order_id = 'ord0001';
+
+
+    $mc = new MailchimpEcommerce();
+    $mc->updateOrder($store_id, $order_id);
+
+    $this->assertEquals('PATCH', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/orders/' . $order_id, $mc->getClient()->uri);
+  }
+
+  /**
    * Test getting all products.
    */
   public function testsGetProducts() {
