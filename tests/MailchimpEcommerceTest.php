@@ -364,6 +364,21 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library function for getting order lines.
+   */
+  public function testGetOrderLine() {
+    $store_id = 'MC001';
+    $order_id = 'ord0001';
+    $line_id = 'L001';
+
+    $mc = new MailchimpEcommerce();
+    $mc->getOrderLine($store_id, $order_id, $line_id);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndPoint() . '/ecommerce/stores/' . $store_id . '/orders/' . $order_id . '/lines/' . $line_id, $mc->getClient()->uri);
+  }
+
+  /**
    * Test getting all products.
    */
   public function testsGetProducts() {

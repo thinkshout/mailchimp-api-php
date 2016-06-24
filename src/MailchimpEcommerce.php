@@ -511,6 +511,34 @@ class MailchimpEcommerce extends Mailchimp {
     return $this->request('GET', '/ecommerce/stores/{store_id}/orders/{order_id}/lines', $tokens, $parameters);
   }
 
+  /**
+   * Get information about a specific order line item.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID of the order.
+   * @param string $line_id
+   *  The ID for the line item of an order.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/lines/#read-get_ecommerce_stores_store_id_orders_order_id_lines_line_id
+   */
+  public function getOrderLine($store_id, $order_id, $line_id, $parameters = []) {
+    $tokens = [
+      'store_id' => $store_id,
+      'order_id' => $order_id,
+      'line_id' => $line_id,
+    ];
+
+    return $this->request('GET', '/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}', $tokens, $parameters);
+  }
+
 
   /**
    * Get information about all products for a store.
