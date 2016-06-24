@@ -454,11 +454,11 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#edit-patch_ecommerce_stores_store_id_orders_order_id
    */
-  public function updateOrder($store_id, $order_id, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function updateOrder($store_id, $order_id, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'store_id' => $store_id,
       'order_id' => $order_id,
-    );
+    ];
 
     return $this->request('PATCH', '/ecommerce/stores/{store_id}/orders/{order_id}', $tokens, $parameters, $batch);
   }
