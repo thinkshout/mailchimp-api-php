@@ -464,6 +464,27 @@ class MailchimpEcommerce extends Mailchimp {
   }
 
   /**
+   * Deletes an order.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID for the order in a store.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#delete-delete_ecommerce_stores_store_id_orders_order_id
+   */
+  public function deleteOrder($store_id, $order_id) {
+    $tokens = [
+      'store_id' => $store_id,
+      'order_id' => $order_id,
+    ];
+
+    return $this->request('DELETE', '/ecommerce/stores/{store_id}/orders/{order_id}', $tokens);
+  }
+
+  /**
    * Get information about all products for a store.
    *
    * @param string $store_id
