@@ -14,7 +14,7 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#read-get_ecommerce_stores
    */
-  public function getStores($parameters = array()) {
+  public function getStores($parameters = []) {
     return $this->request('GET', '/ecommerce/stores', NULL, $parameters);
   }
 
@@ -30,10 +30,10 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#read-get_ecommerce_stores_store_id
    */
-  public function getStore($store_id, $parameters = array()) {
-    $tokens = array(
+  public function getStore($store_id, $parameters = []) {
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
     return $this->request('GET', '/ecommerce/stores/{store_id}', $tokens, $parameters);
   }
@@ -58,13 +58,13 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#create-post_ecommerce_stores
    */
-  public function addStore($id, $list_id, $name, $currency_code, $parameters = array(), $batch = FALSE) {
-    $parameters += array(
+  public function addStore($id, $list_id, $name, $currency_code, $parameters = [], $batch = FALSE) {
+    $parameters += [
       'id' => $id,
       'list_id' => $list_id,
       'name' => $name,
       'currency_code' => $currency_code,
-    );
+    ];
 
     return $this->request('POST', '/ecommerce/stores', NULL, $parameters, $batch);
   }
@@ -87,15 +87,15 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#edit-patch_ecommerce_stores_store_id
    */
-  public function updateStore($store_id, $name, $currency_code, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function updateStore($store_id, $name, $currency_code, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'name' => $name,
       'currency_code' => $currency_code,
-    );
+    ];
 
     return $this->request('PATCH', '/ecommerce/stores/{store_id}', $tokens, $parameters, $batch);
   }
@@ -111,9 +111,9 @@ class MailchimpEcommerce extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#delete-delete_ecommerce_stores_store_id
    */
   public function deleteStore($store_id) {
-    $tokens = array(
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
     return $this->request('DELETE', '/ecommerce/stores/{store_id}', $tokens);
   }
@@ -130,10 +130,10 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#read-get_ecommerce_stores_store_id_carts
    */
-  public function getCarts($store_id, $parameters = array()) {
-    $tokens = array(
+  public function getCarts($store_id, $parameters = []) {
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
     return $this->request('GET', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters);
   }
@@ -152,11 +152,11 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#read-get_ecommerce_stores_store_id_carts_cart_id
    */
-  public function getCart($store_id, $cart_id, $parameters = array()) {
-    $tokens = array(
+  public function getCart($store_id, $cart_id, $parameters = []) {
+    $tokens = [
       'store_id' => $store_id,
       'cart_id' => $cart_id,
-    );
+    ];
 
     return $this->request('GET', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens, $parameters);
   }
@@ -183,17 +183,17 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#create-post_ecommerce_stores_store_id_carts
    */
-  public function addCart($store_id, $id, $customer, $currency_code, $order_total, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function addCart($store_id, $id, $customer, $currency_code, $order_total, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'id' => $id,
       'customer' => $customer,
       'currency_code' => $currency_code,
       'order_total' => $order_total,
-    );
+    ];
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters, $batch);
   }
@@ -211,10 +211,10 @@ class MailchimpEcommerce extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#delete-delete_ecommerce_stores_store_id_carts_cart_id
    */
   public function deleteCart($store_id, $cart_id) {
-    $tokens = array(
+    $tokens = [
       'store_id' => $store_id,
       'cart_id' => $cart_id,
-    );
+    ];
 
     return $this->request('DELETE', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens);
   }
@@ -231,10 +231,10 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#read-get_ecommerce_stores_store_id_customers
    */
-  public function getCustomers($store_id, $parameters = array()) {
-    $tokens = array(
+  public function getCustomers($store_id, $parameters = []) {
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
     return $this->request('GET', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters);
   }
@@ -253,11 +253,11 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#read-get_ecommerce_stores_store_id_customers_customer_id
    */
-  public function getCustomer($store_id, $customer_id, $parameters = array()) {
-    $tokens = array(
+  public function getCustomer($store_id, $customer_id, $parameters = []) {
+    $tokens = [
       'store_id' => $store_id,
       'customer_id' => $customer_id,
-    );
+    ];
 
     return $this->request('GET', '/ecommerce/stores/' . $store_id . '/customers/' . $customer_id, $tokens, $parameters);
   }
@@ -284,16 +284,16 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#create-post_ecommerce_stores_store_id_customers
    */
-  public function addCustomer($store_id, $id, $email_address, $opt_in_status, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function addCustomer($store_id, $id, $email_address, $opt_in_status, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'id' => $id,
       'email_address' => $email_address,
       'opt_in_status' => $opt_in_status,
-    );
+    ];
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters, $batch);
   }
@@ -318,16 +318,16 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#edit-patch_ecommerce_stores_store_id_customers_customer_id
    */
-  public function updateCustomer($store_id, $customer_id, $email_address, $opt_in_status, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function updateCustomer($store_id, $customer_id, $email_address, $opt_in_status, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'store_id' => $store_id,
       'customer_id' => $customer_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'email_address' => $email_address,
       'opt_in_status' => $opt_in_status,
-    );
+    ];
 
     return $this->request('PATCH', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens, $parameters, $batch);
   }
@@ -345,10 +345,10 @@ class MailchimpEcommerce extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#delete-delete_ecommerce_stores_store_id_customers_customer_id
    */
   public function deleteCustomer($store_id, $customer_id) {
-    $tokens = array(
+    $tokens = [
       'store_id' => $store_id,
       'customer_id' => $customer_id,
-    );
+    ];
 
     return $this->request('DELETE', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens);
   }
@@ -365,10 +365,10 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#read-get_ecommerce_stores_store_id_orders
    */
-  public function getOrders($store_id, $parameters = array()) {
-    $tokens = array(
+  public function getOrders($store_id, $parameters = []) {
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
     return $this->request('GET', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters);
   }
@@ -387,11 +387,11 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#read-get_ecommerce_stores_store_id_orders_order_id
    */
-  public function getOrder($store_id, $order_id, $parameters = array()) {
-    $tokens = array(
+  public function getOrder($store_id, $order_id, $parameters = []) {
+    $tokens = [
       'store_id' => $store_id,
       'order_id' => $order_id,
-    );
+    ];
 
     return $this->request('GET', '/ecommerce/stores/' . $store_id . '/orders/' . $order_id, $tokens, $parameters);
   }
@@ -422,18 +422,18 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#create-post_ecommerce_stores_store_id_orders
    */
-  public function addOrder($store_id, $id, $customer, $currency_code, $order_total, $lines, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function addOrder($store_id, $id, $customer, $currency_code, $order_total, $lines, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'id' => $id,
       'customer' => $customer,
       'currency_code' => $currency_code,
       'order_total' => $order_total,
       'lines' => $lines,
-    );
+    ];
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters, $batch);
   }
@@ -454,20 +454,20 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *
-   *  @throws \Mailchimp\MailchimpAPIException
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#
    */
-  public function addProduct($store_id, $id, $title, $variants = array(), $parameters = array()){
-    $tokens = array(
+  public function addProduct($store_id, $id, $title, $variants = [], $parameters = []) {
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'id' => $id,
       'title' => $title,
       'variants' => $variants,
-    );
+    ];
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
   }
@@ -486,10 +486,10 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#read-get_ecommerce_stores_store_id_products
    */
-  public function getProducts($store_id, $parameters = array()){
-    $tokens = array(
+  public function getProducts($store_id, $parameters = []) {
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
     return $this->request('GET', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
   }
@@ -510,11 +510,11 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#read-get_ecommerce_stores_store_id_products_product_id
    */
-  public function getProduct($store_id, $product_id, $parameters = array()){
-    $tokens = array(
+  public function getProduct($store_id, $product_id, $parameters = []) {
+    $tokens = [
       'store_id' => $store_id,
       'product_id' => $product_id,
-    );
+    ];
 
     return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens, $parameters);
   }
@@ -533,11 +533,11 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/
    */
-  public function deleteProduct($store_id, $product_id){
-    $tokens = array(
+  public function deleteProduct($store_id, $product_id) {
+    $tokens = [
       'store_id' => $store_id,
       'product_id' => $product_id,
-    );
+    ];
 
     return $this->request('DELETE', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens);
   }
