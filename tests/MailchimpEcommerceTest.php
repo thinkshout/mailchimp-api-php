@@ -379,6 +379,35 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library function for adding an order line.
+   */
+  public function testAddOrderLine() {
+    $store_id = 'MC001';
+    $order_id = 'ord0001';
+    $id = 'L002';
+    $product_id = 'PROD001';
+    $product_variant_id = "Freddie's Jokes";
+    $quantity = 1;
+    $price = 5;
+
+    $mc = new MailchimpEcommerce();
+    $mc->addOrderLine($store_id, $order_id, $id, $product_id, $product_variant_id, $quantity, $price);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/orders/' . $order_id . '/lines', $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($id, $request_body->id);
+    $this->assertEquals($product_id, $request_body->product_id);
+    $this->assertEquals($product_variant_id, $request_body->product_variant_id);
+    $this->assertEquals($quantity, $request_body->quantity);
+    $this->assertEquals($price, $request_body->price);
+  }
+
+  /**
    * Test getting all products.
    */
   public function testsGetProducts() {

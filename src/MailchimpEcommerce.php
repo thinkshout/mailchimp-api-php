@@ -539,6 +539,48 @@ class MailchimpEcommerce extends Mailchimp {
     return $this->request('GET', '/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}', $tokens, $parameters);
   }
 
+  /**
+   * Add a new line item to an existing order.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID for the order in a store.
+   * @param string $id
+   *  A unique identifier for the order line item.
+   * @param string $product_id
+   *  A unique identifier for the product associated with the order line item.
+   * @param string $product_variant_id
+   *  A unique identifier for the product variant associated with the order line item.
+   * @param integer $quantity
+   *  The quantity of an order line item.
+   * @param float $price
+   *  The price of an order line item.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   * @param bool $batch
+   *  TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/lines/#create-post_ecommerce_stores_store_id_orders_order_id_lines
+   */
+  public function addOrderLine($store_id, $order_id, $id, $product_id, $product_variant_id, $quantity, $price, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'store_id' => $store_id,
+      'order_id' => $order_id,
+    ];
+
+    $parameters += [
+      'id' => $id,
+      'product_id' => $product_id,
+      'product_variant_id' => $product_variant_id,
+      'quantity' => $quantity,
+      'price' => $price,
+    ];
+
+    return $this->request('POST', '/ecommerce/stores/{store_id}/orders/{order_id}/lines', $tokens, $parameters, $batch);
+  }
 
   /**
    * Get information about all products for a store.
