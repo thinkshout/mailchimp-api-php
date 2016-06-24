@@ -447,6 +447,8 @@ class MailchimpEcommerce extends Mailchimp {
    *  The ID for the order in the store.
    * @param array $parameters
    *  An array of optional parameters. See API docs.
+   * @param bool $batch
+   *  TRUE to create a new pending batch operation.
    *
    * @return object
    *
@@ -483,6 +485,32 @@ class MailchimpEcommerce extends Mailchimp {
 
     return $this->request('DELETE', '/ecommerce/stores/{store_id}/orders/{order_id}', $tokens);
   }
+
+  /**
+   * Get information about an order's line items.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID of the order.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/lines/#read-get_ecommerce_stores_store_id_orders_order_id_lines
+   */
+  public function getOrderLines($store_id, $order_id, $parameters = []) {
+    $tokens = [
+      'store_id' => $store_id,
+      'order_id' => $order_id,
+    ];
+
+    return $this->request('GET', '/ecommerce/stores/{store_id}/orders/{order_id}/lines', $tokens, $parameters);
+  }
+
 
   /**
    * Get information about all products for a store.
