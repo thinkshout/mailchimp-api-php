@@ -790,6 +790,6 @@ class MailchimpEcommerce extends Mailchimp {
       'product_id' => $product_id,
       'variant_id' => $variant_id,
     ];
-    return $this->request('DELETE', ' /ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens);
+    return $this->request('DELETE', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens);
   }
 }
