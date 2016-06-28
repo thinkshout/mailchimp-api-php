@@ -2,6 +2,8 @@
 
 namespace Mailchimp\Tests;
 
+use Mailchimp\MailchimpEcommerce;
+
 class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
   /**
@@ -494,8 +496,65 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $variant_id = 'var001';
     $mc = new MailchimpEcommerce();
     $mc->deleteProductVariant($store_id, $product_id, $variant_id);
+    // Confirm we are using DELETE in the client method.
     $this->assertEquals('DELETE', $mc->getClient()->method);
     // Confirm URI being used.
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id . '/variants/' . $variant_id, $mc->getClient()->uri);
+  }
+
+  /**
+   * Test getting a single variant of a single product.
+   */
+  public function testGetVariant() {
+    $store_id = 'MC001';
+    $product_id = 'sku0001';
+    $variant_id = 'var001';
+    $mc = new MailchimpEcommerce();
+    $mc->getProductVariant($store_id, $product_id, $variant_id);
+    // Check method.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id . '/variants/' . $variant_id, $mc->getClient()->uri);
+  }
+
+  /**
+   * Test getting all variants for a single product.
+   */
+  public function testGetVariants() {
+    $store_id = 'MC001';
+    $product_id = 'sku0001';
+    $mc = new MailchimpEcommerce();
+    $mc->getProductVariants($store_id, $product_id);
+    // Check method.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id . '/variants', $mc->getClient()->uri);
+
+  }
+
+  /**
+   * Test updating a variant.
+   */
+  public function testUpdateVariant() {
+    $store_id = 'MC001';
+    $product_id = 'sku0001';
+    $variant_id = 'var001';
+    $params = [
+      'title' => 'New Title',
+      'url' => 'http://www.example.com',
+      'sku' => 'abc0042',
+    ];
+    $mc = new MailchimpEcommerce();
+    $mc->updateProductVariant($store_id, $product_id, $variant_id, $params);
+    // Check method.
+    $this->assertEquals('PATCH', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id . '/variants' . $variant_id, $mc->getClient()->uri);
+    // Test the contents of the body of the request for the params.
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+    $request_body = $mc->getClient()->options['json'];
+    $this->assertEquals($params['url'], $request_body->url);
+    $this->assertEquals($params['title'], $request_body->title);
+    $this->assertEquals($params['sku'], $request_body->sku);
   }
 }
