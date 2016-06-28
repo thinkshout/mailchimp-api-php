@@ -685,4 +685,111 @@ class MailchimpEcommerce extends Mailchimp {
 
     return $this->request('DELETE', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens);
   }
+
+  /**
+   * Add a variant to a product.
+   *
+   * @param string $store_id
+   *  Store ID.
+   * @param string $product_id
+   *  Product ID.
+   * @param array $parameters
+   *  Array of variant information.
+   * @return object
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * For complete documentation on the parameters array,
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/
+   */
+  public function addProductVariant($store_id, $product_id, $parameters = []) {
+    $tokens = [
+      'store_id' => $store_id,
+      'product_id' => $product_id,
+    ];
+
+    return $this->request('POST', '/ecommerce/stores/{store_id}/products/{product_id}/variants', $tokens, $parameters);
+  }
+
+  /**
+   * Update a specific variant of a specific product.
+   *
+   * @param string $store_id
+   *  The store ID.
+   * @param string $product_id
+   *  The product ID.
+   * @param string $variant_id
+   *  The variant ID.
+   * @param array $parameters
+   *  The data to update the variant in an array.
+   *  @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/#edit-patch_ecommerce_stores_store_id_products_product_id_variants_variant_id
+   * @return object
+   * @throws \Mailchimp\MailchimpAPIException
+   */
+  public function updateProductVariant($store_id, $product_id, $variant_id, $parameters = []) {
+    $tokens = [
+      'store_id' => $store_id,
+      'product_id' => $product_id,
+      'variant_id' => $variant_id,
+    ];
+    return $this->request('PATCH', ' /ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens, $parameters);
+  }
+
+  /**
+   * Get information about a specific variant of a specific product.
+   * @param string $store_id
+   *  The store ID.
+   * @param string $product_id
+   *  The product ID.
+   * @param string $variant_id
+   *  The variant ID.
+   * @return object
+   * @throws \Mailchimp\MailchimpAPIException
+   */
+  public function getProductVariant($store_id, $product_id, $variant_id) {
+    $tokens = [
+      'store_id' => $store_id,
+      'product_id' => $product_id,
+      'variant_id' => $variant_id,
+    ];
+    return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens);
+  }
+
+  /**
+   * Get information on all variants of a specific product.
+   *
+   * @param string $store_id
+   *  The store ID.
+   * @param string $product_id
+   *  The product ID.
+   * @return object
+   * @throws \Mailchimp\MailchimpAPIException
+   */
+  public function getProductVariants($store_id, $product_id) {
+    $tokens = [
+      'store_id' => $store_id,
+      'product_id' => $product_id,
+    ];
+    return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}/variants', $tokens);
+  }
+
+  /**
+   * Delete a specific variant of a specific product.
+   *
+   * @param string $store_id
+   *  The store ID.
+   * @param string $product_id
+   *  The product ID.
+   * @param string $variant_id
+   *  The variant ID.
+   * @return mixed
+   * @throws \Mailchimp\MailchimpAPIException
+   */
+  public function deleteProductVariant($store_id, $product_id, $variant_id){
+    $tokens = [
+      'store_id' => $store_id,
+      'product_id' => $product_id,
+      'variant_id' => $variant_id,
+    ];
+    return $this->request('DELETE', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens);
+  }
 }
