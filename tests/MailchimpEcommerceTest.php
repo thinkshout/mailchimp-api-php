@@ -377,4 +377,25 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     // Confirm the URI being used.
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id, $mc->getClient()->uri);
   }
+
+  /**
+   * Test adding a product variant.
+   */
+  public function testAddProductVariant() {
+    $store_id = 'MC001';
+    $product_id = 'sku0001';
+    $params = [
+      'id' => 'var001',
+      'title' => 'Var Title'
+    ];
+    $mc = new MailchimpEcommerce();
+
+    $mc->addProductVariant($store_id, $product_id, $params);
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id . '/variants', $mc->getClient()->uri);
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+    $request_body = $mc->getClient()->options['json'];
+    $this->assertEquals($params['id'], $request_body->id);
+    $this->assertEquals($params['title'], $request_body->title);
+  }
 }
