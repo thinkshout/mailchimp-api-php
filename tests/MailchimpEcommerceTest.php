@@ -2,8 +2,6 @@
 
 namespace Mailchimp\Tests;
 
-use Mailchimp\MailchimpEcommerce;
-
 class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
   /**
