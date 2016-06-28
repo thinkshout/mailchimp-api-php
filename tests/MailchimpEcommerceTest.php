@@ -321,6 +321,120 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library function for updating an order.
+   */
+  public function testsUpdateOrder() {
+    $store_id = 'MC001';
+    $order_id = 'ord0001';
+
+
+    $mc = new MailchimpEcommerce();
+    $mc->updateOrder($store_id, $order_id);
+
+    $this->assertEquals('PATCH', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/orders/' . $order_id, $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests library functionality for deleting an order.
+   */
+  public function testDeleteOrder() {
+    $store_id = 'MC002';
+    $order_id = 'ord0001';
+
+    $mc = new MailchimpEcommerce();
+    $mc->deleteOrder($store_id, $order_id);
+
+    $this->assertEquals('DELETE', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/orders/' . $order_id, $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests library function for getting order lines.
+   */
+  public function testGetOrderLines() {
+    $store_id = 'MC001';
+    $order_id = 'ord0001';
+
+    $mc = new MailchimpEcommerce();
+    $mc->getOrderLines($store_id, $order_id);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndPoint() . '/ecommerce/stores/' . $store_id . '/orders/' . $order_id . '/lines', $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests library function for getting order lines.
+   */
+  public function testGetOrderLine() {
+    $store_id = 'MC001';
+    $order_id = 'ord0001';
+    $line_id = 'L001';
+
+    $mc = new MailchimpEcommerce();
+    $mc->getOrderLine($store_id, $order_id, $line_id);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndPoint() . '/ecommerce/stores/' . $store_id . '/orders/' . $order_id . '/lines/' . $line_id, $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests library function for adding an order line.
+   */
+  public function testAddOrderLine() {
+    $store_id = 'MC001';
+    $order_id = 'ord0001';
+    $id = 'L002';
+    $product_id = 'PROD001';
+    $product_variant_id = "Freddie's Jokes";
+    $quantity = 1;
+    $price = 5;
+
+    $mc = new MailchimpEcommerce();
+    $mc->addOrderLine($store_id, $order_id, $id, $product_id, $product_variant_id, $quantity, $price);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/orders/' . $order_id . '/lines', $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($id, $request_body->id);
+    $this->assertEquals($product_id, $request_body->product_id);
+    $this->assertEquals($product_variant_id, $request_body->product_variant_id);
+    $this->assertEquals($quantity, $request_body->quantity);
+    $this->assertEquals($price, $request_body->price);
+  }
+
+  /**
+   * Test getting all products.
+   */
+  public function testsGetProducts() {
+    $store_id = 'MC001';
+    $mc = new MailchimpEcommerce();
+    $mc->getProducts($store_id);
+    // Method must be GET.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Confirm the URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products', $mc->getClient()->uri);
+  }
+
+  /**
+   * Test getting information on a single product.
+   */
+  public function testGetProduct() {
+    $store_id = 'MC001';
+    $product_id = 'sku0001';
+    $mc = new MailchimpEcommerce();
+    $mc->getProduct($store_id, $product_id);
+    // Method must be GET.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Confirm the URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id, $mc->getClient()->uri);
+  }
+
+  /**
    * Test adding a product.
    */
   public function testAddProduct() {
@@ -352,33 +466,6 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
-   * Test getting all products.
-   */
-  public function testsGetProducts() {
-    $store_id = 'MC001';
-    $mc = new MailchimpEcommerce();
-    $mc->getProducts($store_id);
-    // Method must be GET.
-    $this->assertEquals('GET', $mc->getClient()->method);
-    // Confirm the URI being used.
-    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products', $mc->getClient()->uri);
-  }
-
-  /**
-   * Test getting information on a single product.
-   */
-  public function testGetProduct() {
-    $store_id = 'MC001';
-    $product_id = 'sku0001';
-    $mc = new MailchimpEcommerce();
-    $mc->getProduct($store_id, $product_id);
-    // Method must be GET.
-    $this->assertEquals('GET', $mc->getClient()->method);
-    // Confirm the URI being used.
-    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id, $mc->getClient()->uri);
-  }
-
-  /**
    * Test adding a product variant.
    */
   public function testAddProductVariant() {
@@ -386,10 +473,9 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $product_id = 'sku0001';
     $params = [
       'id' => 'var001',
-      'title' => 'Var Title'
+      'title' => 'Var Title',
     ];
     $mc = new MailchimpEcommerce();
-
     $mc->addProductVariant($store_id, $product_id, $params);
     $this->assertEquals('POST', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id . '/variants', $mc->getClient()->uri);

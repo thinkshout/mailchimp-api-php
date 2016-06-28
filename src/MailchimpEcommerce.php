@@ -439,37 +439,147 @@ class MailchimpEcommerce extends Mailchimp {
   }
 
   /**
-   * Add a product to a store.
+   * Update a specific order.
    *
    * @param string $store_id
-   *  Store ID to add the product too. Required.
-   * @param string $id
-   *  Unique ID for the product. Required.
-   * @param string $title
-   *  Product title. Required.
-   * @param array $variants
-   *  An array of the product's variants
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID for the order in the store.
    * @param array $parameters
-   *  An array of additional parameters. See API docs.
+   *  An array of optional parameters. See API docs.
+   * @param bool $batch
+   *  TRUE to create a new pending batch operation.
    *
    * @return object
    *
    * @throws \Mailchimp\MailchimpAPIException
    *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#edit-patch_ecommerce_stores_store_id_orders_order_id
    */
-  public function addProduct($store_id, $id, $title, $variants = [], $parameters = []) {
+  public function updateOrder($store_id, $order_id, $parameters = [], $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
+      'order_id' => $order_id,
+    ];
+
+    return $this->request('PATCH', '/ecommerce/stores/{store_id}/orders/{order_id}', $tokens, $parameters, $batch);
+  }
+
+  /**
+   * Deletes an order.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID for the order in a store.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#delete-delete_ecommerce_stores_store_id_orders_order_id
+   */
+  public function deleteOrder($store_id, $order_id) {
+    $tokens = [
+      'store_id' => $store_id,
+      'order_id' => $order_id,
+    ];
+
+    return $this->request('DELETE', '/ecommerce/stores/{store_id}/orders/{order_id}', $tokens);
+  }
+
+  /**
+   * Get information about an order's line items.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID of the order.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/lines/#read-get_ecommerce_stores_store_id_orders_order_id_lines
+   */
+  public function getOrderLines($store_id, $order_id, $parameters = []) {
+    $tokens = [
+      'store_id' => $store_id,
+      'order_id' => $order_id,
+    ];
+
+    return $this->request('GET', '/ecommerce/stores/{store_id}/orders/{order_id}/lines', $tokens, $parameters);
+  }
+
+  /**
+   * Get information about a specific order line item.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID of the order.
+   * @param string $line_id
+   *  The ID for the line item of an order.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/lines/#read-get_ecommerce_stores_store_id_orders_order_id_lines_line_id
+   */
+  public function getOrderLine($store_id, $order_id, $line_id, $parameters = []) {
+    $tokens = [
+      'store_id' => $store_id,
+      'order_id' => $order_id,
+      'line_id' => $line_id,
+    ];
+
+    return $this->request('GET', '/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}', $tokens, $parameters);
+  }
+
+  /**
+   * Add a new line item to an existing order.
+   *
+   * @param string $store_id
+   *  The ID of the store.
+   * @param string $order_id
+   *  The ID for the order in a store.
+   * @param string $id
+   *  A unique identifier for the order line item.
+   * @param string $product_id
+   *  A unique identifier for the product associated with the order line item.
+   * @param string $product_variant_id
+   *  A unique identifier for the product variant associated with the order line item.
+   * @param integer $quantity
+   *  The quantity of an order line item.
+   * @param float $price
+   *  The price of an order line item.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   * @param bool $batch
+   *  TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/lines/#create-post_ecommerce_stores_store_id_orders_order_id_lines
+   */
+  public function addOrderLine($store_id, $order_id, $id, $product_id, $product_variant_id, $quantity, $price, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'store_id' => $store_id,
+      'order_id' => $order_id,
     ];
 
     $parameters += [
       'id' => $id,
-      'title' => $title,
-      'variants' => $variants,
+      'product_id' => $product_id,
+      'product_variant_id' => $product_variant_id,
+      'quantity' => $quantity,
+      'price' => $price,
     ];
 
-    return $this->request('POST', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
+    return $this->request('POST', '/ecommerce/stores/{store_id}/orders/{order_id}/lines', $tokens, $parameters, $batch);
   }
 
   /**
@@ -517,6 +627,40 @@ class MailchimpEcommerce extends Mailchimp {
     ];
 
     return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens, $parameters);
+  }
+
+  /**
+   * Add a product to a store.
+   *
+   * @param string $store_id
+   *  Store ID to add the product too. Required.
+   * @param string $id
+   *  Unique ID for the product. Required.
+   * @param string $title
+   *  Product title. Required.
+   * @param array $variants
+   *  An array of the product's variants
+   * @param array $parameters
+   *  An array of additional parameters. See API docs.
+   *
+   * @return object
+   *
+   *  @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#
+   */
+  public function addProduct($store_id, $id, $title, $variants = array(), $parameters = array()){
+    $tokens = array(
+      'store_id' => $store_id,
+    );
+
+    $parameters += array(
+      'id' => $id,
+      'title' => $title,
+      'variants' => $variants,
+    );
+
+    return $this->request('POST', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
   }
 
   /**
