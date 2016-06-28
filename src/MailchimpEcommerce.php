@@ -731,7 +731,7 @@ class MailchimpEcommerce extends Mailchimp {
       'product_id' => $product_id,
       'variant_id' => $variant_id,
     ];
-    return $this->request('PATCH', ' /ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens, $parameters);
+    return $this->request('PATCH', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens, $parameters);
   }
 
   /**

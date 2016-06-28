@@ -547,7 +547,7 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     // Check method.
     $this->assertEquals('PATCH', $mc->getClient()->method);
     // Check URI being used.
-    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id . '/variants' . $variant_id, $mc->getClient()->uri);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id . '/variants/' . $variant_id, $mc->getClient()->uri);
     // Test the contents of the body of the request for the params.
     $this->assertNotEmpty($mc->getClient()->options['json']);
     $request_body = $mc->getClient()->options['json'];
