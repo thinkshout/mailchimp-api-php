@@ -484,4 +484,18 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($params['id'], $request_body->id);
     $this->assertEquals($params['title'], $request_body->title);
   }
+
+  /**
+   * Test deleting a variant.
+   */
+  public function testDeleteVariant() {
+    $store_id = 'MC001';
+    $product_id = 'sku0001';
+    $variant_id = 'var001';
+    $mc = new MailchimpEcommerce();
+    $mc->deleteProductVariant($store_id, $product_id, $variant_id);
+    $this->assertEquals('DELETE', $mc->getClient()->method);
+    // Confirm URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id . '/variants/' . $variant_id, $mc->getClient()->uri);
+  }
 }
