@@ -199,6 +199,31 @@ class MailchimpEcommerce extends Mailchimp {
   }
 
   /**
+   * Updates a cart.
+   *
+   * @param string $store_id
+   *   The unique identifier for the store.
+   * @param string $cart_id
+   *   The unique identifier for the cart.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   * @param bool $batch
+   *   TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#edit-patch_ecommerce_stores_store_id_carts_cart_id
+   */
+  public function updateCart($store_id, $cart_id, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'store_id' => $store_id,
+      'cart_id' => $cart_id,
+    ];
+
+    return $this->request('PATCH', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens, $parameters, $batch);
+  }
+
+  /**
    * Deletes a cart.
    *
    * @param string $store_id
