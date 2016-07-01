@@ -148,6 +148,20 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library function for updating an existing cart.
+   */
+  public function testUpdateCart() {
+    $store_id = 'MC001';
+    $cart_id = 'cart0001';
+
+    $mc = new MailchimpEcommerce();
+    $mc->updateCart($store_id, $cart_id);
+
+    $this->assertEquals('PATCH', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/carts/' . $cart_id, $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library function for deleting a cart.
    */
   public function testDeleteCart() {
@@ -159,6 +173,65 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
     $this->assertEquals($mc->getEndPoint() . '/ecommerce/stores/' . $store_id . '/carts/' . $cart_id, $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests library function for adding a line item to a cart.
+   */
+  public function testAddCartLine() {
+    $store_id = 'MC001';
+    $cart_id = 'cart0001';
+    $id = 'L001';
+    $product_id = 'PROD001';
+    $product_variant_id = "Freddie's Jokes";
+    $quantity = 1;
+    $price = 5;
+
+    $mc = new MailchimpEcommerce();
+    $mc->addCartLine($store_id, $cart_id, $id, $product_id, $product_variant_id, $quantity, $price);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/carts/' . $cart_id . '/lines', $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($id, $request_body->id);
+    $this->assertEquals($product_id, $request_body->product_id);
+    $this->assertEquals($product_variant_id, $request_body->product_variant_id);
+    $this->assertEquals($quantity, $request_body->quantity);
+    $this->assertEquals($price, $request_body->price);
+  }
+
+  /**
+   * Tests library function for updating a cart line item.
+   */
+  public function testUpdateCartLine() {
+    $store_id = 'MC001';
+    $cart_id = 'cart0001';
+    $line_id = 'L001';
+
+    $mc = new MailchimpEcommerce();
+    $mc->updateCartLine($store_id, $cart_id, $line_id);
+
+    $this->assertEquals('PATCH', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/carts/' . $cart_id . '/lines/' . $line_id, $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests library function for deleting a cart line item.
+   */
+  public function testDeleteCartLine() {
+    $store_id = 'MC001';
+    $cart_id = 'cart0001';
+    $line_id = 'L001';
+
+    $mc = new MailchimpEcommerce();
+    $mc->deleteCartLine($store_id, $cart_id, $line_id);
+
+    $this->assertEquals('DELETE', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndPoint() . '/ecommerce/stores/' . $store_id . '/carts/' . $cart_id . '/lines/' . $line_id, $mc->getClient()->uri);
   }
 
   /**
