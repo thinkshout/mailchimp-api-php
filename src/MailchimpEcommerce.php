@@ -523,10 +523,9 @@ class MailchimpEcommerce extends Mailchimp {
    *  The ID of the store.
    * @param string $id
    *  A unique identifier for the order.
-   * @param object $customer
-   *  Information about a specific customer. This information will update any
-   *  existing customer. If the customer doesn't exist in the store, a new
-   *  customer will be created.
+   * @param array $customer
+   *  Associative array of customer information.
+   *  - id (string): A unique identifier for the customer.
    * @param array $order
    *  Associative array of order information.
    *  - currency_code (string): The three-letter ISO 4217 currency code.
@@ -546,7 +545,7 @@ class MailchimpEcommerce extends Mailchimp {
 
     $parameters = [
       'id' => $id,
-      'customer' => $customer,
+      'customer' => (object) $customer,
     ];
 
     $parameters += $order;
