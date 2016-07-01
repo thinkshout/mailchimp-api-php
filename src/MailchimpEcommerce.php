@@ -527,14 +527,11 @@ class MailchimpEcommerce extends Mailchimp {
    *  Information about a specific customer. This information will update any
    *  existing customer. If the customer doesn't exist in the store, a new
    *  customer will be created.
-   * @param string $currency_code
-   *  The three-letter ISO 4217 code for the currency that the store accepts.
-   * @param float $order_total
-   *  The total for the order.
-   * @param array $lines
-   *  An array of the order's line items.
-   * @param array $parameters
-   *  Associative array of optional request parameters.
+   * @param array $order
+   *  Associative array of order information.
+   *  - currency_code (string): The three-letter ISO 4217 currency code.
+   *  - order_total (float): The total for the order.
+   *  - lines (array): An array of the order's line items.
    * @param bool $batch
    *  TRUE to create a new pending batch operation.
    *
@@ -542,17 +539,17 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#create-post_ecommerce_stores_store_id_orders
    */
-  public function addOrder($store_id, $order_id, $customer, $order, $batch = FALSE) {
+  public function addOrder($store_id, $id, $customer, $order, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
     ];
 
     $parameters = [
-      'id' => $order_id,
+      'id' => $id,
       'customer' => $customer,
     ];
 
-    $parameters += (array) $order;
+    $parameters += $order;
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters, $batch);
   }
