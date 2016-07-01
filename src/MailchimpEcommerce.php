@@ -552,7 +552,7 @@ class MailchimpEcommerce extends Mailchimp {
       'customer' => $customer,
     ];
 
-    $parameters += $order;
+    $parameters += (array) $order;
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters, $batch);
   }
