@@ -245,6 +245,101 @@ class MailchimpEcommerce extends Mailchimp {
   }
 
   /**
+   * Add a new line item to an existing cart.
+   *
+   * @param string $store_id
+   *  The unique identifier for the store.
+   * @param string $cart_id
+   *  The unique identifier for the cart.
+   * @param string $id
+   *  A unique identifier for the order line item.
+   * @param string $product_id
+   *  A unique identifier for the product associated with the order line item.
+   * @param string $product_variant_id
+   *  A unique identifier for the product variant associated with the order line item.
+   * @param integer $quantity
+   *  The quantity of an order line item.
+   * @param float $price
+   *  The price of an order line item.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   * @param bool $batch
+   *  TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/lines/#create-post_ecommerce_stores_store_id_carts_cart_id_lines
+   */
+  public function addCartLine($store_id, $cart_id, $id, $product_id, $product_variant_id, $quantity, $price, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'store_id' => $store_id,
+      'cart_id' => $cart_id,
+    ];
+
+    $parameters += [
+      'id' => $id,
+      'product_id' => $product_id,
+      'product_variant_id' => $product_variant_id,
+      'quantity' => $quantity,
+      'price' => $price,
+    ];
+
+    return $this->request('POST', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines', $tokens, $parameters, $batch);
+  }
+
+  /**
+   * Updates an existing line item in a cart.
+   *
+   * @param string $store_id
+   *  The unique identifier for the store.
+   * @param string $cart_id
+   *  The unique identifier for the cart.
+   * @param string $line_id
+   *  A unique identifier for the order line item.
+   * @param array $parameters
+   *  An array of optional parameters. See API docs.
+   * @param bool $batch
+   *  TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/lines/#edit-patch_ecommerce_stores_store_id_carts_cart_id_lines_line_id
+   */
+  public function updateCartLine($store_id, $cart_id, $line_id, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'store_id' => $store_id,
+      'cart_id' => $cart_id,
+      'line_id' => $line_id,
+    ];
+
+    return $this->request('PATCH', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}', $tokens, $parameters, $batch);
+  }
+
+  /**
+   * Deletes a line item in a cart.
+   *
+   * @param string $store_id
+   *  The unique identifier for the store.
+   * @param string $cart_id
+   *  The unique identifier for the cart.
+   * @param string $line_id
+   *  A unique identifier for the order line item.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/lines/#delete-delete_ecommerce_stores_store_id_carts_cart_id_lines_line_id
+   */
+  public function deleteCartLine($store_id, $cart_id, $line_id) {
+    $tokens = [
+      'store_id' => $store_id,
+      'cart_id' => $cart_id,
+      'line_id' => $line_id,
+    ];
+
+    return $this->request('DELETE', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}', $tokens);
+  }
+
+  /**
    * Get information about a store's customers.
    *
    * @param string $store_id
