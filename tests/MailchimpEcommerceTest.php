@@ -360,11 +360,9 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
       'email_address' => 'freddy@freddiesjokes.com',
       'opt_in_status' => TRUE,
     ];
-    $order = (object) [
-      'currency_code' => 'USD',
-      'order_total' => 12.45,
-    ];
-    $order->lines = [
+    $currency_code = 'USD';
+    $order_total = 12.45;
+    $line_item = (object) [
       'id' => 'L001',
       'product_id' => 'PROD001',
       'product_variant_id' => 'PROD001A',
@@ -373,7 +371,7 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     ];
 
     $mc = new MailchimpEcommerce();
-    $mc->addOrder($store_id, $order_id, $customer, $order);
+    $mc->addOrder($store_id, $order_id, $customer, $currency_code, $order_total, [$line_item], $parameters = [], $batch = FALSE);
 
     $this->assertEquals('POST', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/orders', $mc->getClient()->uri);
@@ -386,13 +384,13 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($customer->id, $request_body->customer->id);
     $this->assertEquals($customer->email_address, $request_body->customer->email_address);
     $this->assertEquals($customer->opt_in_status, $request_body->customer->opt_in_status);
-    $this->assertEquals($order->currency_code, $request_body->currency_code);
-    $this->assertEquals($order->order_total, $request_body->order_total);
-    $this->assertEquals($order->lines['id'], $request_body->lines['id']);
-    $this->assertEquals($order->lines['product_id'], $request_body->lines['product_id']);
-    $this->assertEquals($order->lines['product_variant_id'], $request_body->lines['product_variant_id']);
-    $this->assertEquals($order->lines['quantity'], $request_body->lines['quantity']);
-    $this->assertEquals($order->lines['price'], $request_body->lines['price']);
+    $this->assertEquals($currency_code, $request_body->currency_code);
+    $this->assertEquals($order_total, $request_body->order_total);
+    $this->assertEquals($line_item->id, $request_body->lines[0]->id);
+    $this->assertEquals($line_item->product_id, $request_body->lines[0]->product_id);
+    $this->assertEquals($line_item->product_variant_id, $request_body->lines[0]->product_variant_id);
+    $this->assertEquals($line_item->quantity, $request_body->lines[0]->quantity);
+    $this->assertEquals($line_item->price, $request_body->lines[0]->price);
   }
 
   /**
