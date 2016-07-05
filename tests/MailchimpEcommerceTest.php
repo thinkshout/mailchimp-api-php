@@ -157,6 +157,13 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($cart['currency_code'], $request_body->currency_code);
     $this->assertEquals($cart['order_total'], $request_body->order_total);
     $this->assertEquals($cart['lines'], $request_body->lines);
+    $this->assertEquals($cart['lines']['id'], $request_body->lines['id']);
+    $this->assertEquals($cart['lines']['product_id'], $request_body->lines['product_id']);
+    $this->assertEquals($cart['lines']['product_title'], $request_body->lines['product_title']);
+    $this->assertEquals($cart['lines']['product_variant_id'], $request_body->lines['product_variant_id']);
+    $this->assertEquals($cart['lines']['product_variant_title'], $request_body->lines['product_variant_title']);
+    $this->assertEquals($cart['lines']['quantity'], $request_body->lines['quantity']);
+    $this->assertEquals($cart['lines']['price'], $request_body->lines['price']);
   }
 
   /**
@@ -405,6 +412,13 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($order['currency_code'], $request_body->currency_code);
     $this->assertEquals($order['order_total'], $request_body->order_total);
     $this->assertEquals($order['lines'], $request_body->lines);
+    $this->assertEquals($order['lines']['id'], $request_body->lines['id']);
+    $this->assertEquals($order['lines']['product_id'], $request_body->lines['product_id']);
+    $this->assertEquals($order['lines']['product_title'], $request_body->lines['product_title']);
+    $this->assertEquals($order['lines']['product_variant_id'], $request_body->lines['product_variant_id']);
+    $this->assertEquals($order['lines']['product_variant_title'], $request_body->lines['product_variant_title']);
+    $this->assertEquals($order['lines']['quantity'], $request_body->lines['quantity']);
+    $this->assertEquals($order['lines']['price'], $request_body->lines['price']);
   }
 
   /**
