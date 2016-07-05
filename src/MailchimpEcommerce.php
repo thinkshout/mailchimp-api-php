@@ -268,6 +268,32 @@ class MailchimpEcommerce extends Mailchimp {
   }
 
   /**
+   * Get information about a specific cart line item.
+   *
+   * @param string $store_id
+   *  The unique identifier for the store.
+   * @param string $cart_id
+   *  The unique identifier for the cart.
+   * @param string $line_id
+   *  The unique identifier for the line item of a cart.
+   * @param array $parameters
+   *  Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/lines/#read-get_ecommerce_stores_store_id_carts_cart_id_lines_line_id
+   */
+  public function getCartLine($store_id, $cart_id, $line_id, $parameters = []) {
+    $tokens = [
+      'store_id' => $store_id,
+      'cart_id' => $cart_id,
+      'line_id' => $line_id,
+    ];
+
+    return $this->request('GET', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}', $tokens, $parameters);
+  }
+
+  /**
    * Add a new line item to an existing cart.
    *
    * @param string $store_id
