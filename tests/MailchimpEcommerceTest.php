@@ -195,6 +195,20 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library function for getting cart lines.
+   */
+  public function testGetCartLines() {
+    $store_id = 'MC001';
+    $cart_id = 'cart0001';
+
+    $mc = new MailchimpEcommerce();
+    $mc->getCartLines($store_id, $cart_id);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/carts/' . $cart_id . '/lines', $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library function for adding a line item to a cart.
    */
   public function testAddCartLine() {
