@@ -199,7 +199,7 @@ class MailchimpEcommerce extends Mailchimp {
   }
 
   /**
-   * Updates a cart.
+   * Updates a specific cart.
    *
    * @param string $store_id
    *   The unique identifier for the store.
@@ -824,7 +824,7 @@ class MailchimpEcommerce extends Mailchimp {
    *  The variant ID.
    * @param array $parameters
    *  The data to update the variant in an array.
-   *  @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/#edit-patch_ecommerce_stores_store_id_products_product_id_variants_variant_id
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/#edit-patch_ecommerce_stores_store_id_products_product_id_variants_variant_id
    * @return object
    * @throws \Mailchimp\MailchimpAPIException
    */
