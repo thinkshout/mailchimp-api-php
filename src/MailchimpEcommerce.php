@@ -752,16 +752,16 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#
    */
-  public function addProduct($store_id, $id, $title, $variants = array(), $parameters = array()){
-    $tokens = array(
+  public function addProduct($store_id, $id, $title, $variants = [], $parameters = []){
+    $tokens = [
       'store_id' => $store_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'id' => $id,
       'title' => $title,
       'variants' => $variants,
-    );
+    ];
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
   }
