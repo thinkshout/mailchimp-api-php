@@ -126,11 +126,22 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
       'email_address' => 'freddy@freddiesjokes.com',
       'opt_in_status' => TRUE,
     ];
-    $currency_code = 'USD';
-    $order_total = 12.45;
+    $cart = [
+      'currency_code' => 'USD',
+      'order_total' => 12.45,
+      'lines' => [
+        'id' => 'LINE001',
+        'product_id' => 'PROD001',
+        'product_title' => "Freddie'\''s Jokes",
+        'product_variant_id' => 'PROD001A',
+        'product_variant_title' => "Freddie'\''s Jokes Volume 1",
+        'quantity' => 2,
+        'price' => 10,
+      ],
+    ];
 
     $mc = new MailchimpEcommerce();
-    $mc->addCart($store_id, $id, $customer, $currency_code, $order_total);
+    $mc->addCart($store_id, $id, $customer, $cart);
 
     $this->assertEquals('POST', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/carts', $mc->getClient()->uri);
@@ -143,8 +154,9 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($customer->id, $request_body->customer->id);
     $this->assertEquals($customer->email_address, $request_body->customer->email_address);
     $this->assertEquals($customer->opt_in_status, $request_body->customer->opt_in_status);
-    $this->assertEquals($currency_code, $request_body->currency_code);
-    $this->assertEquals($order_total, $request_body->order_total);
+    $this->assertEquals($cart['currency_code'], $request_body->currency_code);
+    $this->assertEquals($cart['order_total'], $request_body->order_total);
+    $this->assertEquals($cart['lines'], $request_body->lines);
   }
 
   /**
