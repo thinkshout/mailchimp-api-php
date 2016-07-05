@@ -253,16 +253,12 @@ class MailchimpEcommerce extends Mailchimp {
    *  The unique identifier for the cart.
    * @param string $id
    *  A unique identifier for the order line item.
-   * @param string $product_id
-   *  A unique identifier for the product associated with the order line item.
-   * @param string $product_variant_id
-   *  A unique identifier for the product variant associated with the order line item.
-   * @param integer $quantity
-   *  The quantity of an order line item.
-   * @param float $price
-   *  The price of an order line item.
-   * @param array $parameters
-   *  An array of optional parameters. See API docs.
+   * @param array $product
+   *  Associative array of product information.
+   *  - product_id (string) The unique identifier for the product.
+   *  - product_variant_id (string) The unique identifier for the product variant.
+   *  - quantity (int) The quantity of a cart line item.
+   *  - price (float) The price of a cart line item.
    * @param bool $batch
    *  TRUE to create a new pending batch operation.
    *
@@ -270,19 +266,17 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/lines/#create-post_ecommerce_stores_store_id_carts_cart_id_lines
    */
-  public function addCartLine($store_id, $cart_id, $id, $product_id, $product_variant_id, $quantity, $price, $parameters = [], $batch = FALSE) {
+  public function addCartLine($store_id, $cart_id, $id, $product, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
       'cart_id' => $cart_id,
     ];
 
-    $parameters += [
+    $parameters = [
       'id' => $id,
-      'product_id' => $product_id,
-      'product_variant_id' => $product_variant_id,
-      'quantity' => $quantity,
-      'price' => $price,
     ];
+
+    $parameters += $product;
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines', $tokens, $parameters, $batch);
   }
@@ -663,16 +657,12 @@ class MailchimpEcommerce extends Mailchimp {
    *  The ID for the order in a store.
    * @param string $id
    *  A unique identifier for the order line item.
-   * @param string $product_id
-   *  A unique identifier for the product associated with the order line item.
-   * @param string $product_variant_id
-   *  A unique identifier for the product variant associated with the order line item.
-   * @param integer $quantity
-   *  The quantity of an order line item.
-   * @param float $price
-   *  The price of an order line item.
-   * @param array $parameters
-   *  An array of optional parameters. See API docs.
+   * @param array $product
+   *  Associative array of product information.
+   *  - product_id (string) The unique identifier for the product.
+   *  - product_variant_id (string) The unique identifier for the product variant.
+   *  - quantity (int) The quantity of a cart line item.
+   *  - price (float) The price of a cart line item.
    * @param bool $batch
    *  TRUE to create a new pending batch operation.
    *
@@ -680,19 +670,17 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/lines/#create-post_ecommerce_stores_store_id_orders_order_id_lines
    */
-  public function addOrderLine($store_id, $order_id, $id, $product_id, $product_variant_id, $quantity, $price, $parameters = [], $batch = FALSE) {
+  public function addOrderLine($store_id, $order_id, $id, $product, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
       'order_id' => $order_id,
     ];
 
-    $parameters += [
+    $parameters = [
       'id' => $id,
-      'product_id' => $product_id,
-      'product_variant_id' => $product_variant_id,
-      'quantity' => $quantity,
-      'price' => $price,
     ];
+
+    $parameters += $product;
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/orders/{order_id}/lines', $tokens, $parameters, $batch);
   }
