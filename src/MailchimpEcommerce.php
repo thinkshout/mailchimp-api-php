@@ -168,7 +168,7 @@ class MailchimpEcommerce extends Mailchimp {
    *  The unique identifier for the store.
    * @param string $id
    *  The unique identifier for the cart.
-   * @param array $customer
+   * @param object $customer
    *  Associative array of customer information.
    *  - id (string): A unique identifier for the customer.
    * @param array $cart
