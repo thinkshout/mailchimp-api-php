@@ -194,13 +194,15 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $store_id = 'MC001';
     $cart_id = 'cart0001';
     $id = 'L001';
-    $product_id = 'PROD001';
-    $product_variant_id = "Freddie's Jokes";
-    $quantity = 1;
-    $price = 5;
+    $product = [
+      'product_id' => 'PROD001',
+      'product_variant_id' => "Freddie'\''s Jokes",
+      'quantity' => 1,
+      'price' => 5,
+    ];
 
     $mc = new MailchimpEcommerce();
-    $mc->addCartLine($store_id, $cart_id, $id, $product_id, $product_variant_id, $quantity, $price);
+    $mc->addCartLine($store_id, $cart_id, $id, $product);
 
     $this->assertEquals('POST', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/carts/' . $cart_id . '/lines', $mc->getClient()->uri);
@@ -210,10 +212,10 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $request_body = $mc->getClient()->options['json'];
 
     $this->assertEquals($id, $request_body->id);
-    $this->assertEquals($product_id, $request_body->product_id);
-    $this->assertEquals($product_variant_id, $request_body->product_variant_id);
-    $this->assertEquals($quantity, $request_body->quantity);
-    $this->assertEquals($price, $request_body->price);
+    $this->assertEquals($product['product_id'], $request_body->product_id);
+    $this->assertEquals($product['product_variant_id'], $request_body->product_variant_id);
+    $this->assertEquals($product['quantity'], $request_body->quantity);
+    $this->assertEquals($product['price'], $request_body->price);
   }
 
   /**
