@@ -799,7 +799,7 @@ class MailchimpEcommerce extends Mailchimp {
    *
    *  @throws \Mailchimp\MailchimpAPIException
    *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#create-post_ecommerce_stores_store_id_products
    */
   public function addProduct($store_id, $id, $title, $variants = [], $parameters = []){
     $tokens = [
@@ -827,7 +827,7 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @throws \Mailchimp\MailchimpAPIException
    *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#delete-delete_ecommerce_stores_store_id_products_product_id
    */
   public function deleteProduct($store_id, $product_id) {
     $tokens = [
@@ -851,7 +851,7 @@ class MailchimpEcommerce extends Mailchimp {
    * @throws \Mailchimp\MailchimpAPIException
    *
    * For complete documentation on the parameters array,
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/#create-post_ecommerce_stores_store_id_products_product_id_variants
    */
   public function addProductVariant($store_id, $product_id, $parameters = []) {
     $tokens = [
@@ -896,6 +896,8 @@ class MailchimpEcommerce extends Mailchimp {
    *  The variant ID.
    * @return object
    * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/#edit-patch_ecommerce_stores_store_id_products_product_id_variants_variant_id
    */
   public function getProductVariant($store_id, $product_id, $variant_id) {
     $tokens = [
@@ -915,6 +917,8 @@ class MailchimpEcommerce extends Mailchimp {
    *  The product ID.
    * @return object
    * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/#read-get_ecommerce_stores_store_id_products_product_id_variants
    */
   public function getProductVariants($store_id, $product_id) {
     $tokens = [
@@ -935,6 +939,8 @@ class MailchimpEcommerce extends Mailchimp {
    *  The variant ID.
    * @return mixed
    * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/#delete-delete_ecommerce_stores_store_id_products_product_id_variants_variant_id
    */
   public function deleteProductVariant($store_id, $product_id, $variant_id){
     $tokens = [
