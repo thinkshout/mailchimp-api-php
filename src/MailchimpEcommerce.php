@@ -43,14 +43,13 @@ class MailchimpEcommerce extends Mailchimp {
   /**
    * Adds a new store to the authenticated account.
    *
-   * @param string $id
-   *   The unique identifier for the store.
-   * @param string $list_id
-   *   The id for the list associated with the store.
-   * @param string $name
-   *   The name of the store.
-   * @param string $currency_code
-   *   The three-letter ISO 4217 code for the currency that the store accepts.
+   * @param array $store
+   *   Associative array of store information.
+   *   - id (string) The unique identifier for the store.
+   *   - list_id (string) The id for the list associated with the store.
+   *   - name (string) The name of the store.
+   *   - currency_code (string) The three-letter ISO 4217 code for the currency
+   *     that the store accepts.
    * @param array $parameters
    *   Associative array of optional request parameters.
    * @param bool $batch
@@ -61,13 +60,8 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#create-post_ecommerce_stores
    */
-  public function addStore($id, $list_id, $name, $currency_code, $parameters = [], $batch = FALSE) {
-    $parameters += [
-      'id' => $id,
-      'list_id' => $list_id,
-      'name' => $name,
-      'currency_code' => $currency_code,
-    ];
+  public function addStore($store, $parameters = [], $batch = FALSE) {
+    $parameters += $store;
 
     return $this->request('POST', '/ecommerce/stores', NULL, $parameters, $batch);
   }

@@ -32,13 +32,15 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
    * Tests library function for adding a new store.
    */
   public function testAddStore() {
-    $id = 'MC001';
-    $list_id = '205d96e6b4';
-    $name = "Freddie'\''s Merchandise";
-    $currency_code = 'USD';
+    $store = [
+      'id' => 'MC001',
+      'list_id' => '205d96e6b4',
+      'name' => "Freddie'\''s Merchandise",
+      'currency_code' => 'USD',
+    ];
 
     $mc = new MailchimpEcommerce();
-    $mc->addStore($id, $list_id, $name, $currency_code);
+    $mc->addStore($store);
 
     $this->assertEquals('POST', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores', $mc->getClient()->uri);
@@ -47,10 +49,10 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
     $request_body = $mc->getClient()->options['json'];
 
-    $this->assertEquals($id, $request_body->id);
-    $this->assertEquals($list_id, $request_body->list_id);
-    $this->assertEquals($name, $request_body->name);
-    $this->assertEquals($currency_code, $request_body->currency_code);
+    $this->assertEquals($store['id'], $request_body->id);
+    $this->assertEquals($store['list_id'], $request_body->list_id);
+    $this->assertEquals($store['name'], $request_body->name);
+    $this->assertEquals($store['currency_code'], $request_body->currency_code);
   }
 
   /**
