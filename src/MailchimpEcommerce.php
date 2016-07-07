@@ -43,15 +43,14 @@ class MailchimpEcommerce extends Mailchimp {
   /**
    * Adds a new store to the authenticated account.
    *
+   * @param string $id
+   *   A unique identifier for the store.
    * @param array $store
    *   Associative array of store information.
-   *   - id (string) The unique identifier for the store.
    *   - list_id (string) The id for the list associated with the store.
    *   - name (string) The name of the store.
    *   - currency_code (string) The three-letter ISO 4217 code for the currency
    *     that the store accepts.
-   * @param array $parameters
-   *   Associative array of optional request parameters.
    * @param bool $batch
    *   TRUE to create a new pending batch operation.
    *
@@ -60,7 +59,10 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#create-post_ecommerce_stores
    */
-  public function addStore($store, $parameters = [], $batch = FALSE) {
+  public function addStore($id, $store, $batch = FALSE) {
+    $parameters = [
+      'id' => $id,
+    ];
     $parameters += $store;
 
     return $this->request('POST', '/ecommerce/stores', NULL, $parameters, $batch);
@@ -441,6 +443,8 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @param string $store_id
    *   The ID of the store.
+   * @param string $id
+   *   The unique identifier of the customer.
    * @param array $customer
    *   An associative array of customer information.
    *   - id (string) A unique identifier for the customer.
@@ -449,8 +453,6 @@ class MailchimpEcommerce extends Mailchimp {
    *     never overwrite the opt-in status of a pre-existing MailChimp list
    *     member, but will apply to list members that are added through the
    *     e-commerce API endpoints.
-   * @param array $parameters
-   *   Associative array of optional request parameters.
    * @param bool $batch
    *   TRUE to create a new pending batch operation.
    *
@@ -459,9 +461,13 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#create-post_ecommerce_stores_store_id_customers
    */
-  public function addCustomer($store_id, $customer, $parameters = [], $batch = FALSE) {
+  public function addCustomer($store_id, $id, $customer, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
+    ];
+
+    $parameters = [
+      'id' => $id,
     ];
 
     $parameters += $customer;
