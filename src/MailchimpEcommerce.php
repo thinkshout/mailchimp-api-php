@@ -461,16 +461,10 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#create-post_ecommerce_stores_store_id_customers
    */
-  public function addCustomer($store_id, $id, $customer, $batch = FALSE) {
+  public function addCustomer($store_id, $parameters, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
     ];
-
-    $parameters = [
-      'id' => $id,
-    ];
-
-    $parameters += $customer;
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters, $batch);
   }
