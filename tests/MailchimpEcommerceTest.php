@@ -318,12 +318,14 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
    */
   public function testAddCustomer() {
     $store_id = 'MC001';
-    $id = 'cust0001';
-    $email_address = 'freddie@freddiesjokes.com';
-    $opt_in_status = TRUE;
+    $customer = [
+      'id' => 'cust0001',
+      'email_address' => 'freddie@freddiesjokes.com',
+      'opt_in_status' => TRUE,
+    ];
 
     $mc = new MailchimpEcommerce();
-    $mc->addCustomer($store_id, $id, $email_address, $opt_in_status);
+    $mc->addCustomer($store_id, $customer);
 
     $this->assertEquals('POST', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/customers', $mc->getClient()->uri);
@@ -332,9 +334,9 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
     $request_body = $mc->getClient()->options['json'];
 
-    $this->assertEquals($id, $request_body->id);
-    $this->assertEquals($email_address, $request_body->email_address);
-    $this->assertEquals($opt_in_status, $request_body->opt_in_status);
+    $this->assertEquals($customer['id'], $request_body->id);
+    $this->assertEquals($customer['email_address'], $request_body->email_address);
+    $this->assertEquals($customer['opt_in_status'], $request_body->opt_in_status);
   }
 
   /**

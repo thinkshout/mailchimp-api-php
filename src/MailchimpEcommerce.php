@@ -441,14 +441,14 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @param string $store_id
    *   The ID of the store.
-   * @param string $id
-   *   A unique identifier for the customer.
-   * @param string $email_address
-   *   The customer's email address.
-   * @param bool $opt_in_status
-   *   The customer's opt-in status. This value will never overwrite the opt-in
-   *   status of a pre-existing MailChimp list member, but will apply to list
-   *   members that are added through the e-commerce API endpoints.
+   * @param array $customer
+   *   An associative array of customer information.
+   *   - id (string) A unique identifier for the customer.
+   *   - email_address (string) The customer's email address.
+   *   - opt_in_status (boolean) The customer's opt-in status. This value will
+   *     never overwrite the opt-in status of a pre-existing MailChimp list
+   *     member, but will apply to list members that are added through the
+   *     e-commerce API endpoints.
    * @param array $parameters
    *   Associative array of optional request parameters.
    * @param bool $batch
@@ -459,16 +459,12 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#create-post_ecommerce_stores_store_id_customers
    */
-  public function addCustomer($store_id, $id, $email_address, $opt_in_status, $parameters = [], $batch = FALSE) {
+  public function addCustomer($store_id, $customer, $parameters = [], $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
     ];
 
-    $parameters += [
-      'id' => $id,
-      'email_address' => $email_address,
-      'opt_in_status' => $opt_in_status,
-    ];
+    $parameters += $customer;
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters, $batch);
   }
