@@ -493,13 +493,11 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#edit-patch_ecommerce_stores_store_id_customers_customer_id
    */
-  public function updateCustomer($store_id, $customer_id, $customer, $parameters = [], $batch = FALSE) {
+  public function updateCustomer($store_id, $parameters, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
-      'customer_id' => $customer_id,
+      'customer_id' => $parameters['id'],
     ];
-
-    $parameters += $customer;
 
     return $this->request('PATCH', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens, $parameters, $batch);
   }
