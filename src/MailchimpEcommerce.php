@@ -443,8 +443,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @param string $store_id
    *   The ID of the store.
-   * @param string $id
-   *   The unique identifier of the customer.
    * @param array $customer
    *   An associative array of customer information.
    *   - id (string) A unique identifier for the customer.
@@ -461,12 +459,12 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#create-post_ecommerce_stores_store_id_customers
    */
-  public function addCustomer($store_id, $parameters, $batch = FALSE) {
+  public function addCustomer($store_id, $customer, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
     ];
 
-    return $this->request('POST', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters, $batch);
+    return $this->request('POST', '/ecommerce/stores/{store_id}/customers', $tokens, $customer, $batch);
   }
 
   /**
@@ -474,8 +472,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @param string $store_id
    *   The ID of the store.
-   * @param string $customer_id
-   *   The ID for the customer of a store.
    * @param array $customer
    *   An associative array of customer information.
    *   - email_address (string) The customer's email address.
@@ -483,8 +479,6 @@ class MailchimpEcommerce extends Mailchimp {
    *     never overwrite the opt-in status of a pre-existing MailChimp list
    *     member, but will apply to list members that are added through the
    *     e-commerce API endpoints.
-   * @param array $parameters
-   *   Associative array of optional request parameters.
    * @param bool $batch
    *   TRUE to create a new pending batch operation.
    *
@@ -493,13 +487,13 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#edit-patch_ecommerce_stores_store_id_customers_customer_id
    */
-  public function updateCustomer($store_id, $parameters, $batch = FALSE) {
+  public function updateCustomer($store_id, $customer, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
-      'customer_id' => $parameters['id'],
+      'customer_id' => $customer['id'],
     ];
 
-    return $this->request('PATCH', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens, $parameters, $batch);
+    return $this->request('PATCH', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens, $customer, $batch);
   }
 
   /**
