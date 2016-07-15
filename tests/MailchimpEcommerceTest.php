@@ -318,14 +318,14 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
    */
   public function testAddCustomer() {
     $store_id = 'MC001';
-    $id = 'cust0001';
     $customer = [
+      'id' => 'cust0001',
       'email_address' => 'freddie@freddiesjokes.com',
       'opt_in_status' => TRUE,
     ];
 
     $mc = new MailchimpEcommerce();
-    $mc->addCustomer($store_id, $id, $customer);
+    $mc->addCustomer($store_id, $customer);
 
     $this->assertEquals('POST', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/customers', $mc->getClient()->uri);
@@ -334,7 +334,7 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
     $request_body = $mc->getClient()->options['json'];
 
-    $this->assertEquals($id, $request_body->id);
+    $this->assertEquals($customer['id'], $request_body->id);
     $this->assertEquals($customer['email_address'], $request_body->email_address);
     $this->assertEquals($customer['opt_in_status'], $request_body->opt_in_status);
   }
@@ -344,22 +344,23 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
    */
   public function testUpdateCustomer() {
     $store_id = 'MC001';
-    $customer_id = 'cust0001';
     $customer = [
+      'id' => 'cust0001',
       'email_address' => 'freddie@freddiesjokes.com',
       'opt_in_status' => TRUE,
     ];
 
     $mc = new MailchimpEcommerce();
-    $mc->updateCustomer($store_id, $customer_id, $customer);
+    $mc->updateCustomer($store_id, $customer);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/customers/' . $customer_id, $mc->getClient()->uri);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/customers/' . $customer['id'], $mc->getClient()->uri);
 
     $this->assertNotEmpty($mc->getClient()->options['json']);
 
     $request_body = $mc->getClient()->options['json'];
 
+    $this->assertEquals($customer['id'], $request_body->id);
     $this->assertEquals($customer['email_address'], $request_body->email_address);
     $this->assertEquals($customer['opt_in_status'], $request_body->opt_in_status);
   }
