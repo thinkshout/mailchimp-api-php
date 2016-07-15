@@ -2,6 +2,11 @@
 
 namespace Mailchimp;
 
+/**
+ * Mailchimp Reports library.
+ *
+ * @package Mailchimp
+ */
 class MailchimpReports extends Mailchimp {
 
   /**

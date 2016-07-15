@@ -2,6 +2,11 @@
 
 namespace Mailchimp\Tests;
 
+/**
+ * MailChimp Ecommerce test library.
+ *
+ * @package Mailchimp\Tests
+ */
 class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
   /**
@@ -123,7 +128,7 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   public function testAddCart() {
     $store_id = 'MC001';
     $id = 'cart0001';
-    $customer = (object) [
+    $customer = [
       'id' => 'cust0005',
       'email_address' => 'freddy@freddiesjokes.com',
       'opt_in_status' => TRUE,
@@ -153,9 +158,9 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $request_body = $mc->getClient()->options['json'];
 
     $this->assertEquals($id, $request_body->id);
-    $this->assertEquals($customer->id, $request_body->customer->id);
-    $this->assertEquals($customer->email_address, $request_body->customer->email_address);
-    $this->assertEquals($customer->opt_in_status, $request_body->customer->opt_in_status);
+    $this->assertEquals($customer['id'], $request_body->customer->id);
+    $this->assertEquals($customer['email_address'], $request_body->customer->email_address);
+    $this->assertEquals($customer['opt_in_status'], $request_body->customer->opt_in_status);
     $this->assertEquals($cart['currency_code'], $request_body->currency_code);
     $this->assertEquals($cart['order_total'], $request_body->order_total);
     $this->assertEquals($cart['lines'], $request_body->lines);
@@ -412,7 +417,7 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   public function testAddOrder() {
     $store_id = 'MC001';
     $order_id = 'ord0001';
-    $customer = (object) [
+    $customer = [
       'id' => 'cust0005',
       'email_address' => 'freddy@freddiesjokes.com',
       'opt_in_status' => TRUE,
@@ -442,9 +447,9 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $request_body = $mc->getClient()->options['json'];
 
     $this->assertEquals($order_id, $request_body->id);
-    $this->assertEquals($customer->id, $request_body->customer->id);
-    $this->assertEquals($customer->email_address, $request_body->customer->email_address);
-    $this->assertEquals($customer->opt_in_status, $request_body->customer->opt_in_status);
+    $this->assertEquals($customer['id'], $request_body->customer->id);
+    $this->assertEquals($customer['email_address'], $request_body->customer->email_address);
+    $this->assertEquals($customer['opt_in_status'], $request_body->customer->opt_in_status);
     $this->assertEquals($order['currency_code'], $request_body->currency_code);
     $this->assertEquals($order['order_total'], $request_body->order_total);
     $this->assertEquals($order['lines'], $request_body->lines);
@@ -463,7 +468,6 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
   public function testsUpdateOrder() {
     $store_id = 'MC001';
     $order_id = 'ord0001';
-
 
     $mc = new MailchimpEcommerce();
     $mc->updateOrder($store_id, $order_id);
@@ -705,4 +709,5 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($params['title'], $request_body->title);
     $this->assertEquals($params['sku'], $request_body->sku);
   }
+
 }

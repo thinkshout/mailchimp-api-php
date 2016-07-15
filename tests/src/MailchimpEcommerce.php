@@ -2,6 +2,11 @@
 
 namespace Mailchimp\Tests;
 
+/**
+ * MailChimp Ecommerce library test cases.
+ *
+ * @package Mailchimp\Tests
+ */
 class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
 
   /**

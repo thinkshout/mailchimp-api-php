@@ -2,6 +2,11 @@
 
 namespace Mailchimp\Tests;
 
+/**
+ * Test HTTP client.
+ *
+ * @package Mailchimp\Tests
+ */
 class Client extends \GuzzleHttp\Client {
 
   public $method;

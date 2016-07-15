@@ -2,6 +2,11 @@
 
 namespace Mailchimp;
 
+/**
+ * Mailchimp Lists library.
+ *
+ * @package Mailchimp
+ */
 class MailchimpLists extends Mailchimp {
 
   const MEMBER_STATUS_SUBSCRIBED = 'subscribed';

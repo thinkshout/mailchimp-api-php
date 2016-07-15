@@ -2,6 +2,11 @@
 
 namespace Mailchimp;
 
+/**
+ * Mailchimp Ecommerce library.
+ *
+ * @package Mailchimp
+ */
 class MailchimpEcommerce extends Mailchimp {
 
   /**
@@ -171,7 +176,7 @@ class MailchimpEcommerce extends Mailchimp {
    *   The unique identifier for the store.
    * @param string $id
    *   The unique identifier for the cart.
-   * @param object $customer
+   * @param array $customer
    *   Associative array of customer information.
    *   - id (string): A unique identifier for the customer.
    * @param array $cart
@@ -187,14 +192,14 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#create-post_ecommerce_stores_store_id_carts
    */
-  public function addCart($store_id, $id, $customer, $cart, $batch = FALSE) {
+  public function addCart($store_id, $id, array $customer, array $cart, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
     ];
 
     $parameters = [
       'id' => $id,
-      'customer' => $customer,
+      'customer' => (object) $customer,
     ];
 
     $parameters += $cart;
@@ -570,7 +575,7 @@ class MailchimpEcommerce extends Mailchimp {
    *   The ID of the store.
    * @param string $id
    *   A unique identifier for the order.
-   * @param object $customer
+   * @param array $customer
    *   Associative array of customer information.
    *   - id (string): A unique identifier for the customer.
    * @param array $order
@@ -586,7 +591,7 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#create-post_ecommerce_stores_store_id_orders
    */
-  public function addOrder($store_id, $id, $customer, $order, $batch = FALSE) {
+  public function addOrder($store_id, $id, array $customer, array $order, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
     ];

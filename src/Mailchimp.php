@@ -5,6 +5,11 @@ namespace Mailchimp;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
+/**
+ * Mailchimp library.
+ *
+ * @package Mailchimp
+ */
 class Mailchimp {
 
   const VERSION = '1.0.2';
@@ -30,45 +35,54 @@ class Mailchimp {
 
   /**
    * API version.
-   * @var string
+   *
+   * @var string $version
    */
   public $version = self::VERSION;
 
   /**
+   * The GuzzleHttp Client.
+   *
    * @var Client $client
-   *   The GuzzleHttp Client.
    */
   protected $client;
 
   /**
+   * The REST API endpoint.
+   *
    * @var string $endpoint
-   *   The REST API endpoint.
    */
   protected $endpoint = 'https://us1.api.mailchimp.com/3.0';
 
   /**
+   * The MailChimp API key to authenticate with.
+   *
    * @var string $api_key
-   *   The MailChimp API key to authenticate with.
    */
   private $api_key;
 
   /**
+   * The MailChimp API username to authenticate with.
+   *
    * @var string $api_user
-   *   The MailChimp API username to authenticate with.
    */
   private $api_user;
 
   /**
+   * A MailChimp API error code to return with every API response.
+   *
+   * Used for testing / debugging error handling.
+   * See ERROR_CODE_* constants.
+   *
    * @var string $debug_error_code
-   *   A MailChimp API error code to return with every API response.
-   *   Used for testing / debugging error handling.
-   *   See ERROR_CODE_* constants.
    */
   private $debug_error_code;
 
   /**
+   * Array of pending batch operations.
+   *
    * @var array $batch_operations
-   *   Array of pending batch operations.
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
    */
   private $batch_operations;
@@ -78,10 +92,8 @@ class Mailchimp {
    *
    * @param string $api_key
    *   The MailChimp API key.
-   *
    * @param string $api_user
    *   The MailChimp API username.
-   *
    * @param int $timeout
    *   Maximum request time in seconds.
    */
@@ -100,6 +112,7 @@ class Mailchimp {
 
   /**
    * Sets a MailChimp error code to be returned by all requests.
+   *
    * Used to test and debug error handling.
    *
    * @param string $error_code
@@ -150,10 +163,12 @@ class Mailchimp {
   /**
    * Gets the status of a batch request.
    *
-   * @param $batch_id
+   * @param string $batch_id
    *   The ID of the batch operation.
    *
    * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#read-get_batches_batch_id
    */
   public function getBatchOperation($batch_id) {
     $tokens = [
@@ -166,9 +181,9 @@ class Mailchimp {
   /**
    * Adds a pending batch operation.
    *
-   * @param $method
+   * @param string $method
    *   The HTTP method.
-   * @param $path
+   * @param string $path
    *   The request path, relative to the API endpoint.
    * @param array $parameters
    *   Associative array of optional request parameters.
