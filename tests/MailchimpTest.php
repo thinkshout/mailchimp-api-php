@@ -20,7 +20,7 @@ class MailchimpTest extends \PHPUnit_Framework_TestCase {
    */
   public function testVersion() {
     $mc = new Mailchimp();
-    $this->assertEquals($mc::VERSION, '1.0.2');
+    $this->assertEquals($mc::VERSION, '1.0.3');
     $this->assertEquals(json_decode(file_get_contents('composer.json'))->version, $mc::VERSION);
   }
 }
