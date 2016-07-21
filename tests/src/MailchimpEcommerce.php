@@ -42,12 +42,6 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
    * @inheritdoc
    */
   public function getStore($store_id, $parameters = []) {
-
-    if (!empty($this->stores)) {
-      var_dump('getStore');
-      die(var_dump($this->stores));
-    }
-
     return (isset($this->stores[$store_id])) ? $this->stores[$store_id] : NULL;
   }
 
