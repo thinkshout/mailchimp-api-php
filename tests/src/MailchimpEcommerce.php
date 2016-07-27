@@ -2,6 +2,8 @@
 
 namespace Mailchimp\Tests;
 
+use Mailchimp\MailchimpAPIException;
+
 /**
  * MailChimp Ecommerce library test cases.
  *
@@ -22,6 +24,13 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
    * @var array $customers
    */
   private $customers = [];
+
+  /**
+   * Storage for orders. Used in place of real MailChimp API.
+   *
+   * @var array $orders
+   */
+  private $orders = [];
 
   /**
    * @inheritdoc
@@ -77,6 +86,55 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
     }
 
     $this->customers[$store_id][$customer['id']] = (object) $customer;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function getOrder($store_id, $order_id, $parameters = []) {
+    if (isset($this->orders[$store_id])) {
+      return (isset($this->orders[$store_id][$order_id])) ? $this->orders[$store_id][$order_id] : NULL;
+    }
+
+    return NULL;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function addOrder($store_id, $id, array $customer, array $order, $batch = FALSE) {
+    if (empty($store_id)) {
+      throw new MailchimpAPIException('Store ID cannot be empty.');
+    }
+
+    if (empty($id)) {
+      throw new MailchimpAPIException('Order ID cannot be empty.');
+    }
+
+    if (empty($customer)) {
+      throw new MailchimpAPIException('Customer cannot be empty.');
+    }
+
+    if (empty($customer)) {
+      throw new MailchimpAPIException('Order cannot be empty.');
+    }
+
+    if (!isset($order['lines']) || empty($order['lines'])) {
+      throw new MailchimpAPIException('Order must contain at least one line item.');
+    }
+
+    if (!isset($this->orders[$store_id])) {
+      $this->orders[$store_id] = [];
+    }
+
+    $parameters = [
+      'id' => $id,
+      'customer' => (object) $customer,
+    ];
+
+    $parameters += $order;
+
+    $this->orders[$store_id][$id] = (object) $parameters;
   }
 
 }
