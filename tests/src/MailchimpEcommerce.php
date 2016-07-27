@@ -115,7 +115,7 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
       throw new MailchimpAPIException('Customer cannot be empty.');
     }
 
-    if (empty($customer)) {
+    if (empty($order)) {
       throw new MailchimpAPIException('Order cannot be empty.');
     }
 
