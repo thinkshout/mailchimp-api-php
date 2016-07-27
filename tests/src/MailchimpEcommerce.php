@@ -54,7 +54,7 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
     ];
     $parameters += $store;
 
-    $this->stores[$id] = $parameters;
+    $this->stores[$id] = (object) $parameters;
   }
 
   /**
