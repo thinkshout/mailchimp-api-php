@@ -76,7 +76,7 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
       $this->customers[$store_id] = [];
     }
 
-    $this->customers[$store_id][$customer['id']] = $customer;
+    $this->customers[$store_id][$customer['id']] = (object) $customer;
   }
 
 }
