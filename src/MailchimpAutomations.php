@@ -129,6 +129,8 @@ class MailchimpAutomations extends Mailchimp {
    *   The unique id for the Automation workflow email.
    * @param string $email
    *   The email address of the subscriber.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
    *
    * @return object
    *
@@ -146,6 +148,5 @@ class MailchimpAutomations extends Mailchimp {
 
     return $this->request('POST', '/automations/{workflow_id}/emails/{workflow_email_id}/queue', $tokens, $parameters);
   }
+
 }
-
-

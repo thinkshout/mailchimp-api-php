@@ -66,11 +66,11 @@ class MailchimpAutomationsTest extends \PHPUnit_Framework_TestCase {
     $mc->getWorkflowEmailSubscribers($workflow_id, $workflow_email_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/automations/' . $workflow_id . '/emails/' . $workflow_email_id .'/queue', $mc->getClient()->uri);
+    $this->assertEquals($mc->getEndpoint() . '/automations/' . $workflow_id . '/emails/' . $workflow_email_id . '/queue', $mc->getClient()->uri);
   }
 
   /**
-   * Tests library functionality for a specific user in a workflow automation queue
+   * Tests library functionality for a user in a workflow automation queue.
    */
   public function testGetWorkflowEmailSubscriber() {
     $workflow_id = '57afe96172';
@@ -81,11 +81,11 @@ class MailchimpAutomationsTest extends \PHPUnit_Framework_TestCase {
     $mc->getWorkflowEmailSubscriber($workflow_id, $workflow_email_id, $email);
 
     $this->assertEquals('GET', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/automations/' . $workflow_id . '/emails/' . $workflow_email_id .'/queue/' . md5($email), $mc->getClient()->uri);
+    $this->assertEquals($mc->getEndpoint() . '/automations/' . $workflow_id . '/emails/' . $workflow_email_id . '/queue/' . md5($email), $mc->getClient()->uri);
   }
 
   /**
-   * Tests library functionality for a specific user in a workflow automation queue
+   * Tests library functionality for a user in a workflow automation queue.
    */
   public function testAddWorkflowEmailSubscriber() {
     $workflow_id = '57afe96172';

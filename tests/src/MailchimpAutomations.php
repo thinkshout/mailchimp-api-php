@@ -62,8 +62,6 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
     return $response;
   }
 
-
-
   /**
    * @inheritdoc
    */
@@ -79,7 +77,7 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
           'status' => 'sending',
           'emails_sent' => 1,
           'send_time' => '2016-07-20T15:48:04+00:00',
-          'content_type' => 'template'
+          'content_type' => 'template',
         ],
       ],
       'total_items' => 1,
@@ -92,7 +90,7 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
    * @inheritdoc
    */
   public function getWorkflowEmail($workflow_id,$workflow_email_id) {
-    parent::getWorkflowEmail($workflow_id,$workflow_email_id);
+    parent::getWorkflowEmail($workflow_id, $workflow_email_id);
 
     $response = (object) [
       'id' => 'a87de7d1e5',
@@ -101,7 +99,7 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
       'status' => 'sending',
       'emails_sent' => 1,
       'send_time' => '2016-07-20T15:48:04+00:00',
-      'content_type' => 'template'
+      'content_type' => 'template',
     ];
 
     return $response;
@@ -110,8 +108,8 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
   /**
    * @inheritdoc
    */
-  public function getWorkflowEmailSubscribers($workflow_id,$workflow_email_id) {
-    parent::getWorkflowEmailSubscribers($workflow_id,$workflow_email_id);
+  public function getWorkflowEmailSubscribers($workflow_id, $workflow_email_id) {
+    parent::getWorkflowEmailSubscribers($workflow_id, $workflow_email_id);
 
     $response = (object) [
       'workflow_id' => '4e3da78a41',
@@ -123,12 +121,11 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
     return $response;
   }
 
-
   /**
    * @inheritdoc
    */
-  public function getWorkflowEmailSubscriber($workflow_id,$workflow_email_id, $email) {
-    parent::getWorkflowEmailSubscriber($workflow_id,$workflow_email_id,$email);
+  public function getWorkflowEmailSubscriber($workflow_id, $workflow_email_id, $email) {
+    parent::getWorkflowEmailSubscriber($workflow_id, $workflow_email_id, $email);
 
     $response = (object) [
       'id' => md5(strtolower($email)),
