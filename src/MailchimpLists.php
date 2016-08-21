@@ -378,6 +378,35 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Adds a member to a list segment.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $segment_id
+   *   The ID of the segment.
+   * @param array $email
+   *   The email address to add to the segment.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/members/
+   */
+  public function addSegmentMember($list_id, $segment_id, $email, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'segment_id' => $segment_id,
+    ];
+
+    $parameters += [
+      'email_address' => $email,
+    ];
+
+    return $this->request('POST', '/lists/{list_id}/segments/{segment_id}/members', $tokens, $parameters);
+  }
+
+  /**
    * Gets information about webhooks associated with a list.
    *
    * @param string $list_id
