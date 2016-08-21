@@ -239,4 +239,25 @@ class MailchimpListsTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/segments/' . $segment_id . '/members', $mc->getClient()->uri);
   }
 
+  /**
+   * Tests library functionality for adding a segment member.
+   */
+  public function testAddSegmentMember() {
+    $list_id = '205d96e6b4';
+    $segment_id = '457';
+    $email = 'test@example.com';
+
+    $mc = new MailchimpLists();
+    $mc->addSegmentMember($list_id, $segment_id, $email);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/segments/' . $segment_id . '/members', $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($email, $request_body->email_address);
+  }
+
 }
