@@ -2,6 +2,11 @@
 
 namespace Mailchimp;
 
+/**
+ * MailChimp Campaigns library.
+ *
+ * @package Mailchimp
+ */
 class MailchimpCampaigns extends Mailchimp {
 
   const EMAIL_TYPE_HTML = 'html';

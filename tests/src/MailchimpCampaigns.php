@@ -2,6 +2,11 @@
 
 namespace Mailchimp\Tests;
 
+/**
+ * MailChimp Campaigns library test cases.
+ *
+ * @package Mailchimp\Tests
+ */
 class MailchimpCampaigns extends \Mailchimp\MailchimpCampaigns {
 
   /**

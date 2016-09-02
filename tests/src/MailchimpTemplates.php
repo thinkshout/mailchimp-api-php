@@ -2,6 +2,11 @@
 
 namespace Mailchimp\Tests;
 
+/**
+ * MailChimp Templates library test cases.
+ *
+ * @package Mailchimp\Tests
+ */
 class MailchimpTemplates extends \Mailchimp\MailchimpTemplates {
 
   /**

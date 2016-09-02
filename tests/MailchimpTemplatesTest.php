@@ -2,6 +2,11 @@
 
 namespace Mailchimp\Tests;
 
+/**
+ * Mailchimp Templates test library.
+ *
+ * @package Mailchimp\Tests
+ */
 class MailchimpTemplatesTest extends \PHPUnit_Framework_TestCase {
 
   /**

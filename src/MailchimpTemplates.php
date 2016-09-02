@@ -2,6 +2,11 @@
 
 namespace Mailchimp;
 
+/**
+ * Mailchimp Templates library.
+ *
+ * @package Mailchimp
+ */
 class MailchimpTemplates extends Mailchimp {
 
   /**

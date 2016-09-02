@@ -4,6 +4,11 @@ namespace Mailchimp;
 
 use \Exception;
 
+/**
+ * Custom Mailchimp API exception.
+ *
+ * @package Mailchimp
+ */
 class MailchimpAPIException extends Exception {
 
   /**
