@@ -51,6 +51,8 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
    * @inheritdoc
    */
   public function getStore($store_id, $parameters = []) {
+    parent::getStore($store_id, $parameters);
+
     return (isset($this->stores[$store_id])) ? $this->stores[$store_id] : NULL;
   }
 
@@ -58,6 +60,8 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
    * @inheritdoc
    */
   public function addStore($id, $store, $batch = FALSE) {
+    parent::addStore($id, $store, $batch);
+
     $parameters = [
       'id' => $id,
     ];
@@ -70,6 +74,8 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
    * @inheritdoc
    */
   public function getCustomer($store_id, $customer_id, $parameters = []) {
+    parent::getCustomer($store_id, $customer_id, $parameters);
+
     if (isset($this->customers[$store_id])) {
       return (isset($this->customers[$store_id][$customer_id])) ? $this->customers[$store_id][$customer_id] : NULL;
     }
@@ -81,6 +87,8 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
    * @inheritdoc
    */
   public function addCustomer($store_id, $customer, $batch = FALSE) {
+    parent::addCustomer($store_id, $customer, $batch);
+
     if (!isset($this->customers[$store_id])) {
       $this->customers[$store_id] = [];
     }
@@ -92,6 +100,8 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
    * @inheritdoc
    */
   public function getOrder($store_id, $order_id, $parameters = []) {
+    parent::getOrder($store_id, $order_id, $parameters);
+
     if (isset($this->orders[$store_id])) {
       return (isset($this->orders[$store_id][$order_id])) ? $this->orders[$store_id][$order_id] : NULL;
     }
@@ -103,6 +113,8 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
    * @inheritdoc
    */
   public function addOrder($store_id, $id, array $customer, array $order, $batch = FALSE) {
+    parent::addOrder($store_id, $id, $customer, $order, $batch);
+
     if (empty($store_id)) {
       throw new MailchimpAPIException('Store ID cannot be empty.');
     }
