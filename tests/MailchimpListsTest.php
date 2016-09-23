@@ -190,6 +190,20 @@ class MailchimpListsTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library functionality for list segment information.
+   */
+  public function testGetSegment() {
+    $list_id = '57afe96172';
+    $segment_id = '49377';
+
+    $mc = new MailchimpLists();
+    $mc->getSegment($list_id, $segment_id);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/segments/' . $segment_id, $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library functionality for adding a list segment.
    */
   public function testAddSegment() {

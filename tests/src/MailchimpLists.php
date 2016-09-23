@@ -238,6 +238,22 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
   /**
    * @inheritdoc
    */
+  public function getSegment($list_id, $segment_id, $parameters = []) {
+    parent::getSegment($list_id, $segment_id, $parameters);
+
+    $response = (object) [
+      'id' => 49377,
+      'name' => 'Test Segment One',
+      'type' => 'static',
+      'list_id' => $list_id,
+    ];
+
+    return $response;
+  }
+
+  /**
+   * @inheritdoc
+   */
   public function addSegment($list_id, $name, $parameters = [], $batch = FALSE) {
     parent::addSegment($list_id, $name, $parameters, $batch);
 
