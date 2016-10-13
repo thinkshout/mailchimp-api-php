@@ -81,6 +81,26 @@ class MailchimpCampaigns extends Mailchimp {
   }
 
   /**
+   * Gets the HTML, plain-text, and template content for a MailChimp campaign.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/content/#read-get_campaigns_campaign_id_content
+   */
+  public function getCampaignContent($campaign_id, $parameters = []) {
+    $tokens = [
+      'campaign_id' => $campaign_id,
+    ];
+
+    return $this->request('GET', '/campaigns/{campaign_id}/content', $tokens, $parameters);
+  }
+
+  /**
    * Sets the HTML, plain-text, and template content for a MailChimp campaign.
    *
    * @param string $campaign_id

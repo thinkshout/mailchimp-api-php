@@ -64,6 +64,19 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library functionality for getting campaign content.
+   */
+  public function testGetCampaignContent() {
+    $campaign_id = '42694e9e57';
+
+    $mc = new MailchimpCampaigns();
+    $mc->getCampaignContent($campaign_id);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/campaigns/' . $campaign_id . '/content', $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library functionality for setting campaign content.
    */
   public function testSetCampaignContent() {
