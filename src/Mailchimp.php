@@ -94,10 +94,10 @@ class Mailchimp {
    *   The MailChimp API key.
    * @param string $api_user
    *   The MailChimp API username.
-   * @param int $timeout
-   *   Maximum request time in seconds.
+   * @param array $http_options
+   *   HTTP client options.
    */
-  public function __construct($api_key, $api_user = 'apikey', $timeout = 10) {
+  public function __construct($api_key, $api_user = 'apikey', $http_options = null) {
     $this->api_key = $api_key;
     $this->api_user = $api_user;
 
@@ -105,9 +105,19 @@ class Mailchimp {
 
     $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, $dc, $this->endpoint);
 
-    $this->client = new Client([
-      'timeout' => $timeout,
-    ]);
+    // Handle deprecated 'timeout' argument.
+    if (is_int($http_options)) {
+      $http_options = [
+        'timeout' => $http_options,
+      ];
+    }
+
+    // Default timeout is 10 seconds.
+    $http_options += [
+      'timeout' => 10,
+    ];
+
+    $this->client = new Client($http_options);
   }
 
   /**

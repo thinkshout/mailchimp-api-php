@@ -12,7 +12,7 @@ class Mailchimp extends \Mailchimp\Mailchimp {
   /**
    * @inheritdoc
    */
-  public function __construct($api_key = 'apikey', $api_user = 'apikey', $timeout = 60) {
+  public function __construct($api_key = 'apikey', $api_user = 'apikey', $http_options = null) {
     $this->client = new Client();
   }
 
