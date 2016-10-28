@@ -97,7 +97,7 @@ class Mailchimp {
    * @param array $http_options
    *   HTTP client options.
    */
-  public function __construct($api_key, $api_user = 'apikey', $http_options = null) {
+  public function __construct($api_key, $api_user = 'apikey', $http_options = []) {
     $this->api_key = $api_key;
     $this->api_user = $api_user;
 
