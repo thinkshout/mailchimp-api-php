@@ -17,9 +17,15 @@ class MailchimpCURLClient {
   public function request($method, $uri = '', $options = [], $parameters = []) {
     $ch = curl_init();
 
-    // TODO: Set request headers.
+    // Set request headers.
+    $headers = [];
+    foreach ($options['headers'] as $header_name => $header_value) {
+      $headers[] = $header_name . ': ' . $header_value;
+    }
 
-    // Set requst content.
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    // Set request content.
     switch ($method) {
       case 'POST':
         curl_setopt($ch, CURLOPT_POST, TRUE);
