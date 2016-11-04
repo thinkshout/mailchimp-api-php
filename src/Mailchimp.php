@@ -117,7 +117,15 @@ class Mailchimp {
       'timeout' => 10,
     ];
 
-    $this->client = new Client($http_options);
+    // Use Guzzle HTTP client if PHP version is 5.5.0 or above.
+    // Use cURL otherwise.
+    if (version_compare(phpversion(), '5.5.0', '>=')) {
+      $this->client = new Client($http_options);
+    }
+    else {
+      $this->client = new MailchimpCURLClient($http_options);
+    }
+
   }
 
   /**
@@ -274,6 +282,15 @@ class Mailchimp {
       $options['headers']['X-Trigger-Error'] = $this->debug_error_code;
     }
 
+    if (version_compare(phpversion(), '5.5.0', '>=')) {
+      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters);
+    }
+    else {
+      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters);
+    }
+  }
+
+  public function handleRequest($method, $uri = '', $options = [], $parameters) {
     if (!empty($parameters)) {
       if ($method == 'GET') {
         // Send parameters as query string parameters.
@@ -286,11 +303,10 @@ class Mailchimp {
     }
 
     try {
-      $response = $this->client->request($method, $this->endpoint . $path, $options);
+      $response = $this->client->request($method, $uri, $options);
       $data = json_decode($response->getBody());
 
       return $data;
-
     }
     catch (RequestException $e) {
       $response = $e->getResponse();
@@ -300,6 +316,20 @@ class Mailchimp {
       else {
         $message = $e->getMessage();
       }
+
+      throw new MailchimpAPIException($message, $e->getCode(), $e);
+    }
+  }
+
+  public function handleRequestCURL($method, $uri = '', $options = [], $parameters) {
+    try {
+      $response = $this->client->request($method, $uri, $options, $parameters);
+      $data = json_decode($response);
+
+      return $data;
+    }
+    catch (Exception $e) {
+      $message = $e->getMessage();
 
       throw new MailchimpAPIException($message, $e->getCode(), $e);
     }
