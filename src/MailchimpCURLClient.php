@@ -44,6 +44,7 @@ class MailchimpCURLClient {
         break;
       case 'PUT':
         curl_setopt($ch, CURLOPT_PUT, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
         break;
       case 'PATCH':
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
