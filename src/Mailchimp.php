@@ -41,11 +41,18 @@ class Mailchimp {
   public $version = self::VERSION;
 
   /**
-   * The GuzzleHttp Client.
+   * The GuzzleHttp client.
    *
    * @var Client $client
    */
   protected $client;
+
+  /**
+   * The cURL client.
+   *
+   * @var MailchimpCURLClient $curl_client
+   */
+  protected $curl_client;
 
   /**
    * The REST API endpoint.
@@ -88,6 +95,15 @@ class Mailchimp {
   private $batch_operations;
 
   /**
+   * TRUE if cURL should be used instead of the default Guzzle library.
+   *
+   * Provides compatibility with PHP 5.4.
+   *
+   * @var boolean $use_curl
+   */
+  private $use_curl;
+
+  /**
    * Mailchimp constructor.
    *
    * @param string $api_key
@@ -119,11 +135,13 @@ class Mailchimp {
 
     // Use Guzzle HTTP client if PHP version is 5.5.0 or above.
     // Use cURL otherwise.
-    if (version_compare(phpversion(), '5.5.0', '>=')) {
-      $this->client = new Client($http_options);
+    $this->use_curl = version_compare(phpversion(), '5.5.0', '<');
+
+    if ($this->use_curl) {
+      $this->curl_client = new MailchimpCURLClient($http_options);
     }
     else {
-      $this->client = new MailchimpCURLClient($http_options);
+      $this->client = new Client($http_options);
     }
 
   }
@@ -282,11 +300,11 @@ class Mailchimp {
       $options['headers']['X-Trigger-Error'] = $this->debug_error_code;
     }
 
-    if (version_compare(phpversion(), '5.5.0', '>=')) {
-      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters);
+    if ($this->use_curl) {
+      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters);
     }
     else {
-      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters);
+      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters);
     }
   }
 
@@ -323,12 +341,12 @@ class Mailchimp {
 
   public function handleRequestCURL($method, $uri = '', $options = [], $parameters) {
     try {
-      $response = $this->client->request($method, $uri, $options, $parameters);
+      $response = $this->curl_client->request($method, $uri, $options, $parameters);
       $data = json_decode($response);
 
       return $data;
     }
-    catch (Exception $e) {
+    catch (\Exception $e) {
       $message = $e->getMessage();
 
       throw new MailchimpAPIException($message, $e->getCode(), $e);
