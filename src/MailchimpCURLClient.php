@@ -61,7 +61,7 @@ class MailchimpCURLClient {
         $uri .= '?' . http_build_query($parameters);
         break;
       case 'PUT':
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode((object) $parameters));
         break;
       case 'PATCH':
