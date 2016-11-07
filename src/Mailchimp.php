@@ -308,6 +308,11 @@ class Mailchimp {
     }
   }
 
+  /**
+   * Makes a request to the MailChimp API using the Guzzle HTTP client.
+   *
+   * @see Mailchimp::request().
+   */
   public function handleRequest($method, $uri = '', $options = [], $parameters) {
     if (!empty($parameters)) {
       if ($method == 'GET') {
@@ -339,6 +344,11 @@ class Mailchimp {
     }
   }
 
+  /**
+   * Makes a request to the MailChimp API using cURL.
+   *
+   * @see Mailchimp::request().
+   */
   public function handleRequestCURL($method, $uri = '', $options = [], $parameters) {
     try {
       $response = $this->curl_client->request($method, $uri, $options, $parameters);

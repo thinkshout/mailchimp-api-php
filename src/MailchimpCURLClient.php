@@ -3,6 +3,7 @@
 namespace Mailchimp;
 
 /**
+ * cURL client configured for use with the MailChimp API.
  *
  * @package Mailchimp
  */
@@ -10,10 +11,33 @@ class MailchimpCURLClient {
 
   private $config;
 
+  /**
+   * MailchimpCURLClient constructor.
+   *
+   * @param array $config
+   *   cURL configuration options.
+   *   Currently supports only 'timeout'.
+   */
   public function __construct($config = []) {
     $this->config = $config;
   }
 
+  /**
+   * Makes a request to the MailChimp API using cURL.
+   *
+   * @param string $method
+   *   The REST method to use when making the request.
+   * @param string $uri
+   *   The API URI to request.
+   * @param array $options
+   *   Request options. @see Mailchimp::request().
+   * @param array $parameters
+   *   Associative array of parameters to send in the request body.
+   *
+   * @return object
+   *
+   * @throws \Exception
+   */
   public function request($method, $uri = '', $options = [], $parameters = []) {
     $ch = curl_init();
 
