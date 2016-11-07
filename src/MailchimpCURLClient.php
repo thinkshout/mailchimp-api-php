@@ -29,32 +29,25 @@ class MailchimpCURLClient {
     switch ($method) {
       case 'POST':
         curl_setopt($ch, CURLOPT_POST, TRUE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode((object) $parameters));
         break;
       case 'GET':
-        $uri .= '?';
-
-        // Concatenate parameters into request string.
-        foreach ($parameters as $param_name => $param_value) {
-          $uri .= $param_name . '=' . $param_value . '&';
-        }
-
-        // Remove last & character.
-        $uri = substr($uri, 0, -1);
+        $uri .= '?' . http_build_query($parameters);
         break;
       case 'PUT':
-        curl_setopt($ch, CURLOPT_PUT, TRUE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode((object) $parameters));
         break;
       case 'PATCH':
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode((object) $parameters));
         break;
       case 'DELETE':
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
         break;
       default:
-        // Throw exception for unsupported request type.
+        // Throw exception for unsupported request method.
+        throw new \Exception('Unsupported HTTP request method: ' . $method);
         break;
     }
 
