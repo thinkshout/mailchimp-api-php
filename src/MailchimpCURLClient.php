@@ -17,6 +17,8 @@ class MailchimpCURLClient {
   public function request($method, $uri = '', $options = [], $parameters = []) {
     $ch = curl_init();
 
+    curl_setopt($ch, CURLOPT_TIMEOUT, $this->config['timeout']);
+
     // Set request headers.
     $headers = [];
     foreach ($options['headers'] as $header_name => $header_value) {
