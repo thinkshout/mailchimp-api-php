@@ -83,7 +83,15 @@ class MailchimpCURLClient {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $response = curl_exec($ch);
 
+    // Handle errors.
+    $curl_error = ($response === FALSE) ? curl_error($ch) : NULL;
+
+    // Close cURL connection.
     curl_close($ch);
+
+    if (!empty($curl_error)) {
+      throw new \Exception($curl_error);
+    }
 
     return $response;
   }
