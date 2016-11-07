@@ -93,6 +93,11 @@ class MailchimpCURLClient {
       throw new \Exception($curl_error);
     }
 
+    $response_data = json_decode($response);
+    if (isset($response_data->status) && ($response_data->status != 200)) {
+      throw new \Exception($response_data->detail);
+    }
+
     return $response;
   }
 
