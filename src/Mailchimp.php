@@ -12,7 +12,7 @@ use GuzzleHttp\Exception\RequestException;
  */
 class Mailchimp {
 
-  const VERSION = '1.0.4';
+  const VERSION = '1.0.5';
   const DEFAULT_DATA_CENTER = 'us1';
 
   const ERROR_CODE_BAD_REQUEST = 'BadRequest';
