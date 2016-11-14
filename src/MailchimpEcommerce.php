@@ -836,6 +836,40 @@ class MailchimpEcommerce extends Mailchimp {
   }
 
   /**
+   * Update a product in a store.
+   *
+   * @param string $store_id
+   *   The store id.
+   * @param string $id
+   *   A unique identifier for the product.
+   * @param array $variants
+   *   An array of the product’s variants.
+   *   - id (string) A unique identifier for the product variant.
+   *   - title (string) The title of a product variant.
+   * @param array $parameters
+   *   An array of additional parameters. See API docs.
+   *
+   * @return object
+   *   The API Product response object.
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#
+   */
+  public function updateProduct($store_id, $id, $variants = [], $parameters = []) {
+    $tokens = [
+      'store_id' => $store_id,
+      'product_id' => $id,
+    ];
+
+    $parameters += [
+      'variants' => $variants,
+    ];
+
+    return $this->request('POST', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens, $parameters);
+  }
+
+  /**
    * Delete a product.
    *
    * @param string $store_id
