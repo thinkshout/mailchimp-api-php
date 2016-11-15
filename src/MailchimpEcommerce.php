@@ -956,6 +956,8 @@ class MailchimpEcommerce extends Mailchimp {
    *   The id for the product of a store.
    * @param string $variant_id
    *   The id for the product variant.
+   * @param array $parameters
+   *   An array of optional parameters. See API docs.
    *
    * @return object
    *   The API product variant response object.
@@ -964,13 +966,13 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/#edit-patch_ecommerce_stores_store_id_products_product_id_variants_variant_id
    */
-  public function getProductVariant($store_id, $product_id, $variant_id) {
+  public function getProductVariant($store_id, $product_id, $variant_id, $parameters = []) {
     $tokens = [
       'store_id' => $store_id,
       'product_id' => $product_id,
       'variant_id' => $variant_id,
     ];
-    return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens);
+    return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens, $parameters);
   }
 
   /**
