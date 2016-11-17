@@ -186,6 +186,39 @@ class MailchimpCampaigns extends Mailchimp {
   }
 
   /**
+   * Schedule a MailChimp campaign.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   * @param  schedule_time $schedule_time
+   *   The date and time in UTC to schedule the campaign for delivery.
+   * @param bool $timewarp
+   *   Choose whether the campaign should use Timewarp when sending.
+   * @param object $batch_delivery
+   *   Choose whether the campaign should use Batch Delivery.
+   *   Cannot be set to true for campaigns using Timewarp.
+   * @param bool $batch
+   *   TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#action-post_campaigns_campaign_id_actions_schedule
+   */
+  public function schedule($campaign_id, $schedule_time, $timewarp, $batch_delivery, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'campaign_id' => $campaign_id,
+    ];
+    
+    $parameters += [
+      'schedule_time' => $schedule_time,
+      'timewarp' => $timewarp,
+      'batch_delivery' => $batch_delivery,
+    ];
+
+    return $this->request('POST', '/campaigns/{campaign_id}/actions/schedule', $tokens, $parameters, $batch);
+  }
+  
+  /**
    * Send a MailChimp campaign.
    *
    * @param string $campaign_id
