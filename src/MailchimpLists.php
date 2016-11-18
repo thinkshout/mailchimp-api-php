@@ -112,6 +112,26 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Add merge field associated with a MailChimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/merge-fields/#read-get_lists_list_id_merge_fields
+   */
+  public function addMergeField($list_id, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+    ];
+
+    return $this->request('POST', '/lists/{list_id}/merge-fields', $tokens, $parameters);
+  }
+
+  /**
    * Gets information about all members of a MailChimp list.
    *
    * @param string $list_id
