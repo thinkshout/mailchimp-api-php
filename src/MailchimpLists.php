@@ -121,7 +121,7 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/merge-fields/#read-get_lists_list_id_merge_fields
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/merge-fields/#create-post_lists_list_id_merge_fields
    */
   public function addMergeField($list_id, $parameters = []) {
     $tokens = [
