@@ -584,9 +584,12 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
     $store_id = 'MC001';
     $id = 'sku0001';
     $title = 'Test Product 001';
-    $variants = [
+    $variant_1 = (object) [
       'id' => 'PROD001A',
       'title' => "Freddie's Jokes Volume 1",
+    ];
+    $variants = [
+      $variant_1,
     ];
 
     $mc = new MailchimpEcommerce();
@@ -601,8 +604,8 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
     $this->assertEquals($id, $request_body->id);
     $this->assertEquals($title, $request_body->title);
-    $this->assertEquals($variants['id'], $request_body->variants['id']);
-    $this->assertEquals($variants['title'], $request_body->variants['title']);
+    $this->assertEquals($variant_1->id, $request_body->variants[0]->id);
+    $this->assertEquals($variant_1->title, $request_body->variants[0]->title);
   }
 
   /**
@@ -634,10 +637,10 @@ class MailchimpEcommerceTest extends \PHPUnit_Framework_TestCase {
 
     $request_body = $mc->getClient()->options['json'];
 
-    $this->assertEquals($request_body->variants[0]->id, $variant_1->id);
-    $this->assertEquals($request_body->variants[0]->title, $variant_1->title);
-    $this->assertEquals($request_body->variants[1]->id, $variant_2->id);
-    $this->assertEquals($request_body->variants[1]->title, $variant_2->title);
+    $this->assertEquals($variant_1->id, $request_body->variants[0]->id);
+    $this->assertEquals($variant_1->title, $request_body->variants[0]->title);
+    $this->assertEquals($variant_2->id, $request_body->variants[1]->id);
+    $this->assertEquals($variant_2->title, $request_body->variants[1]->title);
   }
 
   /**
