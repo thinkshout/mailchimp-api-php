@@ -843,7 +843,7 @@ class MailchimpEcommerce extends Mailchimp {
    * @param string $id
    *   A unique identifier for the product.
    * @param array $variants
-   *   An array of the product’s variants.
+   *   An array of the product's variants.
    *   - id (string) A unique identifier for the product variant.
    *   - title (string) The title of a product variant.
    * @param array $parameters
@@ -854,7 +854,7 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @throws \Mailchimp\MailchimpAPIException
    *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/#edit-patch_ecommerce_stores_store_id_products_product_id
    */
   public function updateProduct($store_id, $id, $variants = [], $parameters = []) {
     $tokens = [
@@ -964,7 +964,7 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @throws \Mailchimp\MailchimpAPIException
    *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/#edit-patch_ecommerce_stores_store_id_products_product_id_variants_variant_id
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/products/variants/#read-get_ecommerce_stores_store_id_products_product_id_variants_variant_id
    */
   public function getProductVariant($store_id, $product_id, $variant_id, $parameters = []) {
     $tokens = [
