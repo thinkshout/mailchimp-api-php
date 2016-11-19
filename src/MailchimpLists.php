@@ -116,6 +116,10 @@ class MailchimpLists extends Mailchimp {
    *
    * @param string $list_id
    *   The ID of the list.
+   * @param string $name
+   *   The name of the merge field.
+   * @param string $type
+   *   The type for the merge field.
    * @param array $parameters
    *   Associative array of optional request parameters.
    *
@@ -123,9 +127,14 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/merge-fields/#create-post_lists_list_id_merge_fields
    */
-  public function addMergeField($list_id, $parameters = []) {
+  public function addMergeField($list_id, $name, $type, $parameters = []) {
     $tokens = [
       'list_id' => $list_id,
+    ];
+
+    $parameters += [
+      'name' => $name,
+      'type' => $type,
     ];
 
     return $this->request('POST', '/lists/{list_id}/merge-fields', $tokens, $parameters);
