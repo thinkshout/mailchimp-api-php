@@ -147,6 +147,32 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library functionality for scheduling a campaign.
+   */
+  public function testSchedule() {
+    $campaign_id = 'b03bfc273a';
+    $schedule_time = '2017-02-04T19:13:00+00:00';
+    $timewarp = FALSE;
+    $batch_delivery = (object) [
+      'batch_delay' => 5,
+      'batch_count' => 100,
+    ];
+
+    $mc = new MailchimpCampaigns();
+    $mc->schedule($campaign_id, $schedule_time, $timewarp, $batch_delivery);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/campaigns/' . $campaign_id . '/actions/schedule', $mc->getClient()->uri);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($schedule_time, $request_body->schedule_time);
+    $this->assertEquals($timewarp, $request_body->timewarp);
+    $this->assertEquals($batch_delivery->batch_delay, $request_body->batch_delivery->batch_delay);
+    $this->assertEquals($batch_delivery->batch_count, $request_body->batch_delivery->batch_count);
+  }
+
+  /**
    * Tests library functionality for sending a campaign.
    */
   public function testSend() {
