@@ -190,7 +190,7 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @param string $campaign_id
    *   The ID of the campaign.
-   * @param  schedule_time $schedule_time
+   * @param schedule_time $schedule_time
    *   The date and time in UTC to schedule the campaign for delivery.
    * @param bool $timewarp
    *   Choose whether the campaign should use Timewarp when sending.
@@ -208,7 +208,7 @@ class MailchimpCampaigns extends Mailchimp {
     $tokens = [
       'campaign_id' => $campaign_id,
     ];
-    
+
     $parameters += [
       'schedule_time' => $schedule_time,
       'timewarp' => $timewarp,
@@ -217,7 +217,7 @@ class MailchimpCampaigns extends Mailchimp {
 
     return $this->request('POST', '/campaigns/{campaign_id}/actions/schedule', $tokens, $parameters, $batch);
   }
-  
+
   /**
    * Send a MailChimp campaign.
    *
