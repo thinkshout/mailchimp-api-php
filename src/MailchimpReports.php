@@ -64,7 +64,6 @@ class MailchimpReports extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
-   *
    */
   public function getCampaignReport($campaign_id, $type, $parameters = []) {
     $tokens = [
