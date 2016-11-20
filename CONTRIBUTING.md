@@ -51,6 +51,13 @@ using Bash, you'll typically find the file at *~/.bash_profile*.
 
 `export PATH="./vendor/bin:$PATH"`
 
+**Bash example**
+
+```shell
+echo 'export PATH="./vendor/bin:$PATH"' >> ~/.bash_profile`
+source ~/.bash_profile
+```
+
 Then run PHPUnit:
 
 `phpunit`
