@@ -88,6 +88,7 @@ More advanced examples can be found in the *tests* directory.
 
 * [MailChimp API documentation](http://developer.mailchimp.com/documentation/mailchimp/)
 * [MailChimp Drupal module](https://www.drupal.org/project/mailchimp), MailChimp integration for Drupal using this library.
+* [MailChimp E-Commerce Drupal module](https://www.drupal.org/project/mailchimp_ecommerce), MailChimp integration for Drupal Commerce using this library.
 * [ThinkShout](https://thinkshout.com), the library maintainer.
 
 ## Want to help build this and other open source projects?
