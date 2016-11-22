@@ -173,6 +173,19 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library functionality for unscheduling a campaign.
+   */
+  public function testUnschedule() {
+    $campaign_id = 'b03bfc273a';
+
+    $mc = new MailchimpCampaigns();
+    $mc->unschedule($campaign_id);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/campaigns/' . $campaign_id . '/actions/unschedule', $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library functionality for sending a campaign.
    */
   public function testSend() {

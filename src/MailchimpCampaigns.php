@@ -219,6 +219,24 @@ class MailchimpCampaigns extends Mailchimp {
   }
 
   /**
+   * Unschedule a MailChimp campaign.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#action-post_campaigns_campaign_id_actions_unschedule
+   */
+  public function unschedule($campaign_id) {
+    $tokens = [
+      'campaign_id' => $campaign_id,
+    ];
+
+    return $this->request('POST', '/campaigns/{campaign_id}/actions/unschedule', $tokens, NULL);
+  }
+
+  /**
    * Send a MailChimp campaign.
    *
    * @param string $campaign_id
