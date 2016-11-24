@@ -54,7 +54,7 @@ using Bash, you'll typically find the file at *~/.bash_profile*.
 Bash example:
 
 ```shell
-echo 'export PATH="./vendor/bin:$PATH"' >> ~/.bash_profile`
+echo 'export PATH="./vendor/bin:$PATH"' >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
