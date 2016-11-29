@@ -99,6 +99,19 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library functionality for getting a campaign send checklist.
+   */
+  public function testGetSendChecklist() {
+    $campaign_id = '42694e9e57';
+
+    $mc = new MailchimpCampaigns();
+    $mc->getSendChecklist($campaign_id);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/campaigns/' . $campaign_id . '/send-checklist', $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library functionality for updating a campaign.
    */
   public function testUpdateCampaign() {
