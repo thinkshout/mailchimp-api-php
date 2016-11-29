@@ -121,6 +121,24 @@ class MailchimpCampaigns extends Mailchimp {
   }
 
   /**
+   * Get the send checklist for a MailChimp campaign.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/send-checklist
+   */
+  public function getSendChecklist($campaign_id) {
+    $tokens = [
+      'campaign_id' => $campaign_id,
+    ];
+
+    return $this->request('GET', '/campaigns/{campaign_id}/send-checklist', $tokens, NULL);
+  }
+
+  /**
    * Updates a campaign.
    *
    * @param string $campaign_id
