@@ -222,7 +222,7 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#action-post_campaigns_campaign_id_actions_schedule
    */
-  public function schedule($campaign_id, $schedule_time, $timewarp, $batch_delivery, $parameters = [], $batch = FALSE) {
+  public function schedule($campaign_id, $schedule_time, $timewarp = FALSE, $batch_delivery = FALSE, $parameters = [], $batch = FALSE) {
     $tokens = [
       'campaign_id' => $campaign_id,
     ];
