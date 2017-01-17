@@ -57,24 +57,28 @@ class MailchimpCURLClient {
         curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode((object) $parameters));
         break;
+
       case 'GET':
         $uri .= '?' . http_build_query($parameters);
         break;
+
       case 'PUT':
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode((object) $parameters));
         break;
+
       case 'PATCH':
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode((object) $parameters));
         break;
+
       case 'DELETE':
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
         break;
+
       default:
         // Throw exception for unsupported request method.
         throw new \Exception('Unsupported HTTP request method: ' . $method);
-        break;
     }
 
     curl_setopt($ch, CURLOPT_URL, $uri);
@@ -90,7 +94,7 @@ class MailchimpCURLClient {
     // testing the actual http result.
     if (curl_errno($ch)) {
       // Handle errors.
-      $error =  curl_error($ch);
+      $error = curl_error($ch);
     }
     else {
       // The http request was ok, so we can now test the HTTP status code.
