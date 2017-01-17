@@ -583,8 +583,7 @@ class MailchimpLists extends Mailchimp {
           if ($e->getCode() !== 404) {
             // 404 indicates the email address is not subscribed to this list
             // and can be safely ignored. Surface all other exceptions.
-            throw new MailchimpAPIException($e->getResponse()
-              ->getBody(), $e->getCode(), $e);
+            throw new MailchimpAPIException($e->getMessage(), $e->getCode(), $e);
           }
         }
       }
