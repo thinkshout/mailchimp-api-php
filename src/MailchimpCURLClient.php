@@ -87,6 +87,7 @@ class MailchimpCURLClient {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $response = curl_exec($ch);
 
+    $http_code = 0;
     $error = NULL;
 
     // curl_errno return a code which tell us how the curl request happened.
@@ -109,7 +110,7 @@ class MailchimpCURLClient {
     curl_close($ch);
 
     if (!empty($error)) {
-      throw new \Exception($error);
+      throw new \Exception($error, $http_code);
     }
 
     return $response;
