@@ -5,7 +5,7 @@ The API is [documented here](http://developer.mailchimp.com/documentation/mailch
 
 ## Requirements
 
-- PHP 5.5.0 or greater
+- PHP 5.4.0 or greater
 - [Composer](https://getcomposer.org/)
 - [Guzzle](https://github.com/guzzle/guzzle)
 
