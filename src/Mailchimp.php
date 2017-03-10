@@ -161,12 +161,15 @@ class Mailchimp {
   /**
    * Gets MailChimp account information for the authenticated account.
    *
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
    * @return object
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/root/#read-get_root
    */
-  public function getAccount() {
-    return $this->request('GET', '/');
+  public function getAccount($parameters = []) {
+    return $this->request('GET', '/', NULL, $parameters);
   }
 
   /**
