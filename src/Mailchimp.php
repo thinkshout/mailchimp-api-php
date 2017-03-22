@@ -280,7 +280,7 @@ class Mailchimp {
    *
    * @throws MailchimpAPIException
    */
-  public function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE) {
+  public function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE, $returnAssoc = false) {
     if (!empty($tokens)) {
       foreach ($tokens as $key => $value) {
         $path = str_replace('{' . $key . '}', $value, $path);
@@ -304,10 +304,10 @@ class Mailchimp {
     }
 
     if ($this->use_curl) {
-      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters);
+      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
     }
     else {
-      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters);
+      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
     }
   }
 
