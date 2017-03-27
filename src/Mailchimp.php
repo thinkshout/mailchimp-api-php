@@ -275,12 +275,15 @@ class Mailchimp {
    *   Associative array of parameters to send in the request body.
    * @param bool $batch
    *   TRUE if this request should be added to pending batch operations.
+   * @param bool $returnAssoc
+   *   TRUE to return MailChimp API response as an associative array.
    *
-   * @return object
+   * @return mixed
+   *   Object or Array if $returnAssoc is TRUE.
    *
    * @throws MailchimpAPIException
    */
-  public function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE, $returnAssoc = false) {
+  public function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE, $returnAssoc = FALSE) {
     if (!empty($tokens)) {
       foreach ($tokens as $key => $value) {
         $path = str_replace('{' . $key . '}', $value, $path);
