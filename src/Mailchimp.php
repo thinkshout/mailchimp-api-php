@@ -280,7 +280,7 @@ class Mailchimp {
    *
    * @throws MailchimpAPIException
    */
-  protected function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE) {
+  public function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE, $returnAssoc = false) {
     if (!empty($tokens)) {
       foreach ($tokens as $key => $value) {
         $path = str_replace('{' . $key . '}', $value, $path);
@@ -304,10 +304,10 @@ class Mailchimp {
     }
 
     if ($this->use_curl) {
-      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters);
+      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
     }
     else {
-      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters);
+      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
     }
   }
 
@@ -316,7 +316,7 @@ class Mailchimp {
    *
    * @see Mailchimp::request().
    */
-  public function handleRequest($method, $uri = '', $options = [], $parameters) {
+  public function handleRequest($method, $uri = '', $options = [], $parameters, $returnAssoc = false) {
     if (!empty($parameters)) {
       if ($method == 'GET') {
         // Send parameters as query string parameters.
@@ -330,7 +330,7 @@ class Mailchimp {
 
     try {
       $response = $this->client->request($method, $uri, $options);
-      $data = json_decode($response->getBody());
+      $data = json_decode($response->getBody(), $returnAssoc);
 
       return $data;
     }
@@ -352,10 +352,10 @@ class Mailchimp {
    *
    * @see Mailchimp::request().
    */
-  public function handleRequestCURL($method, $uri = '', $options = [], $parameters) {
+  public function handleRequestCURL($method, $uri = '', $options = [], $parameters, $returnAssoc) {
     try {
       $response = $this->curl_client->request($method, $uri, $options, $parameters);
-      $data = json_decode($response);
+      $data = json_decode($response, $returnAssoc);
 
       return $data;
     }
