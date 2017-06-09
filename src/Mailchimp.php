@@ -277,13 +277,15 @@ class Mailchimp {
    *   TRUE if this request should be added to pending batch operations.
    * @param bool $returnAssoc
    *   TRUE to return MailChimp API response as an associative array.
+   * @param bool $object
+   *   FALSE to prevent converting the parameters to a stdObject.
    *
    * @return mixed
    *   Object or Array if $returnAssoc is TRUE.
    *
    * @throws MailchimpAPIException
    */
-  public function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE, $returnAssoc = FALSE) {
+  public function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE, $returnAssoc = FALSE, $object = TRUE) {
     if (!empty($tokens)) {
       foreach ($tokens as $key => $value) {
         $path = str_replace('{' . $key . '}', $value, $path);
@@ -307,10 +309,10 @@ class Mailchimp {
     }
 
     if ($this->use_curl) {
-      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
+      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters, $returnAssoc, $object);
     }
     else {
-      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
+      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters, $returnAssoc, $object);
     }
   }
 
@@ -319,7 +321,7 @@ class Mailchimp {
    *
    * @see Mailchimp::request()
    */
-  public function handleRequest($method, $uri = '', $options = [], $parameters = [], $returnAssoc = FALSE) {
+  public function handleRequest($method, $uri = '', $options = [], $parameters = [], $returnAssoc = FALSE, $object = TRUE) {
     if (!empty($parameters)) {
       if ($method == 'GET') {
         // Send parameters as query string parameters.
@@ -327,7 +329,11 @@ class Mailchimp {
       }
       else {
         // Send parameters as JSON in request body.
-        $options['json'] = (object) $parameters;
+        if ($object) {
+          $options['json'] = (object) $parameters;
+        } else {
+          $options['json'] = $parameters;
+        }
       }
     }
 

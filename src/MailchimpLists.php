@@ -387,8 +387,6 @@ class MailchimpLists extends Mailchimp {
    *   The ID of the list.
    * @param int $segment_id
    *   The ID of the segment.
-   * @param string $name
-   *   The name of the segment.
    * @param array $parameters
    *   Associative array of optional request parameters.
    * @param bool $batch
@@ -398,17 +396,13 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#edit-patch_lists_list_id_segments_segment_id
    */
-  public function updateSegment($list_id, $segment_id, $name, $parameters = [], $batch = FALSE) {
+  public function updateSegment($list_id, $segment_id, $parameters = [], $batch = FALSE) {
     $tokens = [
       'list_id' => $list_id,
       'segment_id' => $segment_id,
     ];
 
-    $parameters += [
-      'name' => $name,
-    ];
-
-    return $this->request('PATCH', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters, $batch);
+    return $this->request('POST', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters, $batch, FALSE, FALSE);
   }
 
   /**
