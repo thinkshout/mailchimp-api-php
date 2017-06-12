@@ -406,7 +406,7 @@ class MailchimpLists extends Mailchimp {
       'convert_to_object' => FALSE
     ];
 
-    return $this->request('POST', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters, $batch, FALSE);
+    return $this->request('POST', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters, $batch);
   }
 
   /**
