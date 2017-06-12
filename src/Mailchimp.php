@@ -277,15 +277,13 @@ class Mailchimp {
    *   TRUE if this request should be added to pending batch operations.
    * @param bool $returnAssoc
    *   TRUE to return MailChimp API response as an associative array.
-   * @param bool $object
-   *   FALSE to prevent converting the parameters to a stdObject.
    *
    * @return mixed
    *   Object or Array if $returnAssoc is TRUE.
    *
    * @throws MailchimpAPIException
    */
-  public function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE, $returnAssoc = FALSE, $object = TRUE) {
+  public function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE, $returnAssoc = FALSE) {
     if (!empty($tokens)) {
       foreach ($tokens as $key => $value) {
         $path = str_replace('{' . $key . '}', $value, $path);
@@ -301,6 +299,7 @@ class Mailchimp {
       'headers' => [
         'Authorization' => $this->api_user . ' ' . $this->api_key,
       ],
+      'convert_to_object' => TRUE
     ];
 
     // Add trigger error header if a debug error code has been set.
@@ -308,11 +307,19 @@ class Mailchimp {
       $options['headers']['X-Trigger-Error'] = $this->debug_error_code;
     }
 
+    // Set the object conversion status if its passed in.
+    if (isset($parameters['convert_to_object'])) {
+      $options['convert_to_object'] = $parameters['convert_to_object'];
+
+      // Remove status from being sent to MailChimp.
+      unset($parameters['convert_to_object']);
+    }
+
     if ($this->use_curl) {
-      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters, $returnAssoc, $object);
+      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
     }
     else {
-      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters, $returnAssoc, $object);
+      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
     }
   }
 
@@ -321,7 +328,7 @@ class Mailchimp {
    *
    * @see Mailchimp::request()
    */
-  public function handleRequest($method, $uri = '', $options = [], $parameters = [], $returnAssoc = FALSE, $object = TRUE) {
+  public function handleRequest($method, $uri = '', $options = [], $parameters = [], $returnAssoc = FALSE) {
     if (!empty($parameters)) {
       if ($method == 'GET') {
         // Send parameters as query string parameters.
@@ -329,9 +336,10 @@ class Mailchimp {
       }
       else {
         // Send parameters as JSON in request body.
-        if ($object) {
+        if ($options['convert_to_object']) {
           $options['json'] = (object) $parameters;
-        } else {
+        }
+        else {
           $options['json'] = $parameters;
         }
       }
