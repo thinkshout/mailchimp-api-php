@@ -5,7 +5,7 @@ The API is [documented here](http://developer.mailchimp.com/documentation/mailch
 
 ## Requirements
 
-- PHP 5.4.0 or greater
+- PHP 5.4.0 or greater (7.0 or greater if you wish to use phpunit)
 - [Composer](https://getcomposer.org/)
 - [Guzzle](https://github.com/guzzle/guzzle)
 
@@ -13,6 +13,10 @@ The API is [documented here](http://developer.mailchimp.com/documentation/mailch
 
 Dependencies are managed by [Composer](https://getcomposer.org/). After
 installing Composer, run the following command from the library root:
+
+`composer install --no-dev`
+
+Or to install with phpunit:
 
 `composer install`
 
