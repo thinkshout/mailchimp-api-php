@@ -14,7 +14,7 @@ The API is [documented here](http://developer.mailchimp.com/documentation/mailch
 Dependencies are managed by [Composer](https://getcomposer.org/). After
 installing Composer, run the following command from the library root:
 
-`composer install --no-dev`
+`composer install --no-dev --ignore-platform-reqs`
 
 Or to install with phpunit:
 
