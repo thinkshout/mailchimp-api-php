@@ -2,8 +2,9 @@
 
 namespace Mailchimp;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
+use Mailchimp\http\MailchimpCurlHttpClient;
+use Mailchimp\http\MailchimpGuzzleHttpClient;
+use Mailchimp\http\MailchimpHttpClientInterface;
 
 /**
  * Mailchimp library.
@@ -41,18 +42,11 @@ class Mailchimp {
   public $version = self::VERSION;
 
   /**
-   * The GuzzleHttp client.
+   * The HTTP client.
    *
-   * @var Client $client
+   * @var MailchimpHttpClientInterface $client
    */
   protected $client;
-
-  /**
-   * The cURL client.
-   *
-   * @var MailchimpCURLClient $curl_client
-   */
-  protected $curl_client;
 
   /**
    * The REST API endpoint.
@@ -95,15 +89,6 @@ class Mailchimp {
   private $batch_operations;
 
   /**
-   * TRUE if cURL should be used instead of the default Guzzle library.
-   *
-   * Provides compatibility with PHP 5.4.
-   *
-   * @var boolean $use_curl
-   */
-  private $use_curl;
-
-  /**
    * Mailchimp constructor.
    *
    * @param string $api_key
@@ -112,8 +97,10 @@ class Mailchimp {
    *   The MailChimp API username.
    * @param array $http_options
    *   HTTP client options.
+   * @param MailchimpHttpClientInterface $client
+   *   Optional custom HTTP client. $http_options are ignored if this is set.
    */
-  public function __construct($api_key, $api_user = 'apikey', $http_options = []) {
+  public function __construct($api_key, $api_user = 'apikey', $http_options = [], MailchimpHttpClientInterface $client = NULL) {
     $this->api_key = $api_key;
     $this->api_user = $api_user;
 
@@ -121,29 +108,12 @@ class Mailchimp {
 
     $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, $dc, $this->endpoint);
 
-    // Handle deprecated 'timeout' argument.
-    if (is_int($http_options)) {
-      $http_options = [
-        'timeout' => $http_options,
-      ];
-    }
-
-    // Default timeout is 10 seconds.
-    $http_options += [
-      'timeout' => 10,
-    ];
-
-    // Use Guzzle HTTP client if PHP version is 5.5.0 or above.
-    // Use cURL otherwise.
-    $this->use_curl = version_compare(phpversion(), '5.5.0', '<');
-
-    if ($this->use_curl) {
-      $this->curl_client = new MailchimpCURLClient($http_options);
+    if (!empty($client)) {
+      $this->client = $client;
     }
     else {
-      $this->client = new Client($http_options);
+      $this->client = $this->getDefaultHttpClient($http_options);
     }
-
   }
 
   /**
@@ -306,67 +276,7 @@ class Mailchimp {
       $options['headers']['X-Trigger-Error'] = $this->debug_error_code;
     }
 
-    if ($this->use_curl) {
-      return $this->handleRequestCURL($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
-    }
-    else {
-      return $this->handleRequest($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
-    }
-  }
-
-  /**
-   * Makes a request to the MailChimp API using the Guzzle HTTP client.
-   *
-   * @see Mailchimp::request()
-   */
-  public function handleRequest($method, $uri = '', $options = [], $parameters = [], $returnAssoc = FALSE) {
-    if (!empty($parameters)) {
-      if ($method == 'GET') {
-        // Send parameters as query string parameters.
-        $options['query'] = $parameters;
-      }
-      else {
-        // Send parameters as JSON in request body.
-        $options['json'] = (object) $parameters;
-      }
-    }
-
-    try {
-      $response = $this->client->request($method, $uri, $options);
-      $data = json_decode($response->getBody(), $returnAssoc);
-
-      return $data;
-    }
-    catch (RequestException $e) {
-      $response = $e->getResponse();
-      if (!empty($response)) {
-        $message = $e->getResponse()->getBody();
-      }
-      else {
-        $message = $e->getMessage();
-      }
-
-      throw new MailchimpAPIException($message, $e->getCode(), $e);
-    }
-  }
-
-  /**
-   * Makes a request to the MailChimp API using cURL.
-   *
-   * @see Mailchimp::request()
-   */
-  public function handleRequestCURL($method, $uri = '', $options = [], $parameters = [], $returnAssoc = FALSE) {
-    try {
-      $response = $this->curl_client->request($method, $uri, $options, $parameters);
-      $data = json_decode($response, $returnAssoc);
-
-      return $data;
-    }
-    catch (\Exception $e) {
-      $message = $e->getMessage();
-
-      throw new MailchimpAPIException($message, $e->getCode(), $e);
-    }
+    return $this->client->handleRequest($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
   }
 
   /**
@@ -382,6 +292,43 @@ class Mailchimp {
     $api_key_parts = explode('-', $api_key);
 
     return (isset($api_key_parts[1])) ? $api_key_parts[1] : Mailchimp::DEFAULT_DATA_CENTER;
+  }
+
+  /**
+   * Instantiates a default HTTP client based on the local environment.
+   *
+   * @param array $http_options
+   *   HTTP client options.
+   *
+   * @return MailchimpHttpClientInterface
+   *   The HTTP client.
+   */
+  private function getDefaultHttpClient($http_options) {
+    // Process HTTP options.
+    // Handle deprecated 'timeout' argument.
+    if (is_int($http_options)) {
+      $http_options = [
+        'timeout' => $http_options,
+      ];
+    }
+
+    // Default timeout is 10 seconds.
+    $http_options += [
+      'timeout' => 10,
+    ];
+
+    $client = NULL;
+
+    // Use cURL HTTP client if PHP version is below 5.5.0.
+    // Use Guzzle client otherwise.
+    if (version_compare(phpversion(), '5.5.0', '<')) {
+      $client = new MailchimpCurlHttpClient($http_options);
+    }
+    else {
+      $client = new MailchimpGuzzleHttpClient($http_options);
+    }
+
+    return $client;
   }
 
 }
