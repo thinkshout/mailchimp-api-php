@@ -2,12 +2,14 @@
 
 namespace Mailchimp\Tests;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * MailChimp Campaign test library.
  *
  * @package Mailchimp\Tests
  */
-class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
+class MailchimpCampaignsTest extends TestCase {
 
   /**
    * Tests library functionality for campaigns information.
