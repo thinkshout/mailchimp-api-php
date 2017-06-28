@@ -13,7 +13,7 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
    * @inheritdoc
    */
   public function __construct($api_key = 'apikey', $api_user = 'apikey', $http_options = []) {
-    $this->client = new Client();
+    $this->client = new MailchimpTestHttpClient();
   }
 
   public function getClient() {

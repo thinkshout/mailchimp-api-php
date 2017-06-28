@@ -7,7 +7,7 @@ namespace Mailchimp\Tests;
  *
  * @package Mailchimp\Tests
  */
-class Response extends \GuzzleHttp\Psr7\Response {
+class MailchimpTestHttpResponse extends \GuzzleHttp\Psr7\Response {
 
   public function getBody() {
     return '{}';
