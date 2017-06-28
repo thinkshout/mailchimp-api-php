@@ -117,6 +117,16 @@ class Mailchimp {
   }
 
   /**
+   * Sets a custom HTTP client to be used for all API requests.
+   *
+   * @param \Mailchimp\http\MailchimpHttpClientInterface $client
+   *   The HTTP client.
+   */
+  public function setClient(MailchimpHttpClientInterface $client) {
+    $this->client = $client;
+  }
+
+  /**
    * Sets a MailChimp error code to be returned by all requests.
    *
    * Used to test and debug error handling.
