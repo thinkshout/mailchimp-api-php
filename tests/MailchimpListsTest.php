@@ -251,19 +251,23 @@ class MailchimpListsTest extends TestCase {
   public function testUpdateSegment() {
     $list_id = '57afe96172';
     $segment_id = '49381';
-    $name = 'Updated Test Segment';
+    $emails = array(
+      'members_to_add' => array(
+        'new-employee@mailchimp.com'
+      )
+    );
 
     $mc = new MailchimpLists();
-    $mc->updateSegment($list_id, $segment_id, $name);
+    $mc->updateSegment($list_id, $segment_id, $emails);
 
-    $this->assertEquals('PATCH', $mc->getClient()->method);
+    $this->assertEquals('POST', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/segments/' . $segment_id, $mc->getClient()->uri);
 
     $this->assertNotEmpty($mc->getClient()->options['json']);
 
     $request_body = $mc->getClient()->options['json'];
 
-    $this->assertEquals($name, $request_body->name);
+    $this->assertEquals('new-employee@mailchimp.com', $request_body['members_to_add'][0]);
   }
 
   /**

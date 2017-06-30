@@ -299,11 +299,20 @@ class Mailchimp {
       'headers' => [
         'Authorization' => $this->api_user . ' ' . $this->api_key,
       ],
+      'convert_to_object' => TRUE
     ];
 
     // Add trigger error header if a debug error code has been set.
     if (!empty($this->debug_error_code)) {
       $options['headers']['X-Trigger-Error'] = $this->debug_error_code;
+    }
+
+    // Set the object conversion status if its passed in.
+    if (isset($parameters['convert_to_object'])) {
+      $options['convert_to_object'] = $parameters['convert_to_object'];
+
+      // Remove status from being sent to MailChimp.
+      unset($parameters['convert_to_object']);
     }
 
     if ($this->use_curl) {
@@ -327,7 +336,12 @@ class Mailchimp {
       }
       else {
         // Send parameters as JSON in request body.
-        $options['json'] = (object) $parameters;
+        if ($options['convert_to_object']) {
+          $options['json'] = (object) $parameters;
+        }
+        else {
+          $options['json'] = $parameters;
+        }
       }
     }
 
