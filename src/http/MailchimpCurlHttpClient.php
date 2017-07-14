@@ -97,7 +97,7 @@ class MailchimpCurlHttpClient implements MailchimpHttpClientInterface {
       throw new \Exception($error, $http_code);
     }
 
-    return $response;
+    return json_decode($response, $returnAssoc);
   }
 
 }
