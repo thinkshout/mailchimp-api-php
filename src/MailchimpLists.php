@@ -189,7 +189,7 @@ class MailchimpLists extends Mailchimp {
    * @param string $list_id
    *   The ID of the list.
    * @param string $mc_eid
-   *   The member's unique id.
+   *   The member's unique ID.
    * @param array $parameters
    *   Associative array of optional request parameters.
    *
