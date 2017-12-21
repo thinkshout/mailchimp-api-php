@@ -56,6 +56,8 @@ class MailchimpEcommerce extends Mailchimp {
    *   - name (string) The name of the store.
    *   - currency_code (string) The three-letter ISO 4217 code for the currency
    *     that the store accepts.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
    * @param bool $batch
    *   TRUE to create a new pending batch operation.
    *
@@ -64,10 +66,8 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#create-post_ecommerce_stores
    */
-  public function addStore($id, $store, $batch = FALSE) {
-    $parameters = [
-      'id' => $id,
-    ];
+  public function addStore($id, $store, $parameters = [], $batch = FALSE) {
+    $parameters['id'] = $id;
     $parameters += $store;
 
     return $this->request('POST', '/ecommerce/stores', NULL, $parameters, $batch);
