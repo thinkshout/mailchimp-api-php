@@ -490,6 +490,30 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Removes a member from a list segment.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $segment_id
+   *   The ID of the segment.
+   * @param array $email
+   *   The email address to remove from the segment.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/members/#delete-delete_lists_list_id_segments_segment_id_members_subscriber_hash
+   */
+  public function removeSegmentMember($list_id, $segment_id, $email) {
+    $tokens = [
+      'list_id' => $list_id,
+      'segment_id' => $segment_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    ];
+
+    return $this->request('DELETE', '/lists/{list_id}/segments/{segment_id}/members/{subscriber_hash}', $tokens);
+  }
+
+  /**
    * Gets information about webhooks associated with a list.
    *
    * @param string $list_id
