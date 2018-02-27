@@ -59,7 +59,7 @@ class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
   /**
    * @inheritdoc
    */
-  public function addStore($id, $store, $batch = FALSE) {
+  public function addStore($id, $store, $parameters = [], $batch = FALSE) {
     parent::addStore($id, $store, $batch);
 
     $parameters = [
