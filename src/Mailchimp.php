@@ -13,7 +13,7 @@ use Mailchimp\http\MailchimpHttpClientInterface;
  */
 class Mailchimp {
 
-  const VERSION = '1.0.10';
+  const VERSION = '2.0.0';
   const DEFAULT_DATA_CENTER = 'us1';
 
   const ERROR_CODE_BAD_REQUEST = 'BadRequest';
