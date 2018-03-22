@@ -3,6 +3,7 @@
 namespace Mailchimp\http;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Mailchimp\MailchimpAPIException;
 
@@ -27,8 +28,8 @@ class MailchimpGuzzleHttpClient implements MailchimpHttpClientInterface {
    *   Guzzle HTTP configuration options.
    *   Currently supports only 'timeout'.
    */
-  public function __construct($config = []) {
-    $this->guzzle = new Client($config);
+  public function __construct($config = [], ClientInterface $client = null) {
+    $this->guzzle = $client ? $client : new Client($config);
   }
 
   /**
