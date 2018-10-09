@@ -56,21 +56,21 @@ class Mailchimp {
   protected $endpoint = 'https://us1.api.mailchimp.com/3.0';
 
   /**
-   * The MailChimp API key to authenticate with.
+   * The Mailchimp API key to authenticate with.
    *
    * @var string $api_key
    */
   private $api_key;
 
   /**
-   * The MailChimp API username to authenticate with.
+   * The Mailchimp API username to authenticate with.
    *
    * @var string $api_user
    */
   private $api_user;
 
   /**
-   * A MailChimp API error code to return with every API response.
+   * A Mailchimp API error code to return with every API response.
    *
    * Used for testing / debugging error handling.
    * See ERROR_CODE_* constants.
@@ -92,9 +92,9 @@ class Mailchimp {
    * Mailchimp constructor.
    *
    * @param string $api_key
-   *   The MailChimp API key.
+   *   The Mailchimp API key.
    * @param string $api_user
-   *   The MailChimp API username.
+   *   The Mailchimp API username.
    * @param array $http_options
    *   HTTP client options.
    * @param MailchimpHttpClientInterface $client
@@ -127,19 +127,19 @@ class Mailchimp {
   }
 
   /**
-   * Sets a MailChimp error code to be returned by all requests.
+   * Sets a Mailchimp error code to be returned by all requests.
    *
    * Used to test and debug error handling.
    *
    * @param string $error_code
-   *   The MailChimp error code.
+   *   The Mailchimp error code.
    */
   public function setDebugErrorCode($error_code) {
     $this->debug_error_code = $error_code;
   }
 
   /**
-   * Gets MailChimp account information for the authenticated account.
+   * Gets Mailchimp account information for the authenticated account.
    *
    * @param array $parameters
    *   Associative array of optional request parameters.
@@ -243,7 +243,7 @@ class Mailchimp {
   }
 
   /**
-   * Makes a request to the MailChimp API.
+   * Makes a request to the Mailchimp API.
    *
    * @param string $method
    *   The REST method to use when making the request.
@@ -256,7 +256,7 @@ class Mailchimp {
    * @param bool $batch
    *   TRUE if this request should be added to pending batch operations.
    * @param bool $returnAssoc
-   *   TRUE to return MailChimp API response as an associative array.
+   *   TRUE to return Mailchimp API response as an associative array.
    *
    * @return mixed
    *   Object or Array if $returnAssoc is TRUE.
@@ -293,7 +293,7 @@ class Mailchimp {
    * Gets the ID of the data center associated with an API key.
    *
    * @param string $api_key
-   *   The MailChimp API key.
+   *   The Mailchimp API key.
    *
    * @return string
    *   The data center ID.

@@ -3,7 +3,7 @@
 namespace Mailchimp;
 
 /**
- * MailChimp Campaigns library.
+ * Mailchimp Campaigns library.
  *
  * @package Mailchimp
  */
@@ -81,7 +81,7 @@ class MailchimpCampaigns extends Mailchimp {
   }
 
   /**
-   * Gets the HTML, plain-text, and template content for a MailChimp campaign.
+   * Gets the HTML, plain-text, and template content for a Mailchimp campaign.
    *
    * @param string $campaign_id
    *   The ID of the campaign.
@@ -101,7 +101,7 @@ class MailchimpCampaigns extends Mailchimp {
   }
 
   /**
-   * Sets the HTML, plain-text, and template content for a MailChimp campaign.
+   * Sets the HTML, plain-text, and template content for a Mailchimp campaign.
    *
    * @param string $campaign_id
    *   The ID of the campaign.
@@ -121,7 +121,7 @@ class MailchimpCampaigns extends Mailchimp {
   }
 
   /**
-   * Get the send checklist for a MailChimp campaign.
+   * Get the send checklist for a Mailchimp campaign.
    *
    * @param string $campaign_id
    *   The ID of the campaign.
@@ -204,7 +204,7 @@ class MailchimpCampaigns extends Mailchimp {
   }
 
   /**
-   * Schedule a MailChimp campaign.
+   * Schedule a Mailchimp campaign.
    *
    * @param string $campaign_id
    *   The ID of the campaign.
@@ -237,7 +237,7 @@ class MailchimpCampaigns extends Mailchimp {
   }
 
   /**
-   * Unschedule a MailChimp campaign.
+   * Unschedule a Mailchimp campaign.
    *
    * @param string $campaign_id
    *   The ID of the campaign.
@@ -255,7 +255,7 @@ class MailchimpCampaigns extends Mailchimp {
   }
 
   /**
-   * Send a MailChimp campaign.
+   * Send a Mailchimp campaign.
    *
    * @param string $campaign_id
    *   The ID of the campaign.

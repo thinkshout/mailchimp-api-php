@@ -453,7 +453,7 @@ class MailchimpEcommerce extends Mailchimp {
    *   - id (string) A unique identifier for the customer.
    *   - email_address (string) The customer's email address.
    *   - opt_in_status (boolean) The customer's opt-in status. This value will
-   *     never overwrite the opt-in status of a pre-existing MailChimp list
+   *     never overwrite the opt-in status of a pre-existing Mailchimp list
    *     member, but will apply to list members that are added through the
    *     e-commerce API endpoints.
    * @param bool $batch
@@ -481,7 +481,7 @@ class MailchimpEcommerce extends Mailchimp {
    *   An associative array of customer information.
    *   - email_address (string) The customer's email address.
    *   - opt_in_status (boolean) The customer's opt-in status. This value will
-   *     never overwrite the opt-in status of a pre-existing MailChimp list
+   *     never overwrite the opt-in status of a pre-existing Mailchimp list
    *     member, but will apply to list members that are added through the
    *     e-commerce API endpoints.
    * @param bool $batch

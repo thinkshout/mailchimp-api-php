@@ -3,7 +3,7 @@
 namespace Mailchimp\http;
 
 /**
- * An HTTP client for use with the MailChimp API using cURL.
+ * An HTTP client for use with the Mailchimp API using cURL.
  *
  * @package Mailchimp
  */
