@@ -301,4 +301,34 @@ class MailchimpListsTest extends TestCase {
     $this->assertEquals($email, $request_body->email_address);
   }
 
+  /**
+   * Tests library functionality for adding tags to a member.
+   */
+  public function testAddTagsMember() {
+    $list_id = '205d96e6b4';
+    $tags = ['Foo', 'Bar'];
+    $email = 'test@example.com';
+    $mc = new MailchimpLists();
+    $mc->addTagsMember($list_id, $tags, $email);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5($email) . '/tags', $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $expected = [
+      [
+        'name' => 'Foo',
+        'status' => 'active',
+      ],
+      [
+        'name' => 'Bar',
+        'status' => 'active',
+      ],
+    ];
+    $this->assertEquals($expected, $request_body->tags);
+  }
+
 }
