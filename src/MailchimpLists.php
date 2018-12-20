@@ -617,5 +617,33 @@ class MailchimpLists extends Mailchimp {
 
     return $subscribed_lists;
   }
+  
+  
+  /**
+   * Add a tag to a subscriber.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $email
+   *   The subscribers email.
+   * @param array $tags
+   *   List of tags
+   *
+   * @return object
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/tags/#create-post_lists_list_id_members_subscriber_hash_tags
+   */
+  public function addTags($list_id, $email, array $tags) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    ];
+
+    $parameters = [
+      'tags' => $tags,
+    ];
+
+    return $this->request('POST', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
+  }
 
 }
