@@ -1239,9 +1239,8 @@ class MailchimpEcommerce extends Mailchimp {
     $tokens = [
       'store_id' => $store_id,
       'promo_rule_id' => $promo_rule_id,
-      'promo_code_id' => $promo_code['id'],
     ];
-    return $this->request('POST', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}', $tokens, $promo_code);
+    return $this->request('POST', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes', $tokens, $promo_code);
   }
 
   /**

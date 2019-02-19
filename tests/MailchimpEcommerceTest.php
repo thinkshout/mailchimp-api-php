@@ -866,7 +866,7 @@ class MailchimpEcommerceTest extends TestCase {
     // Check method.
     $this->assertEquals('POST', $mc->getClient()->method);
     // Check URI being used.
-    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules/' . $promo_rule_id . '/promo-codes/' . $promo_code_id, $mc->getClient()->uri);
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules/' . $promo_rule_id . '/promo-codes', $mc->getClient()->uri);
     // Test the contents of the body of the request for the params.
     $this->assertNotEmpty($mc->getClient()->options['json']);
     $request_body = $mc->getClient()->options['json'];
