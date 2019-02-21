@@ -253,6 +253,232 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Gets goals related to a member of a Mailchimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $email
+   *   The member's email address.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/goals/#read-get_lists_list_id_members_subscriber_hash_goals
+   */
+  public function getMemberGoals($list_id, $email, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    ];
+
+    return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/goals', $tokens, $parameters);
+  }
+
+  /**
+   * Get tags from a member.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param array $email
+   *   The email address to get the tags from.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *   - fields (array) A comma-separated list of fields to return.
+   *      Reference parameters of sub-objects with dot notation.
+   *   - exclude_fields (array) A comma-separated list of fields to exclude.
+   *      Reference parameters of sub-objects with dot notation.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/tags/#read-get_lists_list_id_members_subscriber_hash_tags
+   */
+  public function getMemberTags($list_id, $email, array $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5($email),
+    ];
+    return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
+  }
+
+  /**
+   * Adds tags to a member.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param array $email
+   *   The email address to add the tag to.
+   * @param string[] $tags
+   *   Associative array of tag parameters.
+   *   - name (string) The name of the tag.
+   *   - status (string) The status for the tag on the member, pass 'active' to
+   *      add a tag or 'inactive' to remove. Possible values: active, inactive
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/tags/#create-post_lists_list_id_members_subscriber_hash_tags
+   */
+  public function addMemberTags($list_id, $email, array $tags) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5($email),
+    ];
+    foreach ($tags as $tag) {
+      $parameters['tags'][] = [
+        'name' => $tag['name'],
+        'status' => $tag['status'],
+      ];
+    }
+    return $this->request('POST', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
+  }
+
+  /**
+   * Get recent notes from a member in a Mailchimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param array $email
+   *   The email address to add the tag to.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *   - fields (array) A comma-separated list of fields to return.
+   *      Reference parameters of sub-objects with dot notation.
+   *   - exclude_fields (array) A comma-separated list of fields to exclude.
+   *      Reference parameters of sub-objects with dot notation.
+   *   - count (integer) The number of records to return. Default value is 10.
+   *   - offset (integer) The number of records from a collection to skip.
+   *      Iterating over large collections with this parameter can be slow.
+   *      Default value is 0.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/notes/#read-get_lists_list_id_members_subscriber_hash_notes
+   */
+  public function getMemberNotes($list_id, $email, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    ];
+
+    return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/notes', $tokens, $parameters);
+  }
+
+
+  /**
+   * Get a specific note from a member in a Mailchimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param array $email
+   *   The email address to add the tag to.
+   * @param string $note_id
+   *   The ID for the note.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *   - fields (array) A comma-separated list of fields to return.
+   *      Reference parameters of sub-objects with dot notation.
+   *   - exclude_fields (array) A comma-separated list of fields to exclude.
+   *      Reference parameters of sub-objects with dot notation.
+   *
+   * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/notes/#read-get_lists_list_id_members_subscriber_hash_notes_note_id
+   */
+  public function getMemberNote($list_id, $email, $note_id, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+      'note_id' => $note_id,
+    ];
+
+    return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}', $tokens, $parameters);
+  }
+
+
+  /**
+   * Adds a new note to a member in a Mailchimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param array $email
+   *   The email address to add the tag to.
+   * @param array $parameters
+   *   - note (string) The content of the note. Note length is limited to 1,000
+   *      characters.
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/notes/#create-post_lists_list_id_members_subscriber_hash_notes
+   */
+  public function addMemberNote($list_id, $email, $parameters) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    ];
+
+    return $this->request('POST', '/lists/{list_id}/members/{subscriber_hash}/notes', $tokens, $parameters);
+  }
+
+  /**
+   * Update a specific note from a member in a Mailchimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param array $email
+   *   The email address to add the tag to.
+   * @param string $note_id
+   *   The ID for the note.
+   * @param array $parameters
+   *   - note (string) The content of the note. Note length is limited to 1,000
+   *      characters.
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/notes/#edit-patch_lists_list_id_members_subscriber_hash_notes_note_id
+   */
+  public function updateMemberNote($list_id, $email, $note_id, $parameters) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+      'note_id' => $note_id,
+    ];
+
+    return $this->request('PATCH', '/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}', $tokens, $parameters);
+  }
+
+  /**
+   * Delete a specific note from a member in a Mailchimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param array $email
+   *   The email address to add the tag to.
+   * @param string $note_id
+   *   The ID for the note.
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/notes/#delete-delete_lists_list_id_members_subscriber_hash_notes_note_id
+   */
+  public function deleteMemberNote($list_id, $email, $note_id) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+      'note_id' => $note_id,
+    ];
+
+    return $this->request('DELETE', '/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}', $tokens);
+  }
+
+  /**
    * Adds a new member to a Mailchimp list.
    *
    * @param string $list_id
