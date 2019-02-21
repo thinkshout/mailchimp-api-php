@@ -22,6 +22,8 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/#read-get_lists
    */
   public function getLists($parameters = []) {
@@ -37,6 +39,8 @@ class MailchimpLists extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/#read-get_lists_list_id
    */
@@ -57,6 +61,8 @@ class MailchimpLists extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/#read-get_lists_list_id_interest_categories
    */
@@ -80,6 +86,8 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/interests/#read-get_lists_list_id_interest_categories_interest_category_id_interests
    */
   public function getInterests($list_id, $interest_category_id, $parameters = []) {
@@ -100,6 +108,8 @@ class MailchimpLists extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/merge-fields/#read-get_lists_list_id_merge_fields
    */
@@ -124,6 +134,8 @@ class MailchimpLists extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/merge-fields/#create-post_lists_list_id_merge_fields
    */
@@ -150,6 +162,8 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#read-get_lists_list_id_members
    */
   public function getMembers($list_id, $parameters = []) {
@@ -171,6 +185,8 @@ class MailchimpLists extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#read-get_lists_list_id_members_subscriber_hash
    */
@@ -194,6 +210,8 @@ class MailchimpLists extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see https://developer.mailchimp.com/documentation/mailchimp/guides/getting-started-with-ecommerce/
    */
@@ -221,6 +239,8 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/activity/#read-get_lists_list_id_members_subscriber_hash_activity
    */
   public function getMemberActivity($list_id, $email, $parameters = []) {
@@ -246,6 +266,8 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#create-post_lists_list_id_members
    */
   public function addMember($list_id, $email, $parameters = [], $batch = FALSE) {
@@ -269,6 +291,8 @@ class MailchimpLists extends Mailchimp {
    *   The member's email address.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#delete-delete_lists_list_id_members_subscriber_hash
    */
@@ -295,6 +319,8 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#edit-patch_lists_list_id_members_subscriber_hash
    */
   public function updateMember($list_id, $email, $parameters = [], $batch = FALSE) {
@@ -319,6 +345,8 @@ class MailchimpLists extends Mailchimp {
    *   TRUE to create a new pending batch operation.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#edit-put_lists_list_id_members_subscriber_hash
    */
@@ -345,6 +373,8 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#read-get_lists_list_id_segments
    */
   public function getSegments($list_id, $parameters = []) {
@@ -366,6 +396,8 @@ class MailchimpLists extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#read-get_lists_list_id_segments_segment_id
    */
@@ -391,6 +423,8 @@ class MailchimpLists extends Mailchimp {
    *   TRUE to create a new pending batch operation.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#create-post_lists_list_id_segments
    */
@@ -422,6 +456,8 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#edit-patch_lists_list_id_segments_segment_id
    */
   public function updateSegment($list_id, $segment_id, $name, $parameters = [], $batch = FALSE) {
@@ -449,6 +485,8 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/members/#read-get_lists_list_id_segments_segment_id_members
    */
   public function getSegmentMembers($list_id, $segment_id, $parameters = []) {
@@ -473,6 +511,8 @@ class MailchimpLists extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/members/
    */
@@ -499,6 +539,8 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/webhooks/#read-get_lists_list_id_webhooks
    */
   public function getWebhooks($list_id, $parameters = []) {
@@ -520,6 +562,8 @@ class MailchimpLists extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/webhooks/#read-get_lists_list_id_webhooks_webhook_id
    */
@@ -588,7 +632,7 @@ class MailchimpLists extends Mailchimp {
    * @return array
    *   Array of subscribed list objects.
    *
-   * @throws MailchimpAPIException
+   * @throws \Mailchimp\MailchimpAPIException
    */
   public function getListsForEmail($email) {
     $list_data = $this->getLists();

@@ -17,6 +17,8 @@ class MailchimpTemplates extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/templates/#read-get_templates
    */
   public function getTemplates($parameters = []) {
@@ -32,6 +34,8 @@ class MailchimpTemplates extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/templates/#read-get_templates_template_id
    */
@@ -52,6 +56,8 @@ class MailchimpTemplates extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/templates/default-content/#read-get_templates_template_id_default_content
    */

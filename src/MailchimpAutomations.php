@@ -12,6 +12,8 @@ class MailchimpAutomations extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/automations/#read-get_automations
    */
   public function getAutomations($parameters = []) {
@@ -25,6 +27,8 @@ class MailchimpAutomations extends Mailchimp {
    *   The unique id for the Automation workflow.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/automations/#read-get_automations_workflow_id
    */
@@ -43,6 +47,8 @@ class MailchimpAutomations extends Mailchimp {
    *   The unique id for the Automation workflow.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/automations/emails/#read-get_automations_workflow_id_emails
    */
@@ -64,6 +70,8 @@ class MailchimpAutomations extends Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/automations/emails/#read-get_automations_workflow_id_emails
    */
   public function getWorkflowEmail($workflow_id, $workflow_email_id) {
@@ -84,6 +92,8 @@ class MailchimpAutomations extends Mailchimp {
    *   The unique id for the Automation workflow email.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/automations/emails/queue/#read-get_automations_workflow_id_emails_workflow_email_id_queue
    */
@@ -107,6 +117,8 @@ class MailchimpAutomations extends Mailchimp {
    *   The email address of the subscriber.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/automations/emails/queue/#read-get_automations_workflow_id_emails_workflow_email_id_queue_subscriber_hash
    */
@@ -133,6 +145,8 @@ class MailchimpAutomations extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
+   *
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/automations/emails/queue/#create-post_automations_workflow_id_emails_workflow_email_id_queue
    */

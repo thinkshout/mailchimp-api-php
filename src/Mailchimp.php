@@ -84,6 +84,8 @@ class Mailchimp {
    *
    * @var array $batch_operations
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
    */
   private $batch_operations;
@@ -146,6 +148,8 @@ class Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/root/#read-get_root
    */
   public function getAccount($parameters = []) {
@@ -155,7 +159,7 @@ class Mailchimp {
   /**
    * Processes all pending batch operations.
    *
-   * @throws MailchimpAPIException
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
    */
@@ -187,6 +191,8 @@ class Mailchimp {
    *
    * @return object
    *
+   * @throws \Mailchimp\MailchimpAPIException
+   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#read-get_batches_batch_id
    */
   public function getBatchOperation($batch_id) {
@@ -210,7 +216,7 @@ class Mailchimp {
    * @return object
    *   The new batch operation object.
    *
-   * @throws MailchimpAPIException
+   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
    */
@@ -261,7 +267,7 @@ class Mailchimp {
    * @return mixed
    *   Object or Array if $returnAssoc is TRUE.
    *
-   * @throws MailchimpAPIException
+   * @throws \Mailchimp\MailchimpAPIException
    */
   public function request($method, $path, $tokens = NULL, $parameters = NULL, $batch = FALSE, $returnAssoc = FALSE) {
     if (!empty($tokens)) {
