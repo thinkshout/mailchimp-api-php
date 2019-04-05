@@ -331,4 +331,34 @@ class MailchimpListsTest extends TestCase {
     $this->assertEquals($expected, $request_body->tags);
   }
 
+  /**
+   * Tests library functionality for removing tags from a member.
+   */
+  public function testRemoveTagsMember() {
+    $list_id = '205d96e6b4';
+    $tags = ['Foo', 'Bar'];
+    $email = 'test@example.com';
+    $mc = new MailchimpLists();
+    $mc->removeTagsMember($list_id, $tags, $email);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5($email) . '/tags', $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $expected = [
+      [
+        'name' => 'Foo',
+        'status' => 'inactive',
+      ],
+      [
+        'name' => 'Bar',
+        'status' => 'inactive',
+      ],
+    ];
+    $this->assertEquals($expected, $request_body->tags);
+  }
+
 }
