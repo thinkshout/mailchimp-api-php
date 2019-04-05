@@ -500,6 +500,10 @@ class MailchimpLists extends Mailchimp {
    *   The email address to add the tag to.
    * @param array $parameters
    *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/tags/
    */
   public function addTagsMember($list_id, array $tags, $email, array $parameters = []) {
     $tokens = [
