@@ -504,7 +504,7 @@ class MailchimpLists extends Mailchimp {
   public function addTagsMember($list_id, array $tags, $email, array $parameters = []) {
     $tokens = [
       'list_id' => $list_id,
-      'subscriber_hash' => md5($email),
+      'subscriber_hash' => md5(strtolower($email)),
     ];
 
     foreach ($tags as $tag) {
