@@ -199,6 +199,20 @@ class MailchimpListsTest extends TestCase {
   }
 
   /**
+   * Tests library functionality for member tags information.
+   */
+  public function testGetMemberTags() {
+    $list_id = '57afe96172';
+    $email = 'test@example.com';
+
+    $mc = new MailchimpLists();
+    $mc->getMemberTags($list_id, $email);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5($email) . '/tags', $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library functionality for list segment information.
    */
   public function testGetSegments() {
