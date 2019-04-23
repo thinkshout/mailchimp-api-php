@@ -68,6 +68,19 @@ class MailchimpCurlHttpClient implements MailchimpHttpClientInterface {
         throw new \Exception('Unsupported HTTP request method: ' . $method);
     }
 
+    // Set proxy to use.
+    if (isset($this->config['proxy'])) {
+      if (!is_array($this->config['proxy'])) {
+        curl_setopt($ch, CURLOPT_PROXY, $this->config['proxy']);
+      }
+      else {
+        $scheme = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+        if (isset($this->config['proxy'][$scheme])) {
+          curl_setopt($ch, CURLOPT_PROXY, $this->config['proxy'][$scheme]);
+        }
+      }
+    }
+
     curl_setopt($ch, CURLOPT_URL, $uri);
 
     // Get response as a string.
