@@ -46,7 +46,7 @@ class MailchimpCurlHttpClient implements MailchimpHttpClientInterface {
         break;
 
       case 'GET':
-        $uri .= '?' . http_build_query($parameters);
+        $uri .= '?' . drupal_http_build_query($parameters);
         break;
 
       case 'PUT':
