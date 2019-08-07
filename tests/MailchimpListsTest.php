@@ -301,4 +301,19 @@ class MailchimpListsTest extends TestCase {
     $this->assertEquals($email, $request_body->email_address);
   }
 
+  /**
+   * Tests library functionality for removing a segment member.
+   */
+  public function testRemoveSegmentMember() {
+    $list_id = '205d96e6b4';
+    $segment_id = '457';
+    $email = 'test@example.com';
+
+    $mc = new MailchimpLists();
+    $mc->removeSegmentMember($list_id, $segment_id, $email);
+
+    $this->assertEquals('DELETE', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/segments/' . $segment_id . '/members/' . md5($email), $mc->getClient()->uri);
+  }
+
 }
