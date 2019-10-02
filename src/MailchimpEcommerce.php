@@ -18,8 +18,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API store response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#read-get_ecommerce_stores
    */
   public function getStores($parameters = []) {
@@ -36,8 +34,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API store response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#read-get_ecommerce_stores_store_id
    */
@@ -68,8 +64,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API store response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#create-post_ecommerce_stores
    */
   public function addStore($id, $store, $parameters = [], $batch = FALSE) {
@@ -96,8 +90,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API store response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#edit-patch_ecommerce_stores_store_id
    */
   public function updateStore($store_id, $name, $currency_code, $parameters = [], $batch = FALSE) {
@@ -122,8 +114,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API store response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#delete-delete_ecommerce_stores_store_id
    */
   public function deleteStore($store_id) {
@@ -144,8 +134,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API cart response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#read-get_ecommerce_stores_store_id_carts
    */
@@ -169,8 +157,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API cart response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#read-get_ecommerce_stores_store_id_carts_cart_id
    */
@@ -204,8 +190,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API cart response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#create-post_ecommerce_stores_store_id_carts
    */
   public function addCart($store_id, $id, array $customer, array $cart, $batch = FALSE) {
@@ -238,8 +222,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API cart response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#edit-patch_ecommerce_stores_store_id_carts_cart_id
    */
   public function updateCart($store_id, $cart_id, $parameters = [], $batch = FALSE) {
@@ -261,8 +243,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API cart response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#delete-delete_ecommerce_stores_store_id_carts_cart_id
    */
@@ -287,8 +267,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API cart line response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/lines/#read-get_ecommerce_stores_store_id_carts_cart_id_lines
    */
@@ -315,8 +293,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API cart line response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/lines/#read-get_ecommerce_stores_store_id_carts_cart_id_lines_line_id
    */
@@ -350,8 +326,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API cart line response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/lines/#create-post_ecommerce_stores_store_id_carts_cart_id_lines
    */
@@ -387,8 +361,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API cart line response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/lines/#edit-patch_ecommerce_stores_store_id_carts_cart_id_lines_line_id
    */
   public function updateCartLine($store_id, $cart_id, $line_id, $parameters = [], $batch = FALSE) {
@@ -414,8 +386,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API cart line response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/lines/#delete-delete_ecommerce_stores_store_id_carts_cart_id_lines_line_id
    */
   public function deleteCartLine($store_id, $cart_id, $line_id) {
@@ -439,8 +409,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API customer response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#read-get_ecommerce_stores_store_id_customers
    */
   public function getCustomers($store_id, $parameters = []) {
@@ -463,8 +431,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API customer response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#read-get_ecommerce_stores_store_id_customers_customer_id
    */
@@ -496,15 +462,11 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API customer response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#create-post_ecommerce_stores_store_id_customers
    */
   public function addCustomer($store_id, $customer, $batch = FALSE) {
-
     $tokens = [
       'store_id' => $store_id,
-      'customer_id' => $customer['id'],
     ];
 
     return $this->request('POST', '/ecommerce/stores/{store_id}/customers', $tokens, $customer, $batch);
@@ -528,8 +490,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API customer response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#edit-patch_ecommerce_stores_store_id_customers_customer_id
    */
   public function updateCustomer($store_id, $customer, $batch = FALSE) {
@@ -537,8 +497,6 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
       'customer_id' => $customer['id'],
     ];
-
-//    unset($customer['email_address']);
 
     return $this->request('PATCH', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens, $customer, $batch);
   }
@@ -553,8 +511,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API customer response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/customers/#delete-delete_ecommerce_stores_store_id_customers_customer_id
    */
@@ -578,8 +534,6 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API order response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#read-get_ecommerce_stores_store_id_orders
    */
   public function getOrders($store_id, $parameters = []) {
@@ -602,8 +556,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API order response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#read-get_ecommerce_stores_store_id_orders_order_id
    */
@@ -637,21 +589,13 @@ class MailchimpEcommerce extends Mailchimp {
    * @return object
    *   The API order response object.
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#create-post_ecommerce_stores_store_id_orders
    */
   public function addOrder($store_id, $id, array $customer, array $order, $batch = FALSE) {
     $tokens = [
       'store_id' => $store_id,
-      'customer_id' => $id,
     ];
-    //    \Drupal::logger('mc')->notice('<pre>Add Order <code>'.
-    //      print_r($this->request('GET', '/ecommerce/stores/{store_id}/customers/{customer_id}'), true)
-    //      .'</code></pre>');
-    //    if (!empty($this->request('GET', '/ecommerce/stores/{store_id}/customers/{customer_id}'))) {
-    //      unset($customer['email_address']);
-    //    }
+
     $parameters = [
       'id' => $id,
       'customer' => (object) $customer,
@@ -700,8 +644,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API order response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/#delete-delete_ecommerce_stores_store_id_orders_order_id
    */
@@ -789,8 +731,6 @@ class MailchimpEcommerce extends Mailchimp {
    *
    * @return object
    *   The API order line response object.
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/orders/lines/#create-post_ecommerce_stores_store_id_orders_order_id_lines
    */

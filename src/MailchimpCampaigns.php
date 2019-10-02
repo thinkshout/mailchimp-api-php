@@ -26,8 +26,6 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @return object
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#read-get_campaigns
    */
   public function getCampaigns($parameters = []) {
@@ -43,8 +41,6 @@ class MailchimpCampaigns extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#read-get_campaigns_campaign_id
    */
@@ -72,8 +68,6 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @return object
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#create-post_campaigns
    */
   public function addCampaign($type, $recipients, $settings, $parameters = [], $batch = FALSE) {
@@ -96,8 +90,6 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @return object
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/content/#read-get_campaigns_campaign_id_content
    */
   public function getCampaignContent($campaign_id, $parameters = []) {
@@ -118,8 +110,6 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @return object
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/content/#edit-put_campaigns_campaign_id_content
    */
   public function setCampaignContent($campaign_id, $parameters = []) {
@@ -137,8 +127,6 @@ class MailchimpCampaigns extends Mailchimp {
    *   The ID of the campaign.
    *
    * @return object
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/send-checklist
    */
@@ -167,8 +155,6 @@ class MailchimpCampaigns extends Mailchimp {
    *   TRUE to create a new pending batch operation.
    *
    * @return object
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#edit-patch_campaigns_campaign_id
    */
@@ -201,8 +187,6 @@ class MailchimpCampaigns extends Mailchimp {
    *   TRUE to create a new pending batch operation.
    *
    * @return object
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#action-post_campaigns_campaign_id_actions_test
    */

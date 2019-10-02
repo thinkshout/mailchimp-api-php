@@ -17,8 +17,6 @@ class MailchimpReports extends Mailchimp {
    *
    * @return object
    *
-   * @throws \Mailchimp\MailchimpAPIException
-   *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/reports/#read-get_reports
    */
   public function getSummary($parameters = []) {
@@ -34,8 +32,6 @@ class MailchimpReports extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/reports/#read-get_reports_campaign_id
    */

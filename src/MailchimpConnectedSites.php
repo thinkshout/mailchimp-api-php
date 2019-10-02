@@ -18,8 +18,6 @@ class MailchimpConnectedSites extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    */
   public function getConnectedSites($parameters = []) {
     return $this->request('GET', '/connected-sites', NULL, $parameters);
@@ -34,8 +32,6 @@ class MailchimpConnectedSites extends Mailchimp {
    *   Associative array of optional request parameters.
    *
    * @return object
-   *
-   * @throws \Mailchimp\MailchimpAPIException
    */
   public function getConnectedSite($connected_site_id, $parameters = []) {
     $tokens = [

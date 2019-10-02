@@ -302,148 +302,18 @@ class MailchimpListsTest extends TestCase {
   }
 
   /**
-   * Tests library functionality for getting member goals.
+   * Tests library functionality for removing a segment member.
    */
-  public function testGetMemberGoals() {
-    $list_id = '57afe96172';
+  public function testRemoveSegmentMember() {
+    $list_id = '205d96e6b4';
+    $segment_id = '457';
     $email = 'test@example.com';
 
     $mc = new MailchimpLists();
-    $mc->getMemberGoals($list_id, $email);
-
-    $this->assertEquals('GET', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5(strtolower($email)) . '/goals', $mc->getClient()->uri);
-  }
-
-  /**
-   * Tests library functionality for getting member tags.
-   */
-  public function testGetMemberTags() {
-    $list_id = '57afe96172';
-    $email = 'test@example.com';
-
-    $mc = new MailchimpLists();
-    $mc->getMemberTags($list_id, $email);
-
-    $this->assertEquals('GET', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5(strtolower($email)) . '/tags', $mc->getClient()->uri);
-  }
-
-  /**
-   * Tests library functionality for adding member tags.
-   */
-  public function testAddMemeberTags() {
-    $list_id = '57afe96172';
-    $email = 'test@example.com';
-    $tags = [
-      [
-        'name' => 'tag001',
-        'status' => 'active',
-      ],
-      [
-        'name' => 'tag002',
-        'status' => 'active',
-      ],
-    ];
-    $mc = new MailchimpLists();
-    $mc->addMemberTags($list_id, $email, $tags);
-
-    $this->assertEquals('POST', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5(strtolower($email)) . '/tags', $mc->getClient()->uri);
-
-    $this->assertNotEmpty($mc->getClient()->options['json']);
-
-    $request_body = $mc->getClient()->options['json'];
-
-    $this->assertEquals($tags, $request_body->tags);
-  }
-
-  /**
-   * Tests library functionality for getting member notes.
-   */
-  public function testGetMemberNotes() {
-    $list_id = '57afe96172';
-    $email = 'test@example.com';
-
-    $mc = new MailchimpLists();
-    $mc->getMemberNotes($list_id, $email);
-
-    $this->assertEquals('GET', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5(strtolower($email)) . '/notes', $mc->getClient()->uri);
-  }
-
-  /**
-   * Tests library functionality for getting a specific member notes.
-   */
-  public function testGetMemberNote() {
-    $list_id = '57afe96172';
-    $email = 'test@example.com';
-    $note_id = 'note001';
-
-    $mc = new MailchimpLists();
-    $mc->getMemberNote($list_id, $email, $note_id);
-
-    $this->assertEquals('GET', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5(strtolower($email)) . '/notes/' . $note_id, $mc->getClient()->uri);
-  }
-
-  /**
-   * Tests library functionality for adding a new note to a member.
-   */
-  public function testAddMemberNote() {
-    $list_id = '57afe96172';
-    $email = 'test@example.com';
-    $parameters = [ 'note' => 'This is the content of my note.', ];
-
-    $mc = new MailchimpLists();
-    $mc->addMemberNote($list_id, $email, $parameters);
-
-    $this->assertEquals('POST', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5(strtolower($email)) . '/notes', $mc->getClient()->uri);
-
-    $this->assertNotEmpty($mc->getClient()->options['json']);
-
-    $request_body = $mc->getClient()->options['json'];
-
-    $this->assertEquals($parameters['note'], $request_body->note);
-  }
-
-
-
-  /**
-   * Tests library functionality for updating a specific member note.
-   */
-  public function testUpdateMemberNote() {
-    $list_id = '57afe96172';
-    $email = 'test@example.com';
-    $note_id = 'note001';
-    $parameters = [ 'note' => 'This is the content of my note.', ];
-
-    $mc = new MailchimpLists();
-    $mc->updateMemberNote($list_id, $email, $note_id, $parameters);
-
-    $this->assertEquals('PATCH', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5(strtolower($email)) . '/notes/' . $note_id, $mc->getClient()->uri);
-
-    $this->assertNotEmpty($mc->getClient()->options['json']);
-
-    $request_body = $mc->getClient()->options['json'];
-
-    $this->assertEquals($parameters['note'], $request_body->note);
-  }
-
-  /**
-   * Tests library functionality for deleting a specific member note.
-   */
-  public function testDeleteMemberNote() {
-    $list_id = '57afe96172';
-    $email = 'test@example.com';
-    $note_id = 'note001';
-
-    $mc = new MailchimpLists();
-    $mc->deleteMemberNote($list_id, $email, $note_id);
+    $mc->removeSegmentMember($list_id, $segment_id, $email);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
-    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5(strtolower($email)) . '/notes/' . $note_id, $mc->getClient()->uri);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/segments/' . $segment_id . '/members/' . md5($email), $mc->getClient()->uri);
   }
+
 }
