@@ -751,4 +751,196 @@ class MailchimpEcommerceTest extends TestCase {
     $this->assertEquals($params['sku'], $request_body->sku);
   }
 
+
+  /**
+   * Tests creating a promo rule
+   */
+  public function testAddPromoRule() {
+    $store_id = 'MC001';
+    $params = [
+      'id' => 'promo0001',
+      'description' => 'Test promotion rule',
+      'amount' => '10.00',
+      'type' => 'fixed',
+      'target' => 'total',
+    ];
+    $mc = new MailchimpEcommerce();
+    $mc->addPromoRule($store_id, $params);
+    // Check method.
+    $this->assertEquals('POST', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules', $mc->getClient()->uri);
+    // Test the contents of the body of the request for the params.
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+    $request_body = $mc->getClient()->options['json'];
+    $this->assertEquals($params['id'], $request_body->id);
+    $this->assertEquals($params['description'], $request_body->description);
+    $this->assertEquals($params['amount'], $request_body->amount);
+    $this->assertEquals($params['type'], $request_body->type);
+    $this->assertEquals($params['target'], $request_body->target);
+  }
+
+  /**
+   * Tests updating a promo rule
+   */
+  public function testUpdatePromoRule() {
+    $store_id = 'MC001';
+    $params = [
+      'id' => 'promo0001',
+      'description' => 'New description',
+      'amount' => '11',
+      'type' => 'percentage',
+      'target' => 'per_item',
+    ];
+    $mc = new MailchimpEcommerce();
+    $mc->updatePromoRule($store_id, $params);
+    // Check method.
+    $this->assertEquals('PATCH', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules/' . $params['id'], $mc->getClient()->uri);
+    // Test the contents of the body of the request for the params.
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+    $request_body = $mc->getClient()->options['json'];
+    $this->assertEquals($params['id'], $request_body->id);
+    $this->assertEquals($params['description'], $request_body->description);
+    $this->assertEquals($params['amount'], $request_body->amount);
+    $this->assertEquals($params['type'], $request_body->type);
+    $this->assertEquals($params['target'], $request_body->target);
+  }
+
+  /**
+   * Tests getting promo rules
+   */
+  public function testGetPromoRules() {
+    $store_id = 'MC001';
+    $mc = new MailchimpEcommerce();
+    $mc->getPromoRules($store_id);
+    // Check method.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules', $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests getting a promo rule
+   */
+  public function testGetPromoRule() {
+    $store_id = 'MC001';
+    $promo_rule_id = 'promo0001';
+    $mc = new MailchimpEcommerce();
+    $mc->getPromoRule($store_id, $promo_rule_id);
+    // Check method.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules/' . $promo_rule_id, $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests deleting a promo rule
+   */
+  public function testDeletePromoRule() {
+    $store_id = 'MC001';
+    $promo_rule_id = 'promo0001';
+    $mc = new MailchimpEcommerce();
+    $mc->deletePromoRule($store_id, $promo_rule_id);
+    // Method must be DELETE.
+    $this->assertEquals('DELETE', $mc->getClient()->method);
+    // Confirm URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules/' . $promo_rule_id, $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests creating a promo code
+   */
+  public function testAddPromoCode() {
+    $store_id = 'MC001';
+    $promo_rule_id = 'promo0001';
+    $promo_code_id = 'code001';
+    $params = [
+      'id' => 'code001',
+      'code' => 'abc0042',
+      'redemption_url' => 'http://www.example.com',
+    ];
+    $mc = new MailchimpEcommerce();
+    $mc->addPromoCode($store_id, $promo_rule_id, $params);
+    // Check method.
+    $this->assertEquals('POST', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules/' . $promo_rule_id . '/promo-codes', $mc->getClient()->uri);
+    // Test the contents of the body of the request for the params.
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+    $request_body = $mc->getClient()->options['json'];
+    $this->assertEquals($params['id'], $request_body->id);
+    $this->assertEquals($params['code'], $request_body->code);
+    $this->assertEquals($params['redemption_url'], $request_body->redemption_url);  }
+
+  /**
+   * Tests updating a promo code
+   */
+  public function testUpdatePromoCode() {
+    $store_id = 'MC001';
+    $promo_rule_id = 'promo0001';
+    $params = [
+      'id' => 'code001',
+      'code' => 'abc0042',
+      'redemption_url' => 'http://www.example.com',
+    ];
+    $mc = new MailchimpEcommerce();
+    $mc->updatePromoCode($store_id, $promo_rule_id, $params);
+    // Check method.
+    $this->assertEquals('PATCH', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules/' . $promo_rule_id . '/promo-codes/' . $params['id'], $mc->getClient()->uri);
+    // Test the contents of the body of the request for the params.
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+    $request_body = $mc->getClient()->options['json'];
+    $this->assertEquals($params['id'], $request_body->id);
+    $this->assertEquals($params['code'], $request_body->code);
+    $this->assertEquals($params['redemption_url'], $request_body->redemption_url);
+  }
+
+  /**
+   * Tests getting promo codes
+   */
+  public function testGetPromoCodes() {
+    $store_id = 'MC001';
+    $promo_rule_id = 'promo0001';
+    $mc = new MailchimpEcommerce();
+    $mc->getPromoCodes($store_id, $promo_rule_id);
+    // Check method.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules/' . $promo_rule_id . '/promo-codes', $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests getting a promo code
+   */
+  public function testGetPromoCode() {
+    $store_id = 'MC001';
+    $promo_rule_id = 'promo0001';
+    $promo_code_id = 'code001';
+    $mc = new MailchimpEcommerce();
+    $mc->getPromoCode($store_id, $promo_rule_id, $promo_code_id);
+    // Check method.
+    $this->assertEquals('GET', $mc->getClient()->method);
+    // Check URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules/' . $promo_rule_id . '/promo-codes/' . $promo_code_id, $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests deleting a promo code
+   */
+  public function testDeletePromoCode() {
+    $store_id = 'MC001';
+    $promo_rule_id = 'promo0001';
+    $promo_code_id = 'code001';
+    $mc = new MailchimpEcommerce();
+    $mc->deletePromoCode($store_id, $promo_rule_id, $promo_code_id);
+    // Method must be DELETE.
+    $this->assertEquals('DELETE', $mc->getClient()->method);
+    // Confirm URI being used.
+    $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/promo-rules/' . $promo_rule_id . '/promo-codes/' . $promo_code_id, $mc->getClient()->uri);
+  }
+
 }
