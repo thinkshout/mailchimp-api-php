@@ -467,7 +467,7 @@ class MailchimpLists extends Mailchimp {
    *   The ID of the list.
    * @param string $segment_id
    *   The ID of the segment.
-   * @param array $email
+   * @param string $email
    *   The email address to add to the segment.
    * @param array $parameters
    *   Associative array of optional request parameters.
@@ -496,7 +496,7 @@ class MailchimpLists extends Mailchimp {
    *   The ID of the list.
    * @param string $segment_id
    *   The ID of the segment.
-   * @param array $email
+   * @param string $email
    *   The email address to remove from the segment.
    *
    * @return object
@@ -511,6 +511,70 @@ class MailchimpLists extends Mailchimp {
     ];
 
     return $this->request('DELETE', '/lists/{list_id}/segments/{segment_id}/members/{subscriber_hash}', $tokens);
+  }
+
+  /**
+   * Adds tags to a member.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string[] $tags
+   *   A list of tags to add.
+   * @param string $email
+   *   The email address to add the tag to.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/tags/
+   */
+  public function addTagsMember($list_id, array $tags, $email, array $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    ];
+
+    foreach ($tags as $tag) {
+      $parameters['tags'][] = [
+        'name' => $tag,
+        'status' => 'active',
+      ];
+    }
+
+    return $this->request('POST', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
+  }
+
+  /**
+   * Removes tags from a member.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string[] $tags
+   *   A list of tags to remove.
+   * @param string $email
+   *   The email address to remove the tag from.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/tags/
+   */
+  public function removeTagsMember($list_id, array $tags, $email, array $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    ];
+
+    foreach ($tags as $tag) {
+      $parameters['tags'][] = [
+        'name' => $tag,
+        'status' => 'inactive',
+      ];
+    }
+
+    return $this->request('POST', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
   }
 
   /**
