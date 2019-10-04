@@ -336,6 +336,29 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Gets tags related to a member of a MailChimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $email
+   *   The member's email address.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/tags/#read-get_lists_list_id_members_subscriber_hash_tags
+   */
+  public function getMemberTags($list_id, $email, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    ];
+
+    return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
+  }
+
+  /**
    * Gets information about segments associated with a Mailchimp list.
    *
    * @param string $list_id
