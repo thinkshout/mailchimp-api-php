@@ -69,6 +69,90 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Create new interest category associated with a list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $title
+   *   The title of interest category.
+   * @param string $type
+   *   The type of interest category.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/#create-post_lists_list_id_interest_categories
+   */
+  public function addInterestCategories($list_id, $title, $type, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'list_id' => $list_id,
+    ];
+
+    $parameters += [
+      'title' => $title,
+      'type' => $type,
+    ];
+
+    return $this->request('POST', '/lists/{list_id}/interest-categories', $tokens, $parameters);
+  }
+
+  /**
+   * Update interest category associated with a list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $interest_category_id
+   *   The ID of the interest category.
+   * @param string $title
+   *   The title of interest category.
+   * @param string $type
+   *   The type of interest category.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/#create-post_lists_list_id_interest_categories
+   */
+  public function updateInterestCategories($list_id, $interest_category_id, $title, $type, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'list_id' => $list_id,
+      'interest_category_id' => $interest_category_id,
+    ];
+
+    $parameters += [
+      'title' => $title,
+      'type' => $type,
+    ];
+
+    return $this->request('PATCH', '/lists/{list_id}/interest-categories/{interest_category_id}', $tokens, $parameters);
+  }
+
+  /**
+   * Update interest category associated with a list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $interest_category_id
+   *   The ID of the interest category.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/#create-post_lists_list_id_interest_categories
+   */
+  public function deleteInterestCategories($list_id, $interest_category_id, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'list_id' => $list_id,
+      'interest_category_id' => $interest_category_id,
+    ];
+
+    return $this->request('DELETE', '/lists/{list_id}/interest-categories/{interest_category_id}', $tokens, $parameters);
+  }
+
+  /**
    * Gets information about all interests associated with an interest category.
    *
    * @param string $list_id
@@ -89,6 +173,93 @@ class MailchimpLists extends Mailchimp {
     ];
 
     return $this->request('GET', '/lists/{list_id}/interest-categories/{interest_category_id}/interests', $tokens, $parameters);
+  }
+
+  /**
+   * Create new interest in category.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $interest_category_id
+   *   The ID of interest category.
+   * @param string $name
+   *   The name of interest.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://mailchimp.com/developer/reference/lists/interest-categories/interests/
+   */
+  public function addInterests($list_id, $interest_category_id, $name, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'list_id' => $list_id,
+      'interest_category_id' => $interest_category_id,
+    ];
+
+    $parameters += [
+      'name' => $name,
+    ];
+
+    return $this->request('POST', '/lists/{list_id}/interest-categories/{interest_category_id}/interests', $tokens, $parameters);
+  }
+
+  /**
+   * Edit interest in category.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $interest_category_id
+   *   The ID of interest category.
+   * @param string $interest_id
+   *   The ID of interest.
+   * @param string $name
+   *   The name of interest.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/#create-post_lists_list_id_interest_categories
+   */
+  public function updateInterests($list_id, $interest_category_id, $interest_id, $name, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'list_id' => $list_id,
+      'interest_category_id' => $interest_category_id,
+      'interest_id' => $interest_id,
+    ];
+
+    $parameters += [
+      'name' => $name,
+    ];
+
+    return $this->request('PATCH', '/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}', $tokens, $parameters);
+  }
+
+  /**
+   * Delete interest in category.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $interest_category_id
+   *   The ID of interest category.
+   * @param string $interest_id
+   *   The ID of interest.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/#create-post_lists_list_id_interest_categories
+   */
+  public function deleteInterests($list_id, $interest_category_id, $interest_id, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'list_id' => $list_id,
+      'interest_category_id' => $interest_category_id,
+      'interest_id' => $interest_id,
+    ];
+
+    return $this->request('DELETE', '/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}', $tokens, $parameters);
   }
 
   /**
