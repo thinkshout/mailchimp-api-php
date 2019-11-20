@@ -49,6 +49,65 @@ class MailchimpListsTest extends TestCase {
   }
 
   /**
+   * Tests library functionality for adding new interest categories.
+   */
+  public function testAddInterestCategories() {
+    $list_id = '57afe96172';
+    $title = 'Test Interest Category';
+    $type = 'checkbox';
+
+    $mc = new MailchimpLists();
+    $mc->addInterestCategories($list_id, $title, $type);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/interest-categories', $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($title, $request_body->title);
+    $this->assertEquals($type, $request_body->type);
+  }
+
+  /**
+   * Tests library functionality for updating interest categories.
+   */
+  public function testUpdateInterestCategories() {
+    $list_id = '57afe96172';
+    $title = 'Test Interest Category Edited';
+    $type = 'dropdown';
+    $interest_category_id = '08f0b1d7b2';
+
+    $mc = new MailchimpLists();
+    $mc->updateInterestCategories($list_id, $interest_category_id, $title, $type);
+
+    $this->assertEquals('PATCH', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/interest-categories/' . $interest_category_id, $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($title, $request_body->title);
+    $this->assertEquals($type, $request_body->type);
+  }
+
+  /**
+   * Tests library functionality for deleting interest categories.
+   */
+  public function testDeleteInterestCategories() {
+    $list_id = '57afe96172';
+    $interest_category_id = '08f0b1d7b2';
+
+    $mc = new MailchimpLists();
+    $mc->deleteInterestCategories($list_id, $interest_category_id);
+
+    $this->assertEquals('DELETE', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/interest-categories/' . $interest_category_id, $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library functionality for interests information.
    */
   public function testGetInterests() {

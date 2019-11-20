@@ -89,6 +89,47 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
   /**
    * @inheritdoc
    */
+  public function addInterestCategories($list_id, $title, $type, $parameters = [], $batch = FALSE) {
+    parent::addInterestCategories($list_id, $title, $type, $parameters = [], $batch = FALSE);
+
+    $response = (object) [
+      'list_id' => $list_id,
+      'id' => 'a1e9f4b7f6',
+      'title' => $title,
+      'type' => $type,
+    ];
+
+    return $response;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function updateInterestCategories($list_id, $interest_category_id, $title, $type, $parameters = [], $batch = FALSE) {
+    parent::updateInterestCategories($list_id, $interest_category_id, $title, $type, $parameters = [], $batch = FALSE);
+
+    $response = (object) [
+      'list_id' => $list_id,
+      'id' => 'a1e9f4b7f6',
+      'title' => $title,
+      'type' => $type,
+    ];
+
+    return $response;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function deleteInterestCategories($list_id, $interest_category_id, $parameters = [], $batch = FALSE) {
+    parent::deleteInterestCategories($list_id, $interest_category_id, $parameters = [], $batch = FALSE);
+
+    return (!empty($list_id) && !empty($interest_category_id));
+  }
+
+  /**
+   * @inheritdoc
+   */
   public function getInterests($list_id, $interest_category_id, $parameters = []) {
     parent::getInterests($list_id, $interest_category_id, $parameters);
 
