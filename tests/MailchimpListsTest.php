@@ -122,6 +122,64 @@ class MailchimpListsTest extends TestCase {
   }
 
   /**
+ * Tests library functionality for adding interests.
+ */
+  public function testAddInterests() {
+    $list_id = '57afe96172';
+    $interest_category_id = '08f0b1d7b2';
+    $name = 'Test Interest';
+
+    $mc = new MailchimpLists();
+    $mc->addInterests($list_id, $interest_category_id, $name);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/interest-categories/' . $interest_category_id . '/interests', $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($name, $request_body->name);
+  }
+
+  /**
+   * Tests library functionality for updating interests.
+   */
+  public function testUpdateInterests() {
+    $list_id = '57afe96172';
+    $interest_category_id = '08f0b1d7b2';
+    $interest_id = '9143cf3bd1';
+    $name = 'Test Interest Edited';
+
+    $mc = new MailchimpLists();
+    $mc->updateInterests($list_id, $interest_category_id, $interest_id, $name);
+
+    $this->assertEquals('PATCH', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/interest-categories/' . $interest_category_id . '/interests/' . $interest_id, $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($name, $request_body->name);
+  }
+
+  /**
+   * Tests library functionality for deleting interests.
+   */
+  public function testDeleteInterests() {
+    $list_id = '57afe96172';
+    $interest_category_id = '08f0b1d7b2';
+    $interest_id = '9143cf3bd1';
+
+    $mc = new MailchimpLists();
+    $mc->deleteInterests($list_id, $interest_category_id, $interest_id);
+
+    $this->assertEquals('DELETE', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/interest-categories/' . $interest_category_id . '/interests/' . $interest_id, $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library functionality for merge fields information.
    */
   public function testGetMergeFields() {

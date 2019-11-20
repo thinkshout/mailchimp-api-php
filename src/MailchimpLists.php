@@ -189,7 +189,7 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    *
-   * @see https://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/#create-post_lists_list_id_interest_categories
+   * @see https://mailchimp.com/developer/reference/lists/interest-categories/interests/
    */
   public function addInterests($list_id, $interest_category_id, $name, $parameters = [], $batch = FALSE) {
     $tokens = [
