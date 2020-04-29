@@ -20,6 +20,60 @@ Or to install with phpunit:
 
 `composer install`
 
+## Usage
+
+### Get your account information
+
+A basic test to confirm the library is set up and functional.
+
+```php
+<?php
+require '../mailchimp-api-php/vendor/autoload.php';
+$api_key = 'YOUR_API_KEY';
+$mailchimp = new Mailchimp\Mailchimp($api_key);
+
+// Get the account details of the authenticated user.
+$response = $mailchimp->getAccount();
+
+// Output the account details.
+if (!empty($response) && isset($response->account_id)) {
+  echo "ID: {$response->account_id}\n"
+  . "Name: {$response->account_name}\n";
+}
+```
+
+### Get lists and their interest categories
+
+A more complicated example that takes the response from one API call and
+uses that data to make another.
+
+```php
+<?php
+require '../mailchimp-api-php/vendor/autoload.php';
+$api_key = 'YOUR_API_KEY';
+$mailchimp_lists = new Mailchimp\MailchimpLists($api_key);
+
+// Get all lists.
+$response = $mailchimp_lists->getLists();
+
+if (!empty($response) && isset($response->lists)) {
+  foreach ($response->lists as $list) {
+    // Output the list name.
+    echo "List name: {$list->name}\n";
+
+    // Get the list's interest categories.
+    $interests = $mailchimp_lists->getInterestCategories($list->id);
+
+    // Output the names of the list's interest categories.
+    if (!empty($interests) && isset($interests->categories)) {
+      foreach ($interests->categories as $category) {
+        echo "Interest category: {$category->title}\n";
+      }
+    }
+  }
+}
+```
+
 ## Testing
 
 This library includes a [PHPUnit](https://phpunit.de/) test suite.
