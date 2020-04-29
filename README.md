@@ -28,7 +28,7 @@ A basic test to confirm the library is set up and functional.
 
 ```php
 <?php
-require '../mailchimp-api-php/vendor/autoload.php';
+require 'PATH_TO_LIBRARY/mailchimp-api-php/vendor/autoload.php';
 $api_key = 'YOUR_API_KEY';
 $mailchimp = new Mailchimp\Mailchimp($api_key);
 
@@ -49,7 +49,7 @@ uses that data to make another.
 
 ```php
 <?php
-require '../mailchimp-api-php/vendor/autoload.php';
+require 'PATH_TO_LIBRARY/mailchimp-api-php/vendor/autoload.php';
 $api_key = 'YOUR_API_KEY';
 $mailchimp_lists = new Mailchimp\MailchimpLists($api_key);
 
