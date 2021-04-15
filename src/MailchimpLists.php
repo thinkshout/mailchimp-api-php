@@ -184,6 +184,29 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
+   * Add an event for a MailChimp list member.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $email
+   *   The member's email address.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://mailchimp.com/developer/marketing/api/list-member-events/add-event/
+   */
+  public function addMemberEvent($list_id, $email, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    ];
+
+    return $this->request('POST', '/lists/{list_id}/members/{subscriber_hash}/events', $tokens, $parameters);
+  }
+
+  /**
    * Gets information about a member of a MailChimp list.
    *
    * @param string $list_id
@@ -230,6 +253,29 @@ class MailchimpLists extends Mailchimp {
     ];
 
     return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/activity', $tokens, $parameters);
+  }
+
+  /**
+   * Get events for a MailChimp contact.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $email
+   *   The member's email address.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://mailchimp.com/developer/marketing/api/list-member-events/list-member-events/
+   */
+  public function getMemberEvents($list_id, $email, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'subscriber_hash' => md5(strtolower($email)),
+    ];
+
+    return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/events', $tokens, $parameters);
   }
 
   /**
