@@ -89,6 +89,48 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
   /**
    * @inheritdoc
    */
+  public function addInterestCategories($list_id, $title, $type, $parameters = [], $batch = FALSE) {
+    parent::addInterestCategories($list_id, $title, $type, $parameters = [], $batch = FALSE);
+
+    $response = (object) [
+      'list_id' => $list_id,
+      'id' => 'a1e9f4b7f6',
+      'title' => $title,
+      'type' => $type,
+    ];
+
+    return $response;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function updateInterestCategories($list_id, $interest_category_id, $title, $type, $parameters = [], $batch = FALSE) {
+    parent::updateInterestCategories($list_id, $interest_category_id, $title, $type, $parameters = [], $batch = FALSE);
+
+    $response = (object) [
+      'list_id' => $list_id,
+      'id' => 'a1e9f4b7f6',
+      'title' => $title,
+      'type' => $type,
+      'interest_category_id' => $interest_category_id,
+    ];
+
+    return $response;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function deleteInterestCategories($list_id, $interest_category_id, $parameters = [], $batch = FALSE) {
+    parent::deleteInterestCategories($list_id, $interest_category_id, $parameters = [], $batch = FALSE);
+
+    return (!empty($list_id) && !empty($interest_category_id));
+  }
+
+  /**
+   * @inheritdoc
+   */
   public function getInterests($list_id, $interest_category_id, $parameters = []) {
     parent::getInterests($list_id, $interest_category_id, $parameters);
 
@@ -105,6 +147,47 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
     ];
 
     return $response;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function addInterests($list_id, $interest_category_id, $name, $parameters = [], $batch = FALSE) {
+    parent::addInterests($list_id, $interest_category_id, $name, $parameters = [], $batch = FALSE);
+
+    $response = (object) [
+      'list_id' => $list_id,
+      'category_id' => $interest_category_id,
+      'interest_id' => '9143cf3bd1',
+      'name' => $name,
+    ];
+
+    return $response;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function updateInterests($list_id, $interest_category_id, $interest_id, $name, $parameters = [], $batch = FALSE) {
+    parent::updateInterests($list_id, $interest_category_id, $interest_id, $name, $parameters = [], $batch = FALSE);
+
+    $response = (object) [
+      'list_id' => $list_id,
+      'category_id' => $interest_category_id,
+      'interest_id' => $interest_id,
+      'name' => $name,
+    ];
+
+    return $response;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function deleteInterests($list_id, $interest_category_id, $interest_id, $parameters = [], $batch = FALSE) {
+    parent::deleteInterests($list_id, $interest_category_id, $interest_id, $parameters = [], $batch = FALSE);
+
+    return (!empty($list_id) && !empty($interest_category_id) && !empty($interest_id));
   }
 
   /**

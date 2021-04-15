@@ -2,10 +2,7 @@
 
 namespace Mailchimp\Tests;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use Mailchimp\http\MailchimpHttpClientInterface;
-use Mailchimp\MailchimpAPIException;
 
 /**
  * A dummy HTTP client used when running unit tests.

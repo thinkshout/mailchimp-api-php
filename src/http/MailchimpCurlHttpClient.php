@@ -3,7 +3,7 @@
 namespace Mailchimp\http;
 
 /**
- * An HTTP client for use with the MailChimp API using cURL.
+ * An HTTP client for use with the Mailchimp API using cURL.
  *
  * @package Mailchimp
  */
@@ -66,6 +66,19 @@ class MailchimpCurlHttpClient implements MailchimpHttpClientInterface {
       default:
         // Throw exception for unsupported request method.
         throw new \Exception('Unsupported HTTP request method: ' . $method);
+    }
+
+    // Set proxy to use.
+    if (isset($this->config['proxy'])) {
+      if (!is_array($this->config['proxy'])) {
+        curl_setopt($ch, CURLOPT_PROXY, $this->config['proxy']);
+      }
+      else {
+        $scheme = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+        if (isset($this->config['proxy'][$scheme])) {
+          curl_setopt($ch, CURLOPT_PROXY, $this->config['proxy'][$scheme]);
+        }
+      }
     }
 
     curl_setopt($ch, CURLOPT_URL, $uri);

@@ -76,7 +76,7 @@ class MailchimpAutomations extends Mailchimp {
   }
 
   /**
-   * Gets queued subscribers from a MailChimp workflow automation.
+   * Gets queued subscribers from a Mailchimp workflow automation.
    *
    * @param string $workflow_id
    *   The unique id for the Automation workflow.
@@ -97,7 +97,7 @@ class MailchimpAutomations extends Mailchimp {
   }
 
   /**
-   * Gets a subscriber from a MailChimp workflow automation email queue.
+   * Gets a subscriber from a Mailchimp workflow automation email queue.
    *
    * @param string $workflow_id
    *   The unique id for the Automation workflow.
@@ -121,7 +121,7 @@ class MailchimpAutomations extends Mailchimp {
   }
 
   /**
-   * Adds a subscriber to a MailChimp workflow automation email queue.
+   * Adds a subscriber to a Mailchimp workflow automation email queue.
    *
    * @param string $workflow_id
    *   The unique id for the Automation workflow.

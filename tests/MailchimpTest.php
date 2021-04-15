@@ -5,7 +5,7 @@ namespace Mailchimp\Tests;
 use PHPUnit\Framework\TestCase;
 
 /**
- * MailChimp library test cases.
+ * Mailchimp library test cases.
  *
  * @package Mailchimp\Tests
  */

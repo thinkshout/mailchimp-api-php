@@ -7,7 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 use Mailchimp\MailchimpAPIException;
 
 /**
- * An HTTP client for use with the MailChimp API using Guzzle.
+ * An HTTP client for use with the Mailchimp API using Guzzle.
  *
  * @package Mailchimp
  */

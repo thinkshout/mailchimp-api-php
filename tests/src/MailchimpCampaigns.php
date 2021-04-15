@@ -3,7 +3,7 @@
 namespace Mailchimp\Tests;
 
 /**
- * MailChimp Campaigns library test cases.
+ * Mailchimp Campaigns library test cases.
  *
  * @package Mailchimp\Tests
  */
