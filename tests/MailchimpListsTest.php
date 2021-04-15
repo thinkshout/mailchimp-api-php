@@ -338,6 +338,6 @@ class MailchimpListsTest extends TestCase {
 
     $request_body = $mc->getClient()->options['json'];
 
-    $this->assertEquals($email, $request_body->email_address);
+    $this->assertEquals($event, (array) $request_body);
   }
 }
