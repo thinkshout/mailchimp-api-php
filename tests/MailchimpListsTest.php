@@ -137,6 +137,20 @@ class MailchimpListsTest extends TestCase {
   }
 
   /**
+   * Tests library functionality for member events information.
+   */
+  public function testGetMemberEvents() {
+    $list_id = '57afe96172';
+    $email = 'test@example.com';
+
+    $mc = new MailchimpLists();
+    $mc->getMemberEvents($list_id, $email);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5($email) . '/events', $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library functionality for adding a list member.
    */
   public function testAddMember() {
@@ -301,4 +315,29 @@ class MailchimpListsTest extends TestCase {
     $this->assertEquals($email, $request_body->email_address);
   }
 
+  /**
+   * Tests library functionality for adding a member event.
+   */
+  public function testAddMemberEvent() {
+    $list_id = '205d96e6b4';
+    $email = 'test@example.com';
+    $event = [
+        "name" => "registered_referral",
+        "properties" => [
+          "ref-code-123456"
+        ],
+      ];
+
+    $mc = new MailchimpLists();
+    $mc->AddMemberEvent($list_id, $email, $event);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/lists/' . $list_id . '/members/' . md5($email) . '/events', $mc->getClient()->uri);
+
+    $this->assertNotEmpty($mc->getClient()->options['json']);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($email, $request_body->email_address);
+  }
 }
