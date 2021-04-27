@@ -18,7 +18,10 @@ class MailchimpAPIException extends Exception {
     // Construct message from JSON if required.
     if (substr($message, 0, 1) == '{') {
       $message_obj = json_decode($message);
-      $message = $message_obj->status . ': ' . $message_obj->title . ' - ' . $message_obj->detail;
+      $message = $message_obj->status . ': ' . $message_obj->title;
+      if (!empty($message_obj->detail)) {
+        $message .= ' - ' . $message_obj->detail;
+      }
       if (!empty($message_obj->errors)) {
         $message .= ' ' . serialize($message_obj->errors);
       }
