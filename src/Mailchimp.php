@@ -285,6 +285,8 @@ class Mailchimp {
     if (!empty($this->debug_error_code)) {
       $options['headers']['X-Trigger-Error'] = $this->debug_error_code;
     }
+    //Set version of http to 1.0 in order to avoid body formatter error.
+    $options['version'] = '1.0';
 
     return $this->client->handleRequest($method, $this->endpoint . $path, $options, $parameters, $returnAssoc);
   }
