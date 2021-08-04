@@ -271,7 +271,7 @@ class MailchimpCampaigns extends Mailchimp {
       'campaign_id' => $campaign_id,
     ];
 
-    return $this->request('POST', '/campaigns/{campaign_id}/actions/send', $tokens, NULL, $batch);
+    return $this->request('POST', '/campaigns/{campaign_id}/actions/send', $tokens, [], $batch);
   }
 
   /**
