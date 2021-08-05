@@ -135,7 +135,7 @@ class MailchimpCampaigns extends Mailchimp {
       'campaign_id' => $campaign_id,
     ];
 
-    return $this->request('GET', '/campaigns/{campaign_id}/send-checklist', $tokens, NULL);
+    return $this->request('GET', '/campaigns/{campaign_id}/send-checklist', $tokens, []);
   }
 
   /**
@@ -251,7 +251,7 @@ class MailchimpCampaigns extends Mailchimp {
       'campaign_id' => $campaign_id,
     ];
 
-    return $this->request('POST', '/campaigns/{campaign_id}/actions/unschedule', $tokens, NULL);
+    return $this->request('POST', '/campaigns/{campaign_id}/actions/unschedule', $tokens, []);
   }
 
   /**
@@ -271,7 +271,7 @@ class MailchimpCampaigns extends Mailchimp {
       'campaign_id' => $campaign_id,
     ];
 
-    return $this->request('POST', '/campaigns/{campaign_id}/actions/send', $tokens, NULL, $batch);
+    return $this->request('POST', '/campaigns/{campaign_id}/actions/send', $tokens, [], $batch);
   }
 
   /**
