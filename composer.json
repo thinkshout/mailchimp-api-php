@@ -4,6 +4,7 @@
   "description": "PHP library for v3 of the MailChimp API",
   "keywords": ["mailchimp", "mail"],
   "homepage": "https://github.com/thinkshout/mailchimp-api-php",
+  "license": "GPL-2.0-or-later",
   "require": {
     "php": ">=5.4.0",
     "guzzlehttp/guzzle": "^6.2.1|^7.0.0"
