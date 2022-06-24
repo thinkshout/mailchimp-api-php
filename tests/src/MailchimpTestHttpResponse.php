@@ -2,6 +2,8 @@
 
 namespace Mailchimp\Tests;
 
+use GuzzleHttp\Psr7\Response;
+use Guzzlehttp\Psr7\Utils;
 use Psr\Http\Message\StreamInterface;
 
 /**
@@ -9,10 +11,10 @@ use Psr\Http\Message\StreamInterface;
  *
  * @package Mailchimp\Tests
  */
-class MailchimpTestHttpResponse extends \GuzzleHttp\Psr7\Response {
+class MailchimpTestHttpResponse extends Response {
 
   public function getBody(): StreamInterface {
-    return '{}';
+    return Utils::streamFor();
   }
 
 }
