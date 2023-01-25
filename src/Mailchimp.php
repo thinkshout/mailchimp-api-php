@@ -56,11 +56,11 @@ class Mailchimp {
   protected $endpoint = 'https://us1.api.mailchimp.com/3.0';
 
   /**
-   * The Mailchimp API key to authenticate with.
+   * The Mailchimp Access token to authenticate with.
    *
-   * @var string $api_key
+   * @var string $access_token
    */
-  private $api_key;
+  private $access_token;
 
   /**
    * The Mailchimp API username to authenticate with.
@@ -91,8 +91,10 @@ class Mailchimp {
   /**
    * Mailchimp constructor.
    *
-   * @param string $api_key
-   *   The Mailchimp API key.
+   * @param string $access_token
+   *   The Mailchimp Access token.
+   * @param string $data_center
+   *   The Mailchimp data center associated with the account.
    * @param string $api_user
    *   The Mailchimp API username.
    * @param array $http_options
@@ -100,13 +102,10 @@ class Mailchimp {
    * @param MailchimpHttpClientInterface $client
    *   Optional custom HTTP client. $http_options are ignored if this is set.
    */
-  public function __construct($api_key, $api_user = 'apikey', $http_options = [], MailchimpHttpClientInterface $client = NULL) {
-    $this->api_key = $api_key;
+  public function __construct($access_token, $data_center, $api_user = 'OAuth', $http_options = [], MailchimpHttpClientInterface $client = NULL) {
+    $this->access_token = $access_token;
     $this->api_user = $api_user;
-
-    $dc = $this->getDataCenter($this->api_key);
-
-    $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, $dc, $this->endpoint);
+    $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, $data_center, $this->endpoint);
 
     if (!empty($client)) {
       $this->client = $client;
@@ -277,7 +276,7 @@ class Mailchimp {
     // Set default request options with auth header.
     $options = [
       'headers' => [
-        'Authorization' => $this->api_user . ' ' . $this->api_key,
+        'Authorization' => $this->api_user . ' ' . $this->access_token,
       ],
     ];
 
@@ -290,6 +289,7 @@ class Mailchimp {
   }
 
   /**
+   * @todo remove.
    * Gets the ID of the data center associated with an API key.
    *
    * @param string $api_key
