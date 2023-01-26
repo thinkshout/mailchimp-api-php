@@ -289,22 +289,6 @@ class Mailchimp {
   }
 
   /**
-   * @todo remove.
-   * Gets the ID of the data center associated with an API key.
-   *
-   * @param string $api_key
-   *   The Mailchimp API key.
-   *
-   * @return string
-   *   The data center ID.
-   */
-  private function getDataCenter($api_key) {
-    $api_key_parts = explode('-', $api_key);
-
-    return (isset($api_key_parts[1])) ? $api_key_parts[1] : Mailchimp::DEFAULT_DATA_CENTER;
-  }
-
-  /**
    * Instantiates a default HTTP client based on the local environment.
    *
    * @param array $http_options
