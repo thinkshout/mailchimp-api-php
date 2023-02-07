@@ -87,7 +87,7 @@ $mailchimp = new Mailchimp\Mailchimp($api_key);
 // With this:
 $access_token = 'YOUR_ACCESS_TOKEN';
 $data_center = 'YOUR_DATA_CENTER'; // ex. us-10
-$mailchimp_lists = new Mailchimp\Mailchimp2($access_token, $data_center);
+$mailchimp = new Mailchimp\Mailchimp2($access_token, $data_center);
 
 ```
 
