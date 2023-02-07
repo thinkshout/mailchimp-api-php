@@ -76,7 +76,7 @@ if (!empty($response) && isset($response->lists)) {
 
 ### API Key vs OAuth Access Token
 
-If you need to connect to Mailchimp using an OAuth generated access token modify your calls to use the Mailchimp2 class as follows.
+If you need to connect to Mailchimp using an OAuth generated access token, modify your calls to use the Mailchimp2 class as follows.
 
 ```php
 <?php
