@@ -74,6 +74,23 @@ if (!empty($response) && isset($response->lists)) {
 }
 ```
 
+### API Key vs OAuth Access Token
+
+If you need to connect to Mailchimp using an OAuth generated access token, modify your calls to use the Mailchimp2 class as follows.
+
+```php
+<?php
+// Replace calls like this:
+$api_key = 'YOUR_API_KEY';
+$mailchimp = new Mailchimp\Mailchimp($api_key);
+
+// With this:
+$access_token = 'YOUR_ACCESS_TOKEN';
+$data_center = 'YOUR_DATA_CENTER'; // ex. us-10
+$mailchimp = new Mailchimp\Mailchimp2($access_token, $data_center);
+
+```
+
 ## Testing
 
 This library includes a [PHPUnit](https://phpunit.de/) test suite.
