@@ -5,7 +5,7 @@ namespace Mailchimp;
 use Mailchimp\http\MailchimpHttpClientInterface;
 
 /**
- * Provides an interface a Mailchimp class.
+ * Defines an interface for a Mailchimp API object.
  *
  * @internal
  */

@@ -47,7 +47,7 @@ class Mailchimp implements MailchimpApiInterface {
    *
    * @var MailchimpHttpClientInterface $client
    */
-  protected $client;
+  public $client;
 
   /**
    * The REST API endpoint.
