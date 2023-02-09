@@ -7,7 +7,7 @@ namespace Mailchimp;
  *
  * @package Mailchimp
  */
-class MailchimpTemplates extends Mailchimp {
+class MailchimpTemplates extends MailchimpApiUser {
 
   /**
    * Gets information about all templates owned by the authenticated account.
@@ -20,7 +20,7 @@ class MailchimpTemplates extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/templates/#read-get_templates
    */
   public function getTemplates($parameters = []) {
-    return $this->request('GET', '/templates', NULL, $parameters);
+    return $this->api_class->request('GET', '/templates', NULL, $parameters);
   }
 
   /**
@@ -40,7 +40,7 @@ class MailchimpTemplates extends Mailchimp {
       'template_id' => $template_id,
     ];
 
-    return $this->request('GET', '/templates/{template_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/templates/{template_id}', $tokens, $parameters);
   }
 
   /**
@@ -60,7 +60,7 @@ class MailchimpTemplates extends Mailchimp {
       'template_id' => $template_id,
     ];
 
-    return $this->request('GET', '/templates/{template_id}/default-content', $tokens, $parameters);
+    return $this->api_class->request('GET', '/templates/{template_id}/default-content', $tokens, $parameters);
   }
 
 }

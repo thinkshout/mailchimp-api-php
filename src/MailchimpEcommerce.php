@@ -7,7 +7,7 @@ namespace Mailchimp;
  *
  * @package Mailchimp
  */
-class MailchimpEcommerce extends Mailchimp {
+class MailchimpEcommerce extends MailchimpApiUser {
 
   /**
    * Gets information about all stores in the account.
@@ -21,7 +21,7 @@ class MailchimpEcommerce extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#read-get_ecommerce_stores
    */
   public function getStores($parameters = []) {
-    return $this->request('GET', '/ecommerce/stores', NULL, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores', NULL, $parameters);
   }
 
   /**
@@ -42,7 +42,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}', $tokens, $parameters);
   }
 
   /**
@@ -70,7 +70,7 @@ class MailchimpEcommerce extends Mailchimp {
     $parameters['id'] = $id;
     $parameters += $store;
 
-    return $this->request('POST', '/ecommerce/stores', NULL, $parameters, $batch);
+    return $this->api_class->request('POST', '/ecommerce/stores', NULL, $parameters, $batch);
   }
 
   /**
@@ -102,7 +102,7 @@ class MailchimpEcommerce extends Mailchimp {
       'currency_code' => $currency_code,
     ];
 
-    return $this->request('PATCH', '/ecommerce/stores/{store_id}', $tokens, $parameters, $batch);
+    return $this->api_class->request('PATCH', '/ecommerce/stores/{store_id}', $tokens, $parameters, $batch);
   }
 
   /**
@@ -121,7 +121,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
     ];
 
-    return $this->request('DELETE', '/ecommerce/stores/{store_id}', $tokens);
+    return $this->api_class->request('DELETE', '/ecommerce/stores/{store_id}', $tokens);
   }
 
   /**
@@ -142,7 +142,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters);
   }
 
   /**
@@ -166,7 +166,7 @@ class MailchimpEcommerce extends Mailchimp {
       'cart_id' => $cart_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens, $parameters);
   }
 
   /**
@@ -204,7 +204,7 @@ class MailchimpEcommerce extends Mailchimp {
 
     $parameters += $cart;
 
-    return $this->request('POST', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters, $batch);
+    return $this->api_class->request('POST', '/ecommerce/stores/{store_id}/carts', $tokens, $parameters, $batch);
   }
 
   /**
@@ -230,7 +230,7 @@ class MailchimpEcommerce extends Mailchimp {
       'cart_id' => $cart_id,
     ];
 
-    return $this->request('PATCH', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens, $parameters, $batch);
+    return $this->api_class->request('PATCH', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens, $parameters, $batch);
   }
 
   /**
@@ -252,7 +252,7 @@ class MailchimpEcommerce extends Mailchimp {
       'cart_id' => $cart_id,
     ];
 
-    return $this->request('DELETE', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens);
+    return $this->api_class->request('DELETE', '/ecommerce/stores/{store_id}/carts/{cart_id}', $tokens);
   }
 
   /**
@@ -276,7 +276,7 @@ class MailchimpEcommerce extends Mailchimp {
       'cart_id' => $cart_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines', $tokens, $parameters);
   }
 
   /**
@@ -303,7 +303,7 @@ class MailchimpEcommerce extends Mailchimp {
       'line_id' => $line_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}', $tokens, $parameters);
   }
 
   /**
@@ -341,7 +341,7 @@ class MailchimpEcommerce extends Mailchimp {
 
     $parameters += $product;
 
-    return $this->request('POST', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines', $tokens, $parameters, $batch);
+    return $this->api_class->request('POST', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines', $tokens, $parameters, $batch);
   }
 
   /**
@@ -370,7 +370,7 @@ class MailchimpEcommerce extends Mailchimp {
       'line_id' => $line_id,
     ];
 
-    return $this->request('PATCH', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}', $tokens, $parameters, $batch);
+    return $this->api_class->request('PATCH', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}', $tokens, $parameters, $batch);
   }
 
   /**
@@ -395,7 +395,7 @@ class MailchimpEcommerce extends Mailchimp {
       'line_id' => $line_id,
     ];
 
-    return $this->request('DELETE', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}', $tokens);
+    return $this->api_class->request('DELETE', '/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}', $tokens);
   }
 
   /**
@@ -416,7 +416,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/customers', $tokens, $parameters);
   }
 
   /**
@@ -440,7 +440,7 @@ class MailchimpEcommerce extends Mailchimp {
       'customer_id' => $customer_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/' . $store_id . '/customers/' . $customer_id, $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/' . $store_id . '/customers/' . $customer_id, $tokens, $parameters);
   }
 
   /**
@@ -469,7 +469,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
     ];
 
-    return $this->request('POST', '/ecommerce/stores/{store_id}/customers', $tokens, $customer, $batch);
+    return $this->api_class->request('POST', '/ecommerce/stores/{store_id}/customers', $tokens, $customer, $batch);
   }
 
   /**
@@ -498,7 +498,7 @@ class MailchimpEcommerce extends Mailchimp {
       'customer_id' => $customer['id'],
     ];
 
-    return $this->request('PATCH', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens, $customer, $batch);
+    return $this->api_class->request('PATCH', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens, $customer, $batch);
   }
 
   /**
@@ -520,7 +520,7 @@ class MailchimpEcommerce extends Mailchimp {
       'customer_id' => $customer_id,
     ];
 
-    return $this->request('DELETE', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens);
+    return $this->api_class->request('DELETE', '/ecommerce/stores/{store_id}/customers/{customer_id}', $tokens);
   }
 
   /**
@@ -541,7 +541,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters);
   }
 
   /**
@@ -565,7 +565,7 @@ class MailchimpEcommerce extends Mailchimp {
       'order_id' => $order_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/' . $store_id . '/orders/' . $order_id, $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/' . $store_id . '/orders/' . $order_id, $tokens, $parameters);
   }
 
   /**
@@ -603,7 +603,7 @@ class MailchimpEcommerce extends Mailchimp {
 
     $parameters += $order;
 
-    return $this->request('POST', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters, $batch);
+    return $this->api_class->request('POST', '/ecommerce/stores/{store_id}/orders', $tokens, $parameters, $batch);
   }
 
   /**
@@ -631,7 +631,7 @@ class MailchimpEcommerce extends Mailchimp {
       'order_id' => $order_id,
     ];
 
-    return $this->request('PATCH', '/ecommerce/stores/{store_id}/orders/{order_id}', $tokens, $parameters, $batch);
+    return $this->api_class->request('PATCH', '/ecommerce/stores/{store_id}/orders/{order_id}', $tokens, $parameters, $batch);
   }
 
   /**
@@ -653,7 +653,7 @@ class MailchimpEcommerce extends Mailchimp {
       'order_id' => $order_id,
     ];
 
-    return $this->request('DELETE', '/ecommerce/stores/{store_id}/orders/{order_id}', $tokens);
+    return $this->api_class->request('DELETE', '/ecommerce/stores/{store_id}/orders/{order_id}', $tokens);
   }
 
   /**
@@ -679,7 +679,7 @@ class MailchimpEcommerce extends Mailchimp {
       'order_id' => $order_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/orders/{order_id}/lines', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/orders/{order_id}/lines', $tokens, $parameters);
   }
 
   /**
@@ -708,7 +708,7 @@ class MailchimpEcommerce extends Mailchimp {
       'line_id' => $line_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}', $tokens, $parameters);
   }
 
   /**
@@ -746,7 +746,7 @@ class MailchimpEcommerce extends Mailchimp {
 
     $parameters += $product;
 
-    return $this->request('POST', '/ecommerce/stores/{store_id}/orders/{order_id}/lines', $tokens, $parameters, $batch);
+    return $this->api_class->request('POST', '/ecommerce/stores/{store_id}/orders/{order_id}/lines', $tokens, $parameters, $batch);
   }
 
   /**
@@ -769,7 +769,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
   }
 
   /**
@@ -795,7 +795,7 @@ class MailchimpEcommerce extends Mailchimp {
       'product_id' => $product_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens, $parameters);
   }
 
   /**
@@ -833,7 +833,7 @@ class MailchimpEcommerce extends Mailchimp {
       'variants' => $variants,
     ];
 
-    return $this->request('POST', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
+    return $this->api_class->request('POST', '/ecommerce/stores/{store_id}/products', $tokens, $parameters);
   }
 
   /**
@@ -867,7 +867,7 @@ class MailchimpEcommerce extends Mailchimp {
       'variants' => $variants,
     ];
 
-    return $this->request('PATCH', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens, $parameters);
+    return $this->api_class->request('PATCH', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens, $parameters);
   }
 
   /**
@@ -891,7 +891,7 @@ class MailchimpEcommerce extends Mailchimp {
       'product_id' => $product_id,
     ];
 
-    return $this->request('DELETE', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens);
+    return $this->api_class->request('DELETE', '/ecommerce/stores/{store_id}/products/{product_id}', $tokens);
   }
 
   /**
@@ -917,7 +917,7 @@ class MailchimpEcommerce extends Mailchimp {
       'product_id' => $product_id,
     ];
 
-    return $this->request('POST', '/ecommerce/stores/{store_id}/products/{product_id}/variants', $tokens, $parameters);
+    return $this->api_class->request('POST', '/ecommerce/stores/{store_id}/products/{product_id}/variants', $tokens, $parameters);
   }
 
   /**
@@ -945,7 +945,7 @@ class MailchimpEcommerce extends Mailchimp {
       'product_id' => $product_id,
       'variant_id' => $variant_id,
     ];
-    return $this->request('PATCH', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens, $parameters);
+    return $this->api_class->request('PATCH', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens, $parameters);
   }
 
   /**
@@ -973,7 +973,7 @@ class MailchimpEcommerce extends Mailchimp {
       'product_id' => $product_id,
       'variant_id' => $variant_id,
     ];
-    return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens, $parameters);
   }
 
   /**
@@ -996,7 +996,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
       'product_id' => $product_id,
     ];
-    return $this->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}/variants', $tokens);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/products/{product_id}/variants', $tokens);
   }
 
   /**
@@ -1022,7 +1022,7 @@ class MailchimpEcommerce extends Mailchimp {
       'product_id' => $product_id,
       'variant_id' => $variant_id,
     ];
-    return $this->request('DELETE', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens);
+    return $this->api_class->request('DELETE', '/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}', $tokens);
   }
 
   /**
@@ -1045,7 +1045,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/promo-rules', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/promo-rules', $tokens, $parameters);
   }
 
   /**
@@ -1070,7 +1070,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
       'promo_rule_id' => $promo_rule_id,
     ];
-    return $this->request('GET', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}', $tokens, $parameters);
   }
 
   /**
@@ -1102,7 +1102,7 @@ class MailchimpEcommerce extends Mailchimp {
     $tokens = [
       'store_id' => $store_id,
     ];
-    return $this->request('POST', '/ecommerce/stores/{store_id}/promo-rules', $tokens, $promo_rule);
+    return $this->api_class->request('POST', '/ecommerce/stores/{store_id}/promo-rules', $tokens, $promo_rule);
   }
 
   /**
@@ -1138,7 +1138,7 @@ class MailchimpEcommerce extends Mailchimp {
       'promo_rule_id' => $promo_rule['id'],
     ];
 
-    return $this->request('PATCH', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}', $tokens, $promo_rule, $batch);
+    return $this->api_class->request('PATCH', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}', $tokens, $promo_rule, $batch);
   }
 
   /**
@@ -1161,7 +1161,7 @@ class MailchimpEcommerce extends Mailchimp {
       'promo_rule_id' => $promo_rule_id,
     ];
 
-    return $this->request('DELETE', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}', $tokens);
+    return $this->api_class->request('DELETE', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}', $tokens);
   }
 
   /**
@@ -1185,7 +1185,7 @@ class MailchimpEcommerce extends Mailchimp {
       'promo_rule_id' => $promo_rule_id,
     ];
 
-    return $this->request('GET', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes', $tokens, $parameters);
   }
 
   /**
@@ -1211,7 +1211,7 @@ class MailchimpEcommerce extends Mailchimp {
       'promo_rule_id' => $promo_rule_id,
       'promo_code_id' => $promo_code_id,
     ];
-    return $this->request('GET', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}', $tokens, $parameters);
   }
 
   /**
@@ -1240,7 +1240,7 @@ class MailchimpEcommerce extends Mailchimp {
       'store_id' => $store_id,
       'promo_rule_id' => $promo_rule_id,
     ];
-    return $this->request('POST', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes', $tokens, $promo_code);
+    return $this->api_class->request('POST', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes', $tokens, $promo_code);
   }
 
   /**
@@ -1273,7 +1273,7 @@ class MailchimpEcommerce extends Mailchimp {
       'promo_code_id' => $promo_code['id'],
     ];
 
-    return $this->request('PATCH', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}', $tokens, $promo_code, $batch);
+    return $this->api_class->request('PATCH', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}', $tokens, $promo_code, $batch);
   }
 
   /**
@@ -1300,6 +1300,6 @@ class MailchimpEcommerce extends Mailchimp {
       'promo_code_id' => $promo_code_id,
     ];
 
-    return $this->request('DELETE', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}', $tokens);
+    return $this->api_class->request('DELETE', '/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}', $tokens);
   }
 }
