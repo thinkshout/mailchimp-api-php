@@ -7,7 +7,7 @@ namespace Mailchimp;
  *
  * @package Mailchimp
  */
-class MailchimpLists extends Mailchimp {
+class MailchimpLists extends MailchimpApiUser {
 
   const MEMBER_STATUS_SUBSCRIBED = 'subscribed';
   const MEMBER_STATUS_UNSUBSCRIBED = 'unsubscribed';
@@ -25,7 +25,7 @@ class MailchimpLists extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/#read-get_lists
    */
   public function getLists($parameters = []) {
-    return $this->request('GET', '/lists', NULL, $parameters);
+    return $this->api_class->request('GET', '/lists', NULL, $parameters);
   }
 
   /**
@@ -45,7 +45,7 @@ class MailchimpLists extends Mailchimp {
       'list_id' => $list_id,
     ];
 
-    return $this->request('GET', '/lists/{list_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}', $tokens, $parameters);
   }
 
   /**
@@ -65,7 +65,7 @@ class MailchimpLists extends Mailchimp {
       'list_id' => $list_id,
     ];
 
-    return $this->request('GET', '/lists/{list_id}/interest-categories', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/interest-categories', $tokens, $parameters);
   }
 
   /**
@@ -94,7 +94,7 @@ class MailchimpLists extends Mailchimp {
       'type' => $type,
     ];
 
-    return $this->request('POST', '/lists/{list_id}/interest-categories', $tokens, $parameters);
+    return $this->api_class->request('POST', '/lists/{list_id}/interest-categories', $tokens, $parameters);
   }
 
   /**
@@ -126,7 +126,7 @@ class MailchimpLists extends Mailchimp {
       'type' => $type,
     ];
 
-    return $this->request('PATCH', '/lists/{list_id}/interest-categories/{interest_category_id}', $tokens, $parameters);
+    return $this->api_class->request('PATCH', '/lists/{list_id}/interest-categories/{interest_category_id}', $tokens, $parameters);
   }
 
   /**
@@ -149,7 +149,7 @@ class MailchimpLists extends Mailchimp {
       'interest_category_id' => $interest_category_id,
     ];
 
-    return $this->request('DELETE', '/lists/{list_id}/interest-categories/{interest_category_id}', $tokens, $parameters);
+    return $this->api_class->request('DELETE', '/lists/{list_id}/interest-categories/{interest_category_id}', $tokens, $parameters);
   }
 
   /**
@@ -172,7 +172,7 @@ class MailchimpLists extends Mailchimp {
       'interest_category_id' => $interest_category_id,
     ];
 
-    return $this->request('GET', '/lists/{list_id}/interest-categories/{interest_category_id}/interests', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/interest-categories/{interest_category_id}/interests', $tokens, $parameters);
   }
 
   /**
@@ -201,7 +201,7 @@ class MailchimpLists extends Mailchimp {
       'name' => $name,
     ];
 
-    return $this->request('POST', '/lists/{list_id}/interest-categories/{interest_category_id}/interests', $tokens, $parameters);
+    return $this->api_class->request('POST', '/lists/{list_id}/interest-categories/{interest_category_id}/interests', $tokens, $parameters);
   }
 
   /**
@@ -233,7 +233,7 @@ class MailchimpLists extends Mailchimp {
       'name' => $name,
     ];
 
-    return $this->request('PATCH', '/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}', $tokens, $parameters);
+    return $this->api_class->request('PATCH', '/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}', $tokens, $parameters);
   }
 
   /**
@@ -259,7 +259,7 @@ class MailchimpLists extends Mailchimp {
       'interest_id' => $interest_id,
     ];
 
-    return $this->request('DELETE', '/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}', $tokens, $parameters);
+    return $this->api_class->request('DELETE', '/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}', $tokens, $parameters);
   }
 
   /**
@@ -279,7 +279,7 @@ class MailchimpLists extends Mailchimp {
       'list_id' => $list_id,
     ];
 
-    return $this->request('GET', '/lists/{list_id}/merge-fields', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/merge-fields', $tokens, $parameters);
   }
 
   /**
@@ -308,7 +308,7 @@ class MailchimpLists extends Mailchimp {
       'type' => $type,
     ];
 
-    return $this->request('POST', '/lists/{list_id}/merge-fields', $tokens, $parameters);
+    return $this->api_class->request('POST', '/lists/{list_id}/merge-fields', $tokens, $parameters);
   }
 
   /**
@@ -328,7 +328,7 @@ class MailchimpLists extends Mailchimp {
       'list_id' => $list_id,
     ];
 
-    return $this->request('GET', '/lists/{list_id}/members', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/members', $tokens, $parameters);
   }
 
   /**
@@ -351,7 +351,7 @@ class MailchimpLists extends Mailchimp {
       'subscriber_hash' => md5(strtolower($email)),
     ];
 
-    return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters);
   }
 
   /**
@@ -374,7 +374,7 @@ class MailchimpLists extends Mailchimp {
       'subscriber_hash' => md5(strtolower($email)),
     ];
 
-    return $this->request('POST', '/lists/{list_id}/members/{subscriber_hash}/events', $tokens, $parameters);
+    return $this->api_class->request('POST', '/lists/{list_id}/members/{subscriber_hash}/events', $tokens, $parameters);
   }
 
   /**
@@ -400,7 +400,7 @@ class MailchimpLists extends Mailchimp {
         'unique_email_id' => $mc_eid,
     ];
 
-    return $this->request('GET', '/lists/{list_id}/members/', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/members/', $tokens, $parameters);
   }
 
   /**
@@ -423,7 +423,7 @@ class MailchimpLists extends Mailchimp {
       'subscriber_hash' => md5(strtolower($email)),
     ];
 
-    return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/activity', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/members/{subscriber_hash}/activity', $tokens, $parameters);
   }
 
   /**
@@ -446,7 +446,7 @@ class MailchimpLists extends Mailchimp {
       'subscriber_hash' => md5(strtolower($email)),
     ];
 
-    return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/events', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/members/{subscriber_hash}/events', $tokens, $parameters);
   }
 
   /**
@@ -474,7 +474,7 @@ class MailchimpLists extends Mailchimp {
       'email_address' => $email,
     ];
 
-    return $this->request('POST', '/lists/{list_id}/members', $tokens, $parameters, $batch);
+    return $this->api_class->request('POST', '/lists/{list_id}/members', $tokens, $parameters, $batch);
   }
 
   /**
@@ -495,7 +495,7 @@ class MailchimpLists extends Mailchimp {
       'subscriber_hash' => md5(strtolower($email)),
     ];
 
-    return $this->request('DELETE', '/lists/{list_id}/members/{subscriber_hash}', $tokens);
+    return $this->api_class->request('DELETE', '/lists/{list_id}/members/{subscriber_hash}', $tokens);
   }
 
   /**
@@ -520,7 +520,7 @@ class MailchimpLists extends Mailchimp {
       'subscriber_hash' => md5(strtolower($email)),
     ];
 
-    return $this->request('PATCH', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters, $batch);
+    return $this->api_class->request('PATCH', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters, $batch);
   }
 
   /**
@@ -549,7 +549,7 @@ class MailchimpLists extends Mailchimp {
       'email_address' => $email,
     ];
 
-    return $this->request('PUT', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters, $batch);
+    return $this->api_class->request('PUT', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters, $batch);
   }
 
   /**
@@ -572,7 +572,7 @@ class MailchimpLists extends Mailchimp {
       'subscriber_hash' => md5(strtolower($email)),
     ];
 
-    return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
   }
 
   /**
@@ -592,7 +592,7 @@ class MailchimpLists extends Mailchimp {
       'list_id' => $list_id,
     ];
 
-    return $this->request('GET', '/lists/{list_id}/segments', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/segments', $tokens, $parameters);
   }
 
   /**
@@ -615,7 +615,7 @@ class MailchimpLists extends Mailchimp {
       'segment_id' => $segment_id,
     ];
 
-    return $this->request('GET', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters);
   }
 
   /**
@@ -643,7 +643,7 @@ class MailchimpLists extends Mailchimp {
       'name' => $name,
     ];
 
-    return $this->request('POST', '/lists/{list_id}/segments', $tokens, $parameters, $batch);
+    return $this->api_class->request('POST', '/lists/{list_id}/segments', $tokens, $parameters, $batch);
   }
 
   /**
@@ -674,7 +674,7 @@ class MailchimpLists extends Mailchimp {
       'name' => $name,
     ];
 
-    return $this->request('PATCH', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters, $batch);
+    return $this->api_class->request('PATCH', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters, $batch);
   }
 
   /**
@@ -697,7 +697,7 @@ class MailchimpLists extends Mailchimp {
       'segment_id' => $segment_id,
     ];
 
-    return $this->request('GET', '/lists/{list_id}/segments/{segment_id}/members', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/segments/{segment_id}/members', $tokens, $parameters);
   }
 
   /**
@@ -726,7 +726,7 @@ class MailchimpLists extends Mailchimp {
       'email_address' => $email,
     ];
 
-    return $this->request('POST', '/lists/{list_id}/segments/{segment_id}/members', $tokens, $parameters);
+    return $this->api_class->request('POST', '/lists/{list_id}/segments/{segment_id}/members', $tokens, $parameters);
   }
 
   /**
@@ -750,7 +750,7 @@ class MailchimpLists extends Mailchimp {
       'subscriber_hash' => md5(strtolower($email)),
     ];
 
-    return $this->request('DELETE', '/lists/{list_id}/segments/{segment_id}/members/{subscriber_hash}', $tokens);
+    return $this->api_class->request('DELETE', '/lists/{list_id}/segments/{segment_id}/members/{subscriber_hash}', $tokens);
   }
 
   /**
@@ -782,7 +782,7 @@ class MailchimpLists extends Mailchimp {
       ];
     }
 
-    return $this->request('POST', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
+    return $this->api_class->request('POST', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
   }
 
   /**
@@ -814,7 +814,7 @@ class MailchimpLists extends Mailchimp {
       ];
     }
 
-    return $this->request('POST', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
+    return $this->api_class->request('POST', '/lists/{list_id}/members/{subscriber_hash}/tags', $tokens, $parameters);
   }
 
   /**
@@ -834,7 +834,7 @@ class MailchimpLists extends Mailchimp {
       'list_id' => $list_id,
     ];
 
-    return $this->request('GET', '/lists/{list_id}/webhooks', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/webhooks', $tokens, $parameters);
   }
 
   /**
@@ -857,7 +857,7 @@ class MailchimpLists extends Mailchimp {
       'webhook_id' => $webhook_id,
     ];
 
-    return $this->request('GET', '/lists/{list_id}/webhooks/{webhook_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/lists/{list_id}/webhooks/{webhook_id}', $tokens, $parameters);
   }
 
   /**
@@ -883,7 +883,7 @@ class MailchimpLists extends Mailchimp {
       'url' => $url,
     ];
 
-    return $this->request('POST', '/lists/{list_id}/webhooks', $tokens, $parameters, $batch);
+    return $this->api_class->request('POST', '/lists/{list_id}/webhooks', $tokens, $parameters, $batch);
   }
 
   /**
@@ -904,7 +904,7 @@ class MailchimpLists extends Mailchimp {
       'webhook_id' => $webhook_id,
     ];
 
-    return $this->request('DELETE', '/lists/{list_id}/webhooks/{webhook_id}', $tokens, $parameters);
+    return $this->api_class->request('DELETE', '/lists/{list_id}/webhooks/{webhook_id}', $tokens, $parameters);
   }
 
   /**

@@ -9,7 +9,7 @@ namespace Mailchimp;
  *
  * @see https://kb.mailchimp.com/integrations/connected-sites/about-connected-sites
  */
-class MailchimpConnectedSites extends Mailchimp {
+class MailchimpConnectedSites extends MailchimpApiUser {
 
   /**
    * Gets information about all connected sites for the authenticated account.
@@ -20,7 +20,7 @@ class MailchimpConnectedSites extends Mailchimp {
    * @return object
    */
   public function getConnectedSites($parameters = []) {
-    return $this->request('GET', '/connected-sites', NULL, $parameters);
+    return $this->api_class->request('GET', '/connected-sites', NULL, $parameters);
   }
 
   /**
@@ -38,7 +38,7 @@ class MailchimpConnectedSites extends Mailchimp {
       'connected_site_id' => $connected_site_id,
     ];
 
-    return $this->request('GET', '/connected-sites/{connected_site_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/connected-sites/{connected_site_id}', $tokens, $parameters);
   }
 
 }

@@ -7,7 +7,7 @@ namespace Mailchimp;
  *
  * @package Mailchimp
  */
-class MailchimpReports extends Mailchimp {
+class MailchimpReports extends MailchimpApiUser {
 
   /**
    * Gets a report summary for the authenticated account.
@@ -20,7 +20,7 @@ class MailchimpReports extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/reports/#read-get_reports
    */
   public function getSummary($parameters = []) {
-    return $this->request('GET', '/reports', NULL, $parameters);
+    return $this->api_class->request('GET', '/reports', NULL, $parameters);
   }
 
   /**
@@ -40,7 +40,7 @@ class MailchimpReports extends Mailchimp {
       'campaign_id' => $campaign_id,
     ];
 
-    return $this->request('GET', '/reports/{campaign_id}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/reports/{campaign_id}', $tokens, $parameters);
   }
 
   /**
@@ -71,7 +71,7 @@ class MailchimpReports extends Mailchimp {
       'type' => $type,
     ];
 
-    return $this->request('GET', '/reports/{campaign_id}/{type}', $tokens, $parameters);
+    return $this->api_class->request('GET', '/reports/{campaign_id}/{type}', $tokens, $parameters);
   }
 
 }

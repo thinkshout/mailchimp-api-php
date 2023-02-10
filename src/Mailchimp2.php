@@ -5,13 +5,14 @@ namespace Mailchimp;
 use Mailchimp\http\MailchimpCurlHttpClient;
 use Mailchimp\http\MailchimpGuzzleHttpClient;
 use Mailchimp\http\MailchimpHttpClientInterface;
+use Mailchimp\MailchimpApiInterface;
 
 /**
- * Mailchimp library with access token authentication.
+ * Mailchimp library with OAuth support.
  *
  * @package Mailchimp
  */
-class Mailchimp2 {
+class Mailchimp2 implements MailchimpApiInterface {
 
   const VERSION = '2.0.0';
   const DEFAULT_DATA_CENTER = 'us1';
@@ -46,7 +47,7 @@ class Mailchimp2 {
    *
    * @var MailchimpHttpClientInterface $client
    */
-  protected $client;
+  public $client;
 
   /**
    * The REST API endpoint.
@@ -89,23 +90,26 @@ class Mailchimp2 {
   private $batch_operations;
 
   /**
+   * Authentication settings.
+   *
+   * @var array $authentication_settings
+   */
+  protected $authentication_settings;
+
+  /**
    * Mailchimp constructor.
    *
-   * @param string $access_token
-   *   The Mailchimp Access token.
-   * @param string $data_center
-   *   The Mailchimp data center associated with the account.
-   * @param string $api_user
-   *   The Mailchimp API username.
+   * @param array $authentication_settings
+   *   Authentication settings.
    * @param array $http_options
    *   HTTP client options.
    * @param MailchimpHttpClientInterface $client
    *   Optional custom HTTP client. $http_options are ignored if this is set.
    */
-  public function __construct($access_token, $data_center, $api_user = 'OAuth', $http_options = [], MailchimpHttpClientInterface $client = NULL) {
-    $this->access_token = $access_token;
-    $this->api_user = $api_user;
-    $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, $data_center, $this->endpoint);
+  public function __construct($authentication_settings, $http_options = [], MailchimpHttpClientInterface $client = NULL) {
+    $this->access_token = $authentication_settings['access_token'];
+    $this->api_user = $authentication_settings['api_user'];
+    $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, $authentication_settings['data_center'], $this->endpoint);
 
     if (!empty($client)) {
       $this->client = $client;
@@ -113,87 +117,6 @@ class Mailchimp2 {
     else {
       $this->client = $this->getDefaultHttpClient($http_options);
     }
-  }
-
-  /**
-   * Sets a custom HTTP client to be used for all API requests.
-   *
-   * @param \Mailchimp\http\MailchimpHttpClientInterface $client
-   *   The HTTP client.
-   */
-  public function setClient(MailchimpHttpClientInterface $client) {
-    $this->client = $client;
-  }
-
-  /**
-   * Sets a Mailchimp error code to be returned by all requests.
-   *
-   * Used to test and debug error handling.
-   *
-   * @param string $error_code
-   *   The Mailchimp error code.
-   */
-  public function setDebugErrorCode($error_code) {
-    $this->debug_error_code = $error_code;
-  }
-
-  /**
-   * Gets Mailchimp account information for the authenticated account.
-   *
-   * @param array $parameters
-   *   Associative array of optional request parameters.
-   *
-   * @return object
-   *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/root/#read-get_root
-   */
-  public function getAccount($parameters = []) {
-    return $this->request('GET', '/', NULL, $parameters);
-  }
-
-  /**
-   * Processes all pending batch operations.
-   *
-   * @throws MailchimpAPIException
-   *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
-   */
-  public function processBatchOperations() {
-    $parameters = [
-      'operations' => $this->batch_operations,
-    ];
-
-    try {
-      $response = $this->request('POST', '/batches', NULL, $parameters);
-
-      // Reset batch operations.
-      $this->batch_operations = [];
-
-      return $response;
-
-    }
-    catch (MailchimpAPIException $e) {
-      $message = 'Failed to process batch operations: ' . $e->getMessage();
-      throw new MailchimpAPIException($message, $e->getCode(), $e);
-    }
-  }
-
-  /**
-   * Gets the status of a batch request.
-   *
-   * @param string $batch_id
-   *   The ID of the batch operation.
-   *
-   * @return object
-   *
-   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#read-get_batches_batch_id
-   */
-  public function getBatchOperation($batch_id) {
-    $tokens = [
-      'batch_id' => $batch_id,
-    ];
-
-    return $this->request('GET', '/batches/{batch_id}', $tokens);
   }
 
   /**
@@ -242,7 +165,7 @@ class Mailchimp2 {
   }
 
   /**
-   * Makes a request to the Mailchimp API.
+   * Makes a request to the Mailchimp API using OAuth.
    *
    * @param string $method
    *   The REST method to use when making the request.
