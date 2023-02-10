@@ -26,11 +26,23 @@ Or to install with phpunit:
 
 A basic test to confirm the library is set up and functional.
 
+### With OAuth Access token
 ```php
 <?php
 require 'PATH_TO_LIBRARY/mailchimp-api-php/vendor/autoload.php';
-$api_key = 'YOUR_API_KEY';
-$mailchimp = new Mailchimp\Mailchimp($api_key);
+
+// Instantiate MailchimpApiInterface
+$authentication_settings = [
+  'access_token' => 'YOUR_ACCESS_TOKEN',
+  'data_center' => 'YOUR_DATA_CENTER',
+  'api_user' => 'oauth',
+];
+
+// Use Mailchimp2 class for OAuth access_token.
+$api_class = new Mailchimp2($authentication_settings);
+
+// Instantiate a MailchimpApiUser or a class that extends it (ie. MailchimpLists, MailchimpSignups, etc..)
+$mailchimp = new MailchimpApiUser($api_class);
 
 // Get the account details of the authenticated user.
 $response = $mailchimp->getAccount();
@@ -40,6 +52,33 @@ if (!empty($response) && isset($response->account_id)) {
   echo "ID: {$response->account_id}\n"
   . "Name: {$response->account_name}\n";
 }
+
+```
+
+### With API Key
+```php
+require 'PATH_TO_LIBRARY/mailchimp-api-php/vendor/autoload.php';
+
+// Instantiate MailchimpApiInterface
+$authentication_settings = [
+  'api_key' => 'YOUR_API_KEY',
+  'api_user' => 'api_key',
+];
+
+// Use Mailchimp class for api_key.
+$api_class = new Mailchimp($authentication_settings);
+
+// Instantiate a MailchimpApiUser or a class that extends it (ie. MailchimpLists, MailchimpSignups, etc..)
+$mailchimp = new MailchimpApiUser($api_class);
+
+// Get the account details of the authenticated user.
+$response = $mailchimp->getAccount();
+
+// Output the account details.
+if (!empty($response) && isset($response->account_id)) {
+  echo "ID: {$response->account_id}\n"
+  . "Name: {$response->account_name}\n";
+}ject = new MailchimpApiUser($api_class, $http_options);
 ```
 
 ### Get lists and their interest categories
@@ -50,8 +89,15 @@ uses that data to make another.
 ```php
 <?php
 require 'PATH_TO_LIBRARY/mailchimp-api-php/vendor/autoload.php';
-$api_key = 'YOUR_API_KEY';
-$mailchimp_lists = new Mailchimp\MailchimpLists($api_key);
+
+$authentication_settings = [
+  'access_token' => 'YOUR_ACCESS_TOKEN',
+  'data_center' => 'YOUR_DATA_CENTER',
+  'api_user' => 'oauth',
+];
+$api_class = new Mailchimp2($authentication_settings);
+
+$mailchimp_lists = new Mailchimp\MailchimpLists($api_class);
 
 // Get all lists.
 $response = $mailchimp_lists->getLists();
@@ -72,23 +118,6 @@ if (!empty($response) && isset($response->lists)) {
     }
   }
 }
-```
-
-### API Key vs OAuth Access Token
-
-If you need to connect to Mailchimp using an OAuth generated access token, modify your calls to use the Mailchimp2 class as follows.
-
-```php
-<?php
-// Replace calls like this:
-$api_key = 'YOUR_API_KEY';
-$mailchimp = new Mailchimp\Mailchimp($api_key);
-
-// With this:
-$access_token = 'YOUR_ACCESS_TOKEN';
-$data_center = 'YOUR_DATA_CENTER'; // ex. us-10
-$mailchimp = new Mailchimp\Mailchimp2($access_token, $data_center);
-
 ```
 
 ## Testing
