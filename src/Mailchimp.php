@@ -61,7 +61,7 @@ class Mailchimp implements MailchimpApiInterface {
    *
    * @var string $api_key
    */
-  private $api_key;
+  public $api_key;
 
   /**
    * The Mailchimp API username to authenticate with.
@@ -112,7 +112,7 @@ class Mailchimp implements MailchimpApiInterface {
 
     $dc = $this->getDataCenter($this->api_key);
 
-    $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, $dc, $this->endpoint);
+    $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, (string) $dc, $this->endpoint);
 
     if (!empty($client)) {
       $this->client = $client;
@@ -224,7 +224,7 @@ class Mailchimp implements MailchimpApiInterface {
    *   The data center ID.
    */
   private function getDataCenter($api_key) {
-    $api_key_parts = explode('-', $api_key);
+    $api_key_parts = explode('-', (string) $api_key);
 
     return (isset($api_key_parts[1])) ? $api_key_parts[1] : Mailchimp::DEFAULT_DATA_CENTER;
   }
