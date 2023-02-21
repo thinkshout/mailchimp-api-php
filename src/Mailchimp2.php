@@ -61,7 +61,7 @@ class Mailchimp2 implements MailchimpApiInterface {
    *
    * @var string $access_token
    */
-  private $access_token;
+  public $access_token;
 
   /**
    * The Mailchimp API username to authenticate with.
@@ -109,7 +109,7 @@ class Mailchimp2 implements MailchimpApiInterface {
   public function __construct($authentication_settings, $http_options = [], MailchimpHttpClientInterface $client = NULL) {
     $this->access_token = $authentication_settings['access_token'];
     $this->api_user = $authentication_settings['api_user'];
-    $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, $authentication_settings['data_center'], $this->endpoint);
+    $this->endpoint = str_replace(Mailchimp::DEFAULT_DATA_CENTER, (string) $authentication_settings['data_center'], $this->endpoint);
 
     if (!empty($client)) {
       $this->client = $client;
