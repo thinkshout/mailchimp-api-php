@@ -142,9 +142,3 @@ source ~/.bash_profile
 Then run PHPUnit:
 
 `phpunit`
-
-### Mailchimp API Playground
-
-Mailchimp's [API Playground](https://us1.api.mailchimp.com/playground/) provides
-access to all API methods via a web-based UI. You can use this to test API calls
-and review data you've sent to Mailchimp.
