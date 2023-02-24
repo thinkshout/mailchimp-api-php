@@ -17,7 +17,7 @@ class MailchimpApiUser {
    *
    * @var MailchimpApiInterface $apiClass
    */
-  protected $api_class;
+  public $api_class;
 
   /**
    * Mailchimp API user constructor.
