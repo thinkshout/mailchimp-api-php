@@ -153,7 +153,7 @@ class MailchimpApiUser {
    * @throws MailchimpAPIException
    */
   public function request($method, $path, $tokens = NULL, $parameters = [], $batch = FALSE, $returnAssoc = FALSE) {
-    return $this->api_class->request($method, $path, $tokens = NULL, $parameters = [], $batch = FALSE, $returnAssoc = FALSE);
+    return $this->api_class->request($method, $path, $tokens, $parameters, $batch, $returnAssoc);
   }
 
 }
