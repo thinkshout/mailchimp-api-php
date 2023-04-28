@@ -27,7 +27,6 @@ class MailchimpTest extends TestCase {
    */
   public function testVersion() {
     $mc = new Mailchimp();
-    $this->assertEquals($mc::VERSION, '2.0.0');
     $this->assertEquals(json_decode(file_get_contents('composer.json'))->version, $mc::VERSION);
   }
 
