@@ -2,12 +2,7 @@
 
 namespace Mailchimp\Tests;
 
-/**
- * Mailchimp connected sites library test cases.
- *
- * @package Mailchimp\Tests
- */
-class MailchimpConnectedSites extends \Mailchimp\MailchimpConnectedSites {
+class MailchimpApiUser extends \Mailchimp\MailchimpApiUser {
 
   /**
    * @inheritdoc

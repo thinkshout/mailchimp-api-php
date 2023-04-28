@@ -15,7 +15,8 @@ class MailchimpListsTest extends TestCase {
    * Tests library functionality for lists information.
    */
   public function testGetLists() {
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getLists();
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -28,7 +29,8 @@ class MailchimpListsTest extends TestCase {
   public function testGetList() {
     $list_id = '57afe96172';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getList($list_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -41,7 +43,8 @@ class MailchimpListsTest extends TestCase {
   public function testGetInterestCategories() {
     $list_id = '57afe96172';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getInterestCategories($list_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -56,7 +59,8 @@ class MailchimpListsTest extends TestCase {
     $title = 'Test Interest Category';
     $type = 'checkbox';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->addInterestCategories($list_id, $title, $type);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -79,7 +83,8 @@ class MailchimpListsTest extends TestCase {
     $type = 'dropdown';
     $interest_category_id = '08f0b1d7b2';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->updateInterestCategories($list_id, $interest_category_id, $title, $type);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -100,7 +105,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $interest_category_id = '08f0b1d7b2';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->deleteInterestCategories($list_id, $interest_category_id);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -114,7 +120,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '';
     $interest_category_id = '';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getInterests($list_id, $interest_category_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -129,7 +136,8 @@ class MailchimpListsTest extends TestCase {
     $interest_category_id = '08f0b1d7b2';
     $name = 'Test Interest';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->addInterests($list_id, $interest_category_id, $name);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -151,7 +159,8 @@ class MailchimpListsTest extends TestCase {
     $interest_id = '9143cf3bd1';
     $name = 'Test Interest Edited';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->updateInterests($list_id, $interest_category_id, $interest_id, $name);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -172,7 +181,8 @@ class MailchimpListsTest extends TestCase {
     $interest_category_id = '08f0b1d7b2';
     $interest_id = '9143cf3bd1';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->deleteInterests($list_id, $interest_category_id, $interest_id);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -185,7 +195,8 @@ class MailchimpListsTest extends TestCase {
   public function testGetMergeFields() {
     $list_id = '57afe96172';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getMergeFields($list_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -200,7 +211,8 @@ class MailchimpListsTest extends TestCase {
     $name = 'Phone number';
     $type = 'phone';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->addMergeField($list_id, $name, $type);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -218,7 +230,8 @@ class MailchimpListsTest extends TestCase {
   public function testGetMembers() {
     $list_id = '57afe96172';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getMembers($list_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -232,7 +245,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $email = 'test@example.com';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getMemberInfo($list_id, $email);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -246,7 +260,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $email = 'test@example.com';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getMemberActivity($list_id, $email);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -260,7 +275,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $email = 'test@example.com';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getMemberEvents($list_id, $email);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -274,7 +290,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $email = 'test@example.com';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->addMember($list_id, $email);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -294,7 +311,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $email = 'test@example.com';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->removeMember($list_id, $email);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -308,7 +326,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $email = 'test@example.com';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->updateMember($list_id, $email);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -322,7 +341,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $email = 'test@example.com';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->addOrUpdateMember($list_id, $email);
 
     $this->assertEquals('PUT', $mc->getClient()->method);
@@ -336,7 +356,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $email = 'test@example.com';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getMemberTags($list_id, $email);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -349,7 +370,8 @@ class MailchimpListsTest extends TestCase {
   public function testGetSegments() {
     $list_id = '57afe96172';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getSegments($list_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -363,7 +385,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $segment_id = '49377';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getSegment($list_id, $segment_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -377,7 +400,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '57afe96172';
     $name = 'Test Segment';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->addSegment($list_id, $name);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -398,7 +422,8 @@ class MailchimpListsTest extends TestCase {
     $segment_id = '49381';
     $name = 'Updated Test Segment';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->updateSegment($list_id, $segment_id, $name);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -418,7 +443,8 @@ class MailchimpListsTest extends TestCase {
     $list_id = '205d96e6b4';
     $segment_id = '457';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->getSegmentMembers($list_id, $segment_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -433,7 +459,8 @@ class MailchimpListsTest extends TestCase {
     $segment_id = '457';
     $email = 'test@example.com';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->addSegmentMember($list_id, $segment_id, $email);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -454,7 +481,8 @@ class MailchimpListsTest extends TestCase {
     $segment_id = '457';
     $email = 'test@example.com';
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->removeSegmentMember($list_id, $segment_id, $email);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -468,7 +496,9 @@ class MailchimpListsTest extends TestCase {
     $list_id = '205d96e6b4';
     $tags = ['Foo', 'Bar'];
     $email = 'test@example.com';
-    $mc = new MailchimpLists();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->addTagsMember($list_id, $tags, $email);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -498,7 +528,9 @@ class MailchimpListsTest extends TestCase {
     $list_id = '205d96e6b4';
     $tags = ['Foo', 'Bar'];
     $email = 'test@example.com';
-    $mc = new MailchimpLists();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->removeTagsMember($list_id, $tags, $email);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -534,7 +566,8 @@ class MailchimpListsTest extends TestCase {
         ],
       ];
 
-    $mc = new MailchimpLists();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpLists($api_user);
     $mc->AddMemberEvent($list_id, $email, $event);
 
     $this->assertEquals('POST', $mc->getClient()->method);
