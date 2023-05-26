@@ -14,7 +14,7 @@ use Mailchimp\MailchimpApiInterface;
  */
 class Mailchimp implements MailchimpApiInterface {
 
-  const VERSION = '3.0.0-rc6';
+  const VERSION = '3.0.0';
   const DEFAULT_DATA_CENTER = 'us1';
 
   const ERROR_CODE_BAD_REQUEST = 'BadRequest';
