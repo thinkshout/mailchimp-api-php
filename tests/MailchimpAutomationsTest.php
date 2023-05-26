@@ -10,7 +10,8 @@ class MailchimpAutomationsTest extends TestCase {
    * Tests library functionality for automations.
    */
   public function testGetAutomations() {
-    $mc = new MailchimpAutomations();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpAutomations($api_user);
     $mc->getAutomations();
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -23,7 +24,8 @@ class MailchimpAutomationsTest extends TestCase {
   public function testGetWorkflow() {
     $workflow_id = '57afe96172';
 
-    $mc = new MailchimpAutomations();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpAutomations($api_user);
     $mc->getWorkflow($workflow_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -36,7 +38,8 @@ class MailchimpAutomationsTest extends TestCase {
   public function testGetWorkflowEmails() {
     $workflow_id = '57afe96172';
 
-    $mc = new MailchimpAutomations();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpAutomations($api_user);
     $mc->getWorkflowEmails($workflow_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -50,7 +53,8 @@ class MailchimpAutomationsTest extends TestCase {
     $workflow_id = '57afe96172';
     $workflow_email_id = 'a87de7d1e5';
 
-    $mc = new MailchimpAutomations();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpAutomations($api_user);
     $mc->getWorkflowEmail($workflow_id, $workflow_email_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -64,7 +68,8 @@ class MailchimpAutomationsTest extends TestCase {
     $workflow_id = '57afe96172';
     $workflow_email_id = 'a87de7d1e5';
 
-    $mc = new MailchimpAutomations();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpAutomations($api_user);
     $mc->getWorkflowEmailSubscribers($workflow_id, $workflow_email_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -79,7 +84,8 @@ class MailchimpAutomationsTest extends TestCase {
     $workflow_email_id = 'a87de7d1e5';
     $email = 'test@example.com';
 
-    $mc = new MailchimpAutomations();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpAutomations($api_user);
     $mc->getWorkflowEmailSubscriber($workflow_id, $workflow_email_id, $email);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -94,7 +100,8 @@ class MailchimpAutomationsTest extends TestCase {
     $workflow_email_id = 'a87de7d1e5';
     $email = 'test@example.com';
 
-    $mc = new MailchimpAutomations();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpAutomations($api_user);
     $mc->addWorkflowEmailSubscriber($workflow_id, $workflow_email_id, $email);
 
     $this->assertEquals('POST', $mc->getClient()->method);

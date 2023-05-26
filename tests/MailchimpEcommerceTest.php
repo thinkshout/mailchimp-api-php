@@ -15,7 +15,8 @@ class MailchimpEcommerceTest extends TestCase {
    * Tests library functionality for stores information.
    */
   public function testGetStores() {
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getStores();
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -28,7 +29,8 @@ class MailchimpEcommerceTest extends TestCase {
   public function testGetStore() {
     $store_id = 'MC002';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getStore($store_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -46,7 +48,8 @@ class MailchimpEcommerceTest extends TestCase {
       'currency_code' => 'USD',
     ];
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->addStore($id, $store);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -70,7 +73,8 @@ class MailchimpEcommerceTest extends TestCase {
     $name = "Freddie's Merchandise";
     $currency_code = 'USD';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->updateStore($store_id, $name, $currency_code);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -90,7 +94,8 @@ class MailchimpEcommerceTest extends TestCase {
   public function testDeleteStore() {
     $store_id = 'MC002';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->deleteStore($store_id);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -103,7 +108,8 @@ class MailchimpEcommerceTest extends TestCase {
   public function testGetCarts() {
     $store_id = 'MC001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getCarts($store_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -117,7 +123,8 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $cart_id = 'cart0001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getCart($store_id, $cart_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -149,7 +156,8 @@ class MailchimpEcommerceTest extends TestCase {
       ],
     ];
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->addCart($store_id, $id, $customer, $cart);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -182,7 +190,8 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $cart_id = 'cart0001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->updateCart($store_id, $cart_id);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -196,7 +205,8 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $cart_id = 'cart0001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->deleteCart($store_id, $cart_id);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -210,7 +220,8 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $cart_id = 'cart0001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getCartLines($store_id, $cart_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -225,7 +236,8 @@ class MailchimpEcommerceTest extends TestCase {
     $cart_id = 'cart0001';
     $line_id = 'line002';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getCartLine($store_id, $cart_id, $line_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -246,7 +258,8 @@ class MailchimpEcommerceTest extends TestCase {
       'price' => 5,
     ];
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->addCartLine($store_id, $cart_id, $id, $product);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -271,7 +284,8 @@ class MailchimpEcommerceTest extends TestCase {
     $cart_id = 'cart0001';
     $line_id = 'L001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->updateCartLine($store_id, $cart_id, $line_id);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -286,7 +300,8 @@ class MailchimpEcommerceTest extends TestCase {
     $cart_id = 'cart0001';
     $line_id = 'L001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->deleteCartLine($store_id, $cart_id, $line_id);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -299,7 +314,8 @@ class MailchimpEcommerceTest extends TestCase {
   public function testGetCustomers() {
     $store_id = 'MC001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getCustomers($store_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -313,7 +329,8 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $customer_id = 'cust0001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getCustomer($store_id, $customer_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -331,7 +348,8 @@ class MailchimpEcommerceTest extends TestCase {
       'opt_in_status' => TRUE,
     ];
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->addCustomer($store_id, $customer);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -357,7 +375,8 @@ class MailchimpEcommerceTest extends TestCase {
       'opt_in_status' => TRUE,
     ];
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->updateCustomer($store_id, $customer);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -379,7 +398,8 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $customer_id = 'cust0003';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->deleteCustomer($store_id, $customer_id);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -392,7 +412,8 @@ class MailchimpEcommerceTest extends TestCase {
   public function testGetOrders() {
     $store_id = 'MC001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getOrders($store_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -406,7 +427,8 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $order_id = 'ord0001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getOrder($store_id, $order_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -438,7 +460,8 @@ class MailchimpEcommerceTest extends TestCase {
       ],
     ];
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->addOrder($store_id, $order_id, $customer, $order);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -471,7 +494,8 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $order_id = 'ord0001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->updateOrder($store_id, $order_id);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -485,7 +509,8 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC002';
     $order_id = 'ord0001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->deleteOrder($store_id, $order_id);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -499,7 +524,8 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $order_id = 'ord0001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getOrderLines($store_id, $order_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -514,7 +540,8 @@ class MailchimpEcommerceTest extends TestCase {
     $order_id = 'ord0001';
     $line_id = 'L001';
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getOrderLine($store_id, $order_id, $line_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -535,7 +562,8 @@ class MailchimpEcommerceTest extends TestCase {
       'price' => 5,
     ];
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->addOrderLine($store_id, $order_id, $id, $product);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -557,7 +585,9 @@ class MailchimpEcommerceTest extends TestCase {
    */
   public function testsGetProducts() {
     $store_id = 'MC001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getProducts($store_id);
     // Method must be GET.
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -571,7 +601,9 @@ class MailchimpEcommerceTest extends TestCase {
   public function testGetProduct() {
     $store_id = 'MC001';
     $product_id = 'sku0001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getProduct($store_id, $product_id);
     // Method must be GET.
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -595,7 +627,8 @@ class MailchimpEcommerceTest extends TestCase {
       $variant_1,
     ];
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
 
     $mc->addProduct($store_id, $id, $title, $url, $variants);
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -630,7 +663,8 @@ class MailchimpEcommerceTest extends TestCase {
       $variant_2,
     ];
 
-    $mc = new MailchimpEcommerce();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
 
     $mc->updateProduct($store_id, $id, $variants);
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -652,7 +686,9 @@ class MailchimpEcommerceTest extends TestCase {
   public function testDeleteProduct() {
     $store_id = 'MC001';
     $product_id = 'sku0001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->deleteProduct($store_id, $product_id);
     // Method must be DELETE.
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -670,7 +706,9 @@ class MailchimpEcommerceTest extends TestCase {
       'id' => 'var001',
       'title' => 'Var Title',
     ];
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->addProductVariant($store_id, $product_id, $params);
     $this->assertEquals('POST', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/ecommerce/stores/' . $store_id . '/products/' . $product_id . '/variants', $mc->getClient()->uri);
@@ -687,7 +725,9 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $product_id = 'sku0001';
     $variant_id = 'var001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->deleteProductVariant($store_id, $product_id, $variant_id);
     // Confirm we are using DELETE in the client method.
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -702,7 +742,9 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $product_id = 'sku0001';
     $variant_id = 'var001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getProductVariant($store_id, $product_id, $variant_id);
     // Check method.
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -716,7 +758,9 @@ class MailchimpEcommerceTest extends TestCase {
   public function testGetVariants() {
     $store_id = 'MC001';
     $product_id = 'sku0001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getProductVariants($store_id, $product_id);
     // Check method.
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -737,7 +781,9 @@ class MailchimpEcommerceTest extends TestCase {
       'url' => 'http://www.example.com',
       'sku' => 'abc0042',
     ];
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->updateProductVariant($store_id, $product_id, $variant_id, $params);
     // Check method.
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -764,7 +810,9 @@ class MailchimpEcommerceTest extends TestCase {
       'type' => 'fixed',
       'target' => 'total',
     ];
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->addPromoRule($store_id, $params);
     // Check method.
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -792,7 +840,9 @@ class MailchimpEcommerceTest extends TestCase {
       'type' => 'percentage',
       'target' => 'per_item',
     ];
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->updatePromoRule($store_id, $params);
     // Check method.
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -813,7 +863,9 @@ class MailchimpEcommerceTest extends TestCase {
    */
   public function testGetPromoRules() {
     $store_id = 'MC001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getPromoRules($store_id);
     // Check method.
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -827,7 +879,9 @@ class MailchimpEcommerceTest extends TestCase {
   public function testGetPromoRule() {
     $store_id = 'MC001';
     $promo_rule_id = 'promo0001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getPromoRule($store_id, $promo_rule_id);
     // Check method.
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -841,7 +895,9 @@ class MailchimpEcommerceTest extends TestCase {
   public function testDeletePromoRule() {
     $store_id = 'MC001';
     $promo_rule_id = 'promo0001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->deletePromoRule($store_id, $promo_rule_id);
     // Method must be DELETE.
     $this->assertEquals('DELETE', $mc->getClient()->method);
@@ -861,7 +917,9 @@ class MailchimpEcommerceTest extends TestCase {
       'code' => 'abc0042',
       'redemption_url' => 'http://www.example.com',
     ];
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->addPromoCode($store_id, $promo_rule_id, $params);
     // Check method.
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -885,7 +943,9 @@ class MailchimpEcommerceTest extends TestCase {
       'code' => 'abc0042',
       'redemption_url' => 'http://www.example.com',
     ];
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->updatePromoCode($store_id, $promo_rule_id, $params);
     // Check method.
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -905,7 +965,9 @@ class MailchimpEcommerceTest extends TestCase {
   public function testGetPromoCodes() {
     $store_id = 'MC001';
     $promo_rule_id = 'promo0001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getPromoCodes($store_id, $promo_rule_id);
     // Check method.
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -920,7 +982,9 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $promo_rule_id = 'promo0001';
     $promo_code_id = 'code001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->getPromoCode($store_id, $promo_rule_id, $promo_code_id);
     // Check method.
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -935,7 +999,9 @@ class MailchimpEcommerceTest extends TestCase {
     $store_id = 'MC001';
     $promo_rule_id = 'promo0001';
     $promo_code_id = 'code001';
-    $mc = new MailchimpEcommerce();
+
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpEcommerce($api_user);
     $mc->deletePromoCode($store_id, $promo_rule_id, $promo_code_id);
     // Method must be DELETE.
     $this->assertEquals('DELETE', $mc->getClient()->method);

@@ -15,7 +15,8 @@ class MailchimpReportsTest extends TestCase {
    * Tests library functionality for report information.
    */
   public function testGetSummary() {
-    $mc = new MailchimpReports();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpReports($api_user);
     $mc->getSummary();
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -28,7 +29,8 @@ class MailchimpReportsTest extends TestCase {
   public function testCampaignSummary() {
     $campaign_id = '42694e9e57';
 
-    $mc = new MailchimpReports();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpReports($api_user);
     $mc->getCampaignSummary($campaign_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -42,7 +44,8 @@ class MailchimpReportsTest extends TestCase {
     $campaign_id = '42694e9e57';
     $type = 'email-activity';
 
-    $mc = new MailchimpReports();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpReports($api_user);
     $mc->getCampaignReport($campaign_id, $type);
 
     $this->assertEquals('GET', $mc->getClient()->method);

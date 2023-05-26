@@ -15,7 +15,8 @@ class MailchimpCampaignsTest extends TestCase {
    * Tests library functionality for campaigns information.
    */
   public function testGetCampaigns() {
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->getCampaigns();
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -28,7 +29,8 @@ class MailchimpCampaignsTest extends TestCase {
   public function testGetCampaign() {
     $campaign_id = '42694e9e57';
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->getCampaign($campaign_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -48,7 +50,8 @@ class MailchimpCampaignsTest extends TestCase {
       'from_name' => 'Customer Service',
     ];
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->addCampaign($type, $recipients, $settings);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -71,7 +74,8 @@ class MailchimpCampaignsTest extends TestCase {
   public function testGetCampaignContent() {
     $campaign_id = '42694e9e57';
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->getCampaignContent($campaign_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -87,7 +91,8 @@ class MailchimpCampaignsTest extends TestCase {
       'html' => '<p>The HTML to use for the saved campaign.</p>',
     ];
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->setCampaignContent($campaign_id, $parameters);
 
     $this->assertEquals('PUT', $mc->getClient()->method);
@@ -106,7 +111,8 @@ class MailchimpCampaignsTest extends TestCase {
   public function testGetSendChecklist() {
     $campaign_id = '42694e9e57';
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->getSendChecklist($campaign_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -127,7 +133,8 @@ class MailchimpCampaignsTest extends TestCase {
       'from_name' => 'Customer Service',
     ];
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->updateCampaign($campaign_id, $type, $recipients, $settings);
 
     $this->assertEquals('PATCH', $mc->getClient()->method);
@@ -154,7 +161,8 @@ class MailchimpCampaignsTest extends TestCase {
     ];
     $send_type = 'html';
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->sendTest($campaign_id, $emails, $send_type);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -173,7 +181,8 @@ class MailchimpCampaignsTest extends TestCase {
       'batch_count' => 100,
     ];
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->schedule($campaign_id, $schedule_time, $timewarp, $batch_delivery);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -193,7 +202,8 @@ class MailchimpCampaignsTest extends TestCase {
   public function testUnschedule() {
     $campaign_id = 'b03bfc273a';
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->unschedule($campaign_id);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -206,7 +216,8 @@ class MailchimpCampaignsTest extends TestCase {
   public function testSend() {
     $campaign_id = 'b03bfc273a';
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->send($campaign_id);
 
     $this->assertEquals('POST', $mc->getClient()->method);
@@ -219,7 +230,8 @@ class MailchimpCampaignsTest extends TestCase {
   public function testDelete() {
     $campaign_id = '42694e9e57';
 
-    $mc = new MailchimpCampaigns();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpCampaigns($api_user);
     $mc->delete($campaign_id);
 
     $this->assertEquals('DELETE', $mc->getClient()->method);

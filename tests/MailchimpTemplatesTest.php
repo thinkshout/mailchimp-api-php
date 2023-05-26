@@ -15,7 +15,8 @@ class MailchimpTemplatesTest extends TestCase {
    * Tests library functionality for templates information.
    */
   public function testGetTemplates() {
-    $mc = new MailchimpTemplates();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpTemplates($api_user);
     $mc->getTemplates();
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -28,7 +29,8 @@ class MailchimpTemplatesTest extends TestCase {
   public function testGetTemplate() {
     $template_id = '2000094';
 
-    $mc = new MailchimpTemplates();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpTemplates($api_user);
     $mc->getTemplate($template_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
@@ -41,7 +43,8 @@ class MailchimpTemplatesTest extends TestCase {
   public function testGetTemplateContent() {
     $template_id = '2000094';
 
-    $mc = new MailchimpTemplates();
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpTemplates($api_user);
     $mc->getTemplateContent($template_id);
 
     $this->assertEquals('GET', $mc->getClient()->method);
