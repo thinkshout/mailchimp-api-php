@@ -10,6 +10,13 @@ namespace Mailchimp\Tests;
 class MailchimpConnectedSites extends \Mailchimp\MailchimpConnectedSites {
 
   /**
+   * Test HTTP client.
+   *
+   * @var \Mailchimp\http\MailchimpHttpClientInterface
+   */
+  private $client;
+
+  /**
    * @inheritdoc
    */
   public function __construct($api_class = null) {
