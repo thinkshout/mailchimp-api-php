@@ -12,6 +12,13 @@ use Mailchimp\MailchimpAPIException;
 class MailchimpEcommerce extends \Mailchimp\MailchimpEcommerce {
 
   /**
+   * Test HTTP client.
+   *
+   * @var \Mailchimp\http\MailchimpHttpClientInterface
+   */
+  private $client;
+
+  /**
    * Storage for stores. Used in place of real Mailchimp API.
    *
    * @var array $stores

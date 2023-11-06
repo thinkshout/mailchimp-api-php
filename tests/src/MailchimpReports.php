@@ -10,6 +10,13 @@ namespace Mailchimp\Tests;
 class MailchimpReports extends \Mailchimp\MailchimpReports {
 
   /**
+   * Test HTTP client.
+   *
+   * @var \Mailchimp\http\MailchimpHttpClientInterface
+   */
+  private $client;
+
+  /**
    * @inheritdoc
    */
   public function __construct($api_class = null) {
