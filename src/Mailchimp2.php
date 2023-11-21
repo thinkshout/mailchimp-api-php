@@ -212,6 +212,13 @@ class Mailchimp2 implements MailchimpApiInterface {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function hasApiAccess() {
+    return isset($this->access_token);
+  }
+
+  /**
    * Instantiates a default HTTP client based on the local environment.
    *
    * @param array $http_options

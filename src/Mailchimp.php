@@ -215,6 +215,13 @@ class Mailchimp implements MailchimpApiInterface {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function hasApiAccess() {
+    return isset($this->api_key);
+  }
+
+  /**
    * Gets the ID of the data center associated with an API key.
    *
    * @param string $api_key
