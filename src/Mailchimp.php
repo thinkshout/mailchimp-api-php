@@ -94,7 +94,7 @@ class Mailchimp implements MailchimpApiInterface {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
    */
-  private $batch_operations;
+  public $batch_operations;
 
   /**
    * Mailchimp constructor.
