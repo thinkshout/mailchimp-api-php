@@ -120,14 +120,7 @@ class MailchimpApiUser {
    *   If the access_token or api_key is set.
    */
   public function hasApiAccess() {
-    switch (get_class($this->api_class)) {
-      case 'Mailchimp\Mailchimp':
-        return isset($this->api_class->api_key);
-        break;
-      case 'Mailchimp\Mailchimp2':
-        return isset($this->api_class->access_token);
-        break;
-    }
+    return $this->api_class->hasApiAccess();
   }
 
   /**

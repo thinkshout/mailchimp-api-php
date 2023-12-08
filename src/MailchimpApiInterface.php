@@ -34,5 +34,12 @@ interface MailchimpApiInterface {
    */
   public function request($method, $path, $tokens = NULL, $parameters = [], $batch = FALSE, $returnAssoc = FALSE);
 
+  /**
+   * Checks if key or token is in place.
+   *
+   * @return bool
+   *   If the access_token or api_key is set.
+   */
+  public function hasApiAccess();
 
 }
