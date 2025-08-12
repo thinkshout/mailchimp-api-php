@@ -67,6 +67,7 @@ class MailchimpEcommerce extends MailchimpApiUser {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/#create-post_ecommerce_stores
    */
   public function addStore($id, $store, $parameters = [], $batch = FALSE) {
+    $parameters = is_array($parameters) ? $parameters : [];
     $parameters['id'] = $id;
     $parameters += $store;
 

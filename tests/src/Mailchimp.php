@@ -12,7 +12,7 @@ class Mailchimp extends \Mailchimp\Mailchimp {
   /**
    * @inheritdoc
    */
-  public function __construct($authentication_settings, $http_options = [], MailchimpHttpClientInterface $client = NULL) {
+  public function __construct($authentication_settings, $http_options = [], $client = NULL) {
     $this->client = new MailchimpTestHttpClient();
 
     parent::__construct($authentication_settings, $http_options, $this->client);

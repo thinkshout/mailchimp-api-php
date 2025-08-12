@@ -103,10 +103,10 @@ class Mailchimp implements MailchimpApiInterface {
    *   Authentication settings.
    * @param array $http_options
    *   HTTP client options.
-   * @param MailchimpHttpClientInterface $client
+   * @param MailchimpHttpClientInterface|null $client
    *   Optional custom HTTP client. $http_options are ignored if this is set.
    */
-  public function __construct($authentication_settings, $http_options = [], MailchimpHttpClientInterface $client = NULL) {
+  public function __construct($authentication_settings, $http_options = [], $client = NULL) {
     $this->api_key = $authentication_settings['api_key'];
     $this->api_user = $authentication_settings['api_user'];
 
