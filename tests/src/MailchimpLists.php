@@ -210,6 +210,7 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
         (object) [
           'merge_id' => 1,
           'tag' => 'FNAME',
+          'name' => 'First name',
           'required' => FALSE,
           'public' => TRUE,
           'list_id' => $list_id,
@@ -217,6 +218,7 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
         (object) [
           'merge_id' => 2,
           'tag' => 'LNAME',
+          'name' => 'Last name',
           'required' => TRUE,
           'public' => TRUE,
           'list_id' => $list_id,
@@ -224,6 +226,7 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
         (object) [
           'merge_id' => 3,
           'tag' => 'PRIVATE',
+          'name' => 'Private mergevar',
           'required' => FALSE,
           'public' => FALSE,
           'list_id' => $list_id,
