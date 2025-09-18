@@ -210,15 +210,26 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
         (object) [
           'merge_id' => 1,
           'tag' => 'FNAME',
+          'required' => FALSE,
+          'public' => TRUE,
           'list_id' => $list_id,
         ],
         (object) [
           'merge_id' => 2,
           'tag' => 'LNAME',
+          'required' => TRUE,
+          'public' => TRUE,
+          'list_id' => $list_id,
+        ],
+        (object) [
+          'merge_id' => 3,
+          'tag' => 'PRIVATE',
+          'required' => FALSE,
+          'public' => FALSE,
           'list_id' => $list_id,
         ],
       ],
-      'total_items' => 2,
+      'total_items' => 3,
     ];
 
     return $response;
