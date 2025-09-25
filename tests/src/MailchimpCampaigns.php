@@ -37,8 +37,6 @@ class MailchimpCampaigns extends \Mailchimp\MailchimpCampaigns {
    * @inheritdoc
    */
   public function getCampaign($campaign_id, $parameters = []) {
-    parent::getCampaign($campaign_id, $parameters);
-
     $response = (object) [
       'id' => $campaign_id,
       'type' => 'regular',

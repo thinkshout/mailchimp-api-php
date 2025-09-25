@@ -32,8 +32,6 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
    * @inheritdoc
    */
   public function getAutomations($parameters = []) {
-    parent::getAutomations($parameters);
-
     $response = (object) [
       'automations' => [
         (object) [
@@ -59,7 +57,6 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
    * @inheritdoc
    */
   public function getWorkflow($workflow_id) {
-    parent::getWorkflow($workflow_id);
     $response = (object) [
       'id' => 'eb4c82c9d2',
       'create_time' => '2015-07-23T15:15:00+00:00',
@@ -75,8 +72,6 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
    * @inheritdoc
    */
   public function getWorkflowEmails($workflow_id) {
-    parent::getWorkflowEmails($workflow_id);
-
     $response = (object) [
       'emails' => [
         (object) [
@@ -99,8 +94,6 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
    * @inheritdoc
    */
   public function getWorkflowEmail($workflow_id,$workflow_email_id) {
-    parent::getWorkflowEmail($workflow_id, $workflow_email_id);
-
     $response = (object) [
       'id' => 'a87de7d1e5',
       'workflow_id' => '57afe96172',
@@ -118,8 +111,6 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
    * @inheritdoc
    */
   public function getWorkflowEmailSubscribers($workflow_id, $workflow_email_id) {
-    parent::getWorkflowEmailSubscribers($workflow_id, $workflow_email_id);
-
     $response = (object) [
       'workflow_id' => '4e3da78a41',
       'email_id' => 'a87de7d1e5',
@@ -134,8 +125,6 @@ class MailchimpAutomations extends \Mailchimp\MailchimpAutomations {
    * @inheritdoc
    */
   public function getWorkflowEmailSubscriber($workflow_id, $workflow_email_id, $email) {
-    parent::getWorkflowEmailSubscriber($workflow_id, $workflow_email_id, $email);
-
     $response = (object) [
       'id' => md5(strtolower($email)),
       'workflow_id' => '4e3da78a41',
