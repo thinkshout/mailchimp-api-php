@@ -81,6 +81,7 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
           'list_id' => $list_id,
           'id' => 'a1e9f4b7f6',
           'title' => 'Test Interest Category',
+          'type' => 'checkboxes',
         ],
       ],
       'total_items' => 1,
