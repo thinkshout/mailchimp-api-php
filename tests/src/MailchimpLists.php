@@ -71,6 +71,24 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function getListsForEmail($email) {
+    // Return lists that the email is subscribed to.
+    $list_data = $this->getLists();
+    $subscribed_lists = [];
+
+    if ($list_data->total_items > 0) {
+      // Return the first list if email matches test pattern.
+      if (strpos($email, 'test') !== FALSE) {
+        $subscribed_lists[] = $list_data->lists[0];
+      }
+    }
+
+    return $subscribed_lists;
+  }
+
+  /**
    * @inheritdoc
    */
   public function getInterestCategories($list_id, $parameters = []) {
@@ -218,6 +236,29 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function getMembers($list_id, $parameters = []) {
+    $response = (object) [
+      'members' => [
+        (object) [
+          'id' => md5('test1@example.com'),
+          'email_address' => 'test1@example.com',
+          'status' => 'subscribed',
+        ],
+        (object) [
+          'id' => md5('test2@example.com'),
+          'email_address' => 'test2@example.com',
+          'status' => 'subscribed',
+        ],
+      ],
+      'total_items' => 2,
+    ];
+
+    return $response;
+  }
+
+  /**
    * @inheritdoc
    */
   public function getMemberInfo($list_id, $email, $parameters = []) {
@@ -354,6 +395,33 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function addSegmentMember($list_id, $segment_id, $email, $parameters = []) {
+    $response = (object) [
+      'id' => md5(strtolower($email)),
+      'email_address' => $email,
+      'list_id' => $list_id,
+      'segment_id' => $segment_id,
+    ];
+
+    return $response;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function addTagsMember($list_id, array $tags, $email, array $parameters = []) {
+    $response = (object) [
+      'id' => md5(strtolower($email)),
+      'email_address' => $email,
+      'tags' => $tags,
+    ];
+
+    return $response;
+  }
+
+  /**
    * @inheritdoc
    */
   public function getWebhooks($list_id, $parameters = []) {
@@ -401,6 +469,30 @@ class MailchimpLists extends \Mailchimp\MailchimpLists {
    */
   public function deleteWebhook($list_id, $webhook_id, $parameters = []) {
     return (!empty($list_id) && !empty($webhook_id));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function processBatchOperations() {
+    // Initialize batch_operations if not set.
+    if (!isset($this->api_class->batch_operations)) {
+      $this->api_class->batch_operations = [];
+    }
+
+    $response = (object) [
+      'id' => 'batch-' . uniqid(),
+      'status' => 'pending',
+      'total_operations' => count($this->api_class->batch_operations),
+      'finished_operations' => 0,
+      'errored_operations' => 0,
+      'submitted_at' => date('c'),
+    ];
+
+    // Reset batch operations after processing.
+    $this->api_class->batch_operations = [];
+
+    return $response;
   }
 
 }
