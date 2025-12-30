@@ -86,7 +86,7 @@ class MailchimpApiUser {
     return $this->api_class->request('GET', '/batches/{batch_id}', $tokens);
   }
 
-    /**
+  /**
    * Processes all pending batch operations.
    *
    * @throws MailchimpAPIException
