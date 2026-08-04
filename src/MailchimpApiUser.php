@@ -149,4 +149,17 @@ class MailchimpApiUser {
     return $this->api_class->request($method, $path, $tokens, $parameters, $batch, $returnAssoc);
   }
 
+  /**
+   * Checks API status.
+   *
+   * @return object
+   *   An object with status information.
+   *
+   * @throws \Mailchimp\MailchimpAPIException
+   */
+  public function ping() {
+    $params = ['timeout' => 10];
+    return $this->api_class->request('GET', '/ping', NULL, $params);
+  }
+
 }

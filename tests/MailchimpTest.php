@@ -24,6 +24,19 @@ class MailchimpTest extends TestCase {
   }
 
   /**
+   * Tests library functionality for API ping.
+   */
+  public function testPing() {
+    $api_user = new Mailchimp(['api_user' => null, 'api_key' => null]);
+    $mc = new MailchimpApiUser($api_user);
+    $mc->ping();
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/ping', $mc->getClient()->uri);
+    $this->assertEquals(['timeout' => 10], $mc->getClient()->options['query']);
+  }
+
+  /**
    * Test the version number.
    */
   public function testVersion() {
