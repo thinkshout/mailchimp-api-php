@@ -15,11 +15,7 @@
   "autoload": {
     "psr-4": {
       "Mailchimp\\": "src/",
-      "Mailchimp\\http\\": "src/http/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
+      "Mailchimp\\http\\": "src/http/",
       "Mailchimp\\Tests\\": "tests/src/"
     }
   }
