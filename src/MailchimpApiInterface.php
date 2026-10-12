@@ -22,8 +22,11 @@ interface MailchimpApiInterface {
    *   Associative array of tokens and values to replace in the path.
    * @param array $parameters
    *   Associative array of parameters to send in the request body.
-   * @param bool $batch
-   *   TRUE if this request should be added to pending batch operations.
+   * @param bool|string|int $batch
+   *   TRUE if this request should be added to pending batch operations. A
+   *   non-boolean value also adds the request to pending batch operations and
+   *   is used as the operation's operation_id, which Mailchimp returns with
+   *   the batch results so each operation can be matched to its response.
    * @param bool $returnAssoc
    *   TRUE to return Mailchimp API response as an associative array.
    *

@@ -131,6 +131,9 @@ class Mailchimp implements MailchimpApiInterface {
    *   The request path, relative to the API endpoint.
    * @param array $parameters
    *   Associative array of optional request parameters.
+   * @param string|int $operation_id
+   *   Optional client-supplied ID for this operation, returned by Mailchimp in
+   *   the batch results.
    *
    * @return object
    *   The new batch operation object.
@@ -139,7 +142,7 @@ class Mailchimp implements MailchimpApiInterface {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/batches/#create-post_batches
    */
-  protected function addBatchOperation($method, $path, $parameters = []) {
+  protected function addBatchOperation($method, $path, $parameters = [], $operation_id = NULL) {
     if (empty($method) || empty($path)) {
       throw new MailchimpAPIException('Cannot add batch operation without a method and path.');
     }
@@ -156,6 +159,10 @@ class Mailchimp implements MailchimpApiInterface {
       else {
         $op->body = json_encode($parameters);
       }
+    }
+
+    if ($operation_id !== NULL && $operation_id !== '') {
+      $op->operation_id = (string) $operation_id;
     }
 
     if (empty($this->batch_operations)) {
@@ -178,8 +185,11 @@ class Mailchimp implements MailchimpApiInterface {
    *   Associative array of tokens and values to replace in the path.
    * @param array $parameters
    *   Associative array of parameters to send in the request body.
-   * @param bool $batch
-   *   TRUE if this request should be added to pending batch operations.
+   * @param bool|string|int $batch
+   *   TRUE if this request should be added to pending batch operations. A
+   *   non-boolean value also adds the request to pending batch operations and
+   *   is used as the operation's operation_id, which Mailchimp returns with
+   *   the batch results so each operation can be matched to its response.
    * @param bool $returnAssoc
    *   TRUE to return Mailchimp API response as an associative array.
    *
@@ -196,7 +206,8 @@ class Mailchimp implements MailchimpApiInterface {
     }
 
     if ($batch) {
-      return $this->addBatchOperation($method, $path, $parameters);
+      $operation_id = ($batch === TRUE) ? NULL : $batch;
+      return $this->addBatchOperation($method, $path, $parameters, $operation_id);
     }
 
     // Set default request options with auth header.
